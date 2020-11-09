@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "415404",
+    "ThreadId": "204169",
+    "Html": "<p>Hi,</p>\r\n<p>I was in need to find the last logon date/time and noticed that it was a little more complex to get, so thought I'd give a solution if anybody was interested</p>\r\n<div style=\"color:Black;background-color:White\">\r\n<pre>        Int64 lastLogonThisServer = <span style=\"color:Blue\">new</span> Int64();\r\n        [DirectoryAttribute(<span style=\"color:#A31515\">&quot;lastLogon&quot;</span>)]\r\n        <span style=\"color:Blue\">public</span> <span style=\"color:Blue\">object</span> LastLogon\r\n        {\r\n            <span style=\"color:Blue\">get</span> { <span style=\"color:Blue\">return</span> lastLogonThisServer; }\r\n            <span style=\"color:Blue\">set</span>\r\n            {\r\n                IADsLargeInteger lgInt = (IADsLargeInteger)value;\r\n                lastLogonThisServer = ((<span style=\"color:Blue\">long</span>)lgInt.HighPart &lt;&lt; 32) + lgInt.LowPart;\r\n            }\r\n        }\r\n\r\n        <span style=\"color:Blue\">public</span> DateTime readableLastLogon \r\n        {\r\n            <span style=\"color:Blue\">get</span> { <span style=\"color:Blue\">return</span> DateTime.FromFileTime(<span style=\"font-size:x-small\">(</span><span style=\"color:#2b91af;font-size:x-small\"><span style=\"color:#2b91af;font-size:x-small\">Int64</span></span><span style=\"font-size:x-small\">)</span>LastLogon); }\r\n        }\r\n\r\n</pre>\r\n</div>",
+    "PostedDate": "2010-03-08T04:02:05.13-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "504651",
+    "ThreadId": "204169",
+    "Html": "<p>Thanks. Very helpful.</p>",
+    "PostedDate": "2010-10-08T22:12:46.41-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "516842",
+    "ThreadId": "204169",
+    "Html": "\r\n<p>With the obvious caveat that this only gets you the last logon date against whichever domain controller your query was executed.</p>\r\n<p>Ref, e.g., <a href=\"http://blogs.dirteam.com/blogs/jorge/archive/2008/02/10/showing-last-logon-info-at-logon-in-windows-server-2008.aspx\">\r\nhttp://blogs.dirteam.com/blogs/jorge/archive/2008/02/10/showing-last-logon-info-at-logon-in-windows-server-2008.aspx</a></p>\r\n<p>&nbsp;</p>\r\n",
+    "PostedDate": "2010-11-03T21:21:33.78-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

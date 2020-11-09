@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "62375",
+    "ThreadId": "18980",
+    "Html": "\r\nHi,<br /><br />I dissect the code of LinqToAD and try to understand how it works (I read the explanations on your blog too). <br />But some piece of codes stay obscure for me: I wonder when DirectoryQuery.FindProperties method is called.<br />Whatever can the projection expression be, never the body of lambda expression is a MemberInitExpression type (and never FindProperties is called).<br />Could you lighten this point ?<br />",
+    "PostedDate": "2007-12-11T08:12:36.897-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "62584",
+    "ThreadId": "18980",
+    "Html": "\r\nI reply to myself : I think NewExpression type is needed instead of MemberInitExpression. Then the arguments list is iterated and FindProperties() method is called on each argument. <br />",
+    "PostedDate": "2007-12-12T05:41:07.383-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "63644",
+    "ThreadId": "18980",
+    "Html": "\r\nHi Zim<br /><br />Thanks for your feedback. Some things were reshuffled around the Orcas Beta 2 timeframe while the origins of the code go back post Orcas Beta 2, hence some archaeology might be left in the code. I'll take a look at this in the next iteration of the project.<br /><br />Thanks,<br />-Bart<br />",
+    "PostedDate": "2007-12-17T18:11:40.593-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

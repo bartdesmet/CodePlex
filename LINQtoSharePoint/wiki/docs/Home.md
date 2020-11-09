@@ -1,0 +1,71 @@
+## Introduction
+
+The LINQ to SharePoint project provides a custom query provider for LINQ that allows to query SharePoint lists using familiar LINQ syntax. LINQ stands for Language Integrated Query and is one of the core features of Microsoft's .NET Framework 3.5 release. More information can be found via the MSDN website on [http://msdn.microsoft.com](http://msdn.microsoft.com).
+
+Visit our **team blog** at [http://blogs.bartdesmet.net/LINQtoSharePoint](http://blogs.bartdesmet.net/LINQtoSharePoint). Also check out this **Channel 9** [geekSpeak video](http://channel9.msdn.com/ShowPost.aspx?PostID=353173).
+
+## Features
+
+* Custom query provider that translates LINQ queries to **CAML**, the [Collaborative Application Markup Language](http://msdn2.microsoft.com/en-us/library/ms462365.aspx) used by SharePoint for querying.
+* Support for LINQ in **C# 3.0** and **Visual Basic 9.0**.
+* Entity creation tool **[SpMetal](SpMetal)** to export SharePoint list definitions to entity classes used for querying.
+* **Visual Studio 2008 integration** for entity creation (a.k.a. **SPML**).
+* Can connect to a SharePoint site either using the **SharePoint object model** or via the **SharePoint web services**.
+* Planned support for **updating** through entity types.
+
+## Status
+
+* 11/29/2007 - **[release:v0.2.4.0 alpha release](8713) for .NET Framework 3.5 and Visual Studio 2008 RTM** ([release bulletin](http://community.bartdesmet.net/blogs/linqtosharepoint/archive/2007/11/30/now-available-0-2-4-0-alpha-for-orcas-rtm.aspx))
+* 08/13/2007 - [release:v0.2.3.0 alpha release](6400) available for Orcas Beta 2 ([release bulletin](http://community.bartdesmet.net/blogs/linqtosharepoint/archive/2007/08/14/alpha-0-2-3-now-available.aspx)).
+* 08/01/2007 - Sources updated for Orcas Beta 2. A new release targeting Orcas Beta 2 will be provided soon.
+* 07/20/2007 - [release:v0.2.2.0 alpha release](5973) available for Orcas Beta 1 ([release bulletin](http://community.bartdesmet.net/blogs/linqtosharepoint/archive/2007/07/20/the-0-2-2-alpha-interim-release-an-overview.aspx)).
+* 07/06/2007 - We're currently working on an interim release that focuses on code maintainability and some design changes to enable the 0.3 update feature set. This interim release will be the first to cover [SPML](http://community.bartdesmet.net/blogs/linqtosharepoint/archive/2007/07/04/linq-to-sharepoint-introducing-spml.aspx) and Visual Studio 2008 integration with a code generator and an improved debugger visualizer.
+* 06/30/2007 - [release:v0.2.0.0 alpha release](5390) available for Orcas Beta 1 ([release bulletin](http://community.bartdesmet.net/blogs/linqtosharepoint/archive/2007/07/03/linq-to-sharepoint-alpha-v0-2-available.aspx)).
+* 06/08/2007 - The 0.2 release is planned to become available later this month; the (draft of the) technical spec is now under source control too (/Specs folder).
+* 05/04/2007 - Work has started on the 0.2 release. The 0.2 release will cover enhanced support for different field types in SharePoint, including Lookup fields, and extended overall test coverage.
+* 04/23/2007 - [release:v0.1.2.0 alpha release](3637) available for Orcas March 2007 CTP (update for Beta 1 coming soon).
+
+## Samples
+
+For a list of samples and a quick-start guide, see [Samples](Samples).
+
+### C# sample
+
+{{
+    // updated for the 0.2.2.0 alpha release
+    var ctx = new SharePointDataContext(new Uri("http://wss.mycompany.local"));
+    ctx.Log = Console.Out;
+    var users = ctx.GetList<Users>(ctx);
+
+    var res = from u in users
+              orderby u.Birthdate descending
+              where u.FirstName.StartsWith("B") && u.Age >= 24 && u.FavoriteFood == FavoriteFood.Pizza
+              select new { u.FullName, u.Age, Interest = u.AccountBalance * 0.07 };
+
+    foreach (var u in res)
+        Console.WriteLine(u);
+}}
+
+### Visual Basic sample
+
+{{
+    ' updated for the 0.2.2.0 alpha release
+    Dim context As New SharePointDataContext(New Uri("http://wss.mycompany.local"))
+    context.Log = Console.Out
+    Dim users = context.GetList(Of User)()
+
+    Dim res = From u In users _
+              Order By u.Birthdate Descending _
+              Where u.FirstName.StartsWith("B") And u.Age >= 24 And u.FavoriteFood.Value = FavoriteFood.Pizza _
+              Select u.FullName, u.Age, Interest = u.AccountBalance.Value * 0.07
+
+    For Each u In res
+        Console.WriteLine(u)
+    Next
+}}
+
+## About the project founder
+
+A former Visual C# MVP, **Bart De Smet** now works at Microsoft Corporation on the WPF dev team in an SDE role. Prior to this new challenge, Bart was active in the Belgian community evangelizing various Microsoft technologies, most of the time focusing on CLR, language innovation and frameworks. In his evangelism role, he's been speaking at various events and attended several international conferences including TechEd Europe, IT Forum and the PDC. In 2005, Bart graduated as a Master of Informatics from Ghent University, Belgium. Two years later, Bart became a Master of Computer Science Software Engineering from the same university.
+
+You can visit Bart's blog on [http://blogs.bartdesmet.net/bart](http://blogs.bartdesmet.net/bart)

@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "73575",
+    "ThreadId": "22060",
+    "Html": "\r\nThe following query in the same VB project as that with the offending Where clause (now removed) returns columns ordered alphabetically by column name instead of the order specified by the projection:<br /><br />            Dim Prods2 = From p In lstProds _<br />                         Where p.Discontinued = False _<br />                         Order By p.ProductName _<br />                         Select New With {.ProductID = p.ProductID, .ProductName = p.ProductName, _<br />                                .SKU = p.QuantityPerUnit, .UnitPrice = p.UnitPrice, _<br />                                .Inventory = p.UnitsInStock, .OnOrder = p.UnitsOnOrder}<br /><br />The C# query in the other discussion works as expected.<br /><br />Sample projects to repro these issues are available on request.<br />",
+    "PostedDate": "2008-02-13T08:11:56.84-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

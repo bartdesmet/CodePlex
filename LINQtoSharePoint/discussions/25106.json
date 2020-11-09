@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "84211",
+    "ThreadId": "25106",
+    "Html": "\r\nIf I see this correctly, currently an entity class is bound to a single SharePoint list instance. I think it would be useful if you could use the same entity class for multiple list instances, as it is quite common to have multiple lists having the same schema, but currently there is no way to write code that could handle all these lists the same. <br />For example I could imagine an overload for SharePointDataContext.GetList&lt;T&gt;() that would also take the name of the list: <br />SharePointDataContext.GetList&lt;T&gt;(string listName)<br />What do you think of this?<br />",
+    "PostedDate": "2008-04-01T08:18:41.443-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

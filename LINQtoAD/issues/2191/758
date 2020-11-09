@@ -1,0 +1,890 @@
+﻿/*
+ * LINQ to Active Directory
+ * http://www.codeplex.com/LINQtoAD
+ * 
+ * Copyright Bart De Smet (C) 2007
+ * info@bartdesmet.net - http://blogs.bartdesmet.net/bart
+ * 
+ * This project is subject to licensing restrictions. Visit http://www.codeplex.com/LINQtoAD/Project/License.aspx for more information.
+ */
+
+#region Namespace imports
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.DirectoryServices;
+using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
+using System.Globalization;
+
+#endregion
+
+namespace BdsSoft.DirectoryServices.Linq
+{
+    /// <summary>
+    /// Represents a source object used to tak to Directory Services.
+    /// </summary>
+    public interface IDirectorySource
+    {
+        #region Properties
+
+        /// <summary>
+        /// Gets the logger for the source. Will be used in logging query information.
+        /// </summary>
+        TextWriter Log { get; }
+
+        /// <summary>
+        /// Root location captured by this source.
+        /// </summary>
+        DirectoryEntry Root { get; }
+
+        /// <summary>
+        /// Search scope used when running queries against this source.
+        /// </summary>
+        SearchScope Scope { get; }
+
+        /// <summary>
+        /// Timeout used when running queries against this source.
+        /// </summary>
+        TimeSpan ClientTimeout { get; }
+
+        /// <summary>
+        /// PageSize used when running queries against this source. Set this to a value to enable paging in the query.
+        /// </summary>
+        int PageSize { get; }
+
+        /// <summary>
+        /// Entity type this source will query for.
+        /// </summary>
+        Type OriginalType { get; }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Callback method for entity property change tracking.
+        /// </summary>
+        void UpdateNotification(object sender, PropertyChangedEventArgs e);
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Represents an LDAP data source. Allows for querying the LDAP data source via LINQ.
+    /// </summary>
+    /// <typeparam name="T">Entity type in the underlying source.</typeparam>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    public class DirectorySource<T> : IQueryable<T>, IDirectorySource
+    {
+        #region Private members
+
+        #region Directory information
+
+        private DirectoryEntry searchRoot;
+        private SearchScope searchScope;
+        private TimeSpan clientTimeout;
+        private int pageSize;
+
+        #endregion
+
+        private TextWriter logger;
+
+        /// <summary>
+        /// Update catalog; keeps track of update entity instances.
+        /// </summary>
+        private Dictionary<object, HashSet<string>> updates = new Dictionary<object, HashSet<string>>();
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Creates a new data source instance for the given directory search root and with a given search scope.
+        /// </summary>
+        /// <param name="searchRoot">Root location in the directory to start all searches from.</param>
+        /// <param name="searchScope">Search scope for all queries performed through this data source.</param>
+        public DirectorySource(DirectoryEntry searchRoot, SearchScope searchScope) : this(searchRoot, searchScope, 1000, new TimeSpan(0, 0, int.MaxValue)) { }
+
+        /// <summary>
+        /// Creates a new data source instance for the given directory search root and with a given search scope.
+        /// </summary>
+        /// <param name="searchRoot">Root location in the directory to start all searches from.</param>
+        /// <param name="searchScope">Search scope for all queries performed through this data source.</param>
+        /// <param name="pageSize">Page size for all queries performed through this data source.</param>
+        public DirectorySource(DirectoryEntry searchRoot, SearchScope searchScope, int pageSize) : this(searchRoot, searchScope, pageSize, new TimeSpan(0, 0, int.MaxValue)) { }
+
+        /// <summary>
+        /// Creates a new data source instance for the given directory search root and with a given search scope.
+        /// </summary>
+        /// <param name="searchRoot">Root location in the directory to start all searches from.</param>
+        /// <param name="searchScope">Search scope for all queries performed through this data source.</param>
+        /// <param name="pageSize">Page size for all queries performed through this data source.</param>
+        /// <param name="clientTimeout">Client timeout for all queries performed through this data source.</param>
+        public DirectorySource(DirectoryEntry searchRoot, SearchScope searchScope, int pageSize, TimeSpan clientTimeout)
+        {
+            this.searchRoot = searchRoot;
+            this.searchScope = searchScope;
+            this.pageSize = pageSize;
+            this.clientTimeout = clientTimeout;
+        }
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Used to configure a logger to print diagnostic information about the query performed.
+        /// </summary>
+        public TextWriter Log
+        {
+            get { return logger; }
+            set { logger = value; }
+        }
+
+        public DirectoryEntry Root
+        {
+            get { return searchRoot; }
+        }
+
+        public SearchScope Scope
+        {
+            get { return searchScope; }
+        }
+
+        public TimeSpan ClientTimeout
+        {
+            get { return clientTimeout; }
+        }
+
+        public int PageSize
+        {
+            get { return pageSize; }
+        }
+
+        public Type ElementType
+        {
+            get { return typeof(T); }
+        }
+
+        public Type OriginalType
+        {
+            get { return typeof(T); }
+        }
+
+        public Expression Expression
+        {
+            get { return Expression.Constant(this); }
+        }
+
+        public IQueryProvider Provider
+        {
+            get { return new DirectoryQueryProvider(); }
+        }
+
+        #endregion
+
+        #region Enumeration
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return new DirectoryQuery<T>(this.Expression).GetEnumerator();
+        }
+
+        #endregion
+
+        #region Updates
+
+        public void Update()
+        {
+            Type t = typeof(T);
+            DirectorySchemaAttribute[] attr = (DirectorySchemaAttribute[])t.GetCustomAttributes(typeof(DirectorySchemaAttribute), false);
+
+            foreach (var e in updates)
+            {
+                if (e.Key is T && e.Key is DirectoryEntity)
+                {
+                    DirectoryEntry entry = ((DirectoryEntity)e.Key).DirectoryEntry;
+                    foreach (string property in e.Value)
+                    {
+                        PropertyInfo i = t.GetProperty(property);
+
+                        DirectoryAttributeAttribute[] da = i.GetCustomAttributes(typeof(DirectoryAttributeAttribute), false) as DirectoryAttributeAttribute[];
+                        if (da != null && da.Length != 0 && da[0] != null)
+                        {
+                            if (da[0].QuerySource == DirectoryAttributeType.ActiveDs)
+                            {
+                                if (attr != null && attr.Length != 0)
+                                    attr[0].ActiveDsHelperType.GetProperty(da[0].Attribute).SetValue(entry.NativeObject, i.GetValue(e.Key, null), null);
+                                else
+                                    throw new InvalidOperationException("Missing schema mapping attribute for updates through ADSI.");
+                            }
+                            else
+                                entry.Properties[da[0].Attribute].Value = i.GetValue(e.Key, null);
+                        }
+                        else
+                            entry.Properties[i.Name].Value = i.GetValue(e.Key, null);
+                    }
+                    entry.CommitChanges();
+                }
+                else
+                    throw new InvalidOperationException("Can't apply update because updates type doesn't match original entity type.");
+            }
+
+            updates.Clear();
+        }
+
+        public void UpdateNotification(object sender, PropertyChangedEventArgs e)
+        {
+            T source = (T)sender;
+
+            if (!updates.ContainsKey(source))
+                updates.Add(source, new HashSet<string>());
+
+            updates[source].Add(e.PropertyName);
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// LINQ query provider for Directory Services.
+    /// </summary>
+    public class DirectoryQueryProvider : IQueryProvider
+    {
+        #region CreateQuery implementation
+
+        public IQueryable CreateQuery(Expression expression)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Constructs an IQueryable object that can evaluate the query represented by the specified expression tree. 
+        /// </summary>
+        /// <param name="expression">Expression representing the LDAP query.</param>
+        /// <typeparam name="TElement">The type of the elements of the IQueryable that is returned.</typeparam>
+        /// <returns>IQueryable object that can evaluate the query represented by the specified expression tree.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
+        {
+            return new DirectoryQuery<TElement>(expression);
+        }
+
+        #endregion
+
+        #region Direct execution (not implemented)
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter")]
+        public TResult Execute<TResult>(Expression expression)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Execute(Expression expression)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Represents a query in Directory Services.
+    /// </summary>
+    /// <typeparam name="T">Type of the objects returned by this query upon execution.</typeparam>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    public class DirectoryQuery<T> : IQueryable<T>
+    {
+        #region Private members
+
+        private Expression _ex;
+
+        private IDirectorySource _source;
+
+        private Type originalType;
+
+        #region Projection information
+
+        private HashSet<string> properties = new HashSet<string>();
+        private Delegate project;
+
+        #endregion
+
+        #region Query information
+
+        private string query;
+
+        #endregion
+
+        #endregion
+
+        #region Constructors
+
+        internal DirectoryQuery(Expression ex)
+        {
+            _ex = ex;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public Type ElementType
+        {
+            get { return typeof(T); }
+        }
+
+        public Expression Expression
+        {
+            get { return _ex; }
+        }
+
+        public IQueryProvider Provider
+        {
+            get { return new DirectoryQueryProvider(); }
+        }
+
+        #endregion
+
+        #region Methods
+
+        #region Query execution
+
+        /// <summary>
+        /// Executes the query and returns results.
+        /// </summary>
+        /// <returns>Query results represented as entity objects or projection results.</returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            Parse();
+            return GetResults();
+        }
+
+        /// <summary>
+        /// Executes the query and returns results.
+        /// </summary>
+        /// <returns>Query results represented as entity objects or projection results.</returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        /// <summary>
+        /// Executes the query and returns results.
+        /// </summary>
+        /// <returns>Query results represented as entity objects or projection results.</returns>
+        private IEnumerator<T> GetResults()
+        {
+            DirectorySchemaAttribute[] attr = (DirectorySchemaAttribute[])originalType.GetCustomAttributes(typeof(DirectorySchemaAttribute), false);
+            if (attr == null || attr.Length == 0)
+                throw new InvalidOperationException("Missing schema mapping attribute.");
+
+            DirectoryEntry root = _source.Root;
+            string q = String.Format("(&(objectClass={0}){1})", attr[0].Schema, query);
+            DirectorySearcher s = new DirectorySearcher(root, q, properties.ToArray(), _source.Scope);
+
+            s.PageSize = _source.PageSize;
+            s.ClientTimeout = _source.ClientTimeout;
+
+            if (_source.Log != null)
+                _source.Log.WriteLine(q);
+
+            Type helper = attr[0].ActiveDsHelperType;
+
+            foreach (SearchResult sr in s.FindAll())
+            {
+                DirectoryEntry e = sr.GetDirectoryEntry();
+
+                object result = Activator.CreateInstance(project == null ? typeof(T) : originalType);
+
+                /// *** UPDATE ***
+                DirectoryEntity entity = result as DirectoryEntity;
+                if (entity != null)
+                    entity.DirectoryEntry = e;
+
+                if (project == null)
+                {
+                    foreach (PropertyInfo p in typeof(T).GetProperties())
+                        AssignResultProperty(helper, e, result, p.Name);
+
+                    /// *** UPDATE ***
+                    if (entity != null)
+                        entity.PropertyChanged += new PropertyChangedEventHandler(_source.UpdateNotification);
+
+                    yield return (T)result;
+                }
+                else
+                {
+                    foreach (string prop in properties)
+                        AssignResultProperty(helper, e, result, prop);
+
+                    /// *** UPDATE ***
+                    if (entity != null)
+                        entity.PropertyChanged += new PropertyChangedEventHandler(_source.UpdateNotification);
+
+                    yield return (T)project.DynamicInvoke(result);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Assigns the specified property on the specified object based on the data wrapped in the DirectoryEntry representing the current result.
+        /// </summary>
+        /// <param name="helper">Active Directory helper type to help retrieving the target value.</param>
+        /// <param name="e">Directory entry containing the data for the current result.</param>
+        /// <param name="result">Object the property has to be set on.</param>
+        /// <param name="prop">Property to be set.</param>
+        private void AssignResultProperty(Type helper, DirectoryEntry e, object result, string prop)
+        {
+            PropertyInfo i = originalType.GetProperty(prop);
+            DirectoryAttributeAttribute[] da = i.GetCustomAttributes(typeof(DirectoryAttributeAttribute), false) as DirectoryAttributeAttribute[];
+            if (da != null && da.Length != 0)
+            {
+                if (da[0].QuerySource == DirectoryAttributeType.ActiveDs)
+                {
+                    PropertyInfo p = helper.GetProperty(da[0].Attribute, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                    try
+                    {
+                        i.SetValue(result, p.GetValue(e.NativeObject, null), null);
+                    }
+                    catch (TargetInvocationException) { }
+                }
+                else
+                {
+                    PropertyValueCollection pvc = e.Properties[da[0].Attribute];
+                    if (i.PropertyType.IsArray)
+                    {
+                        Array o = Array.CreateInstance(i.PropertyType.GetElementType(), pvc.Count);
+
+                        int j = 0;
+                        foreach (object oo in pvc)
+                            o.SetValue(oo, j++);
+
+                        i.SetValue(result, o, null);
+                    }
+                    else
+                        if (pvc.Count == 1)
+                            i.SetValue(result, pvc[0], null);
+                }
+            }
+            else
+            {
+                PropertyValueCollection pvc = e.Properties[prop];
+                if (pvc.Count == 1)
+                    i.SetValue(result, pvc[0], null);
+            }
+        }
+
+        #endregion
+
+        #region Query parsing
+
+        /// <summary>
+        /// Parses the query expression tree captured by this query instance.
+        /// </summary>
+        public void Parse()
+        {
+            Parse(_ex);
+        }
+
+        /// <summary>
+        /// Parses the specified query expression tree.
+        /// </summary>
+        /// <param name="ex"></param>
+        public void Parse(Expression ex)
+        {
+            var ce = ex as ConstantExpression;
+            var mce = ex as MethodCallExpression;
+
+            if (ce != null)
+            {
+                _source = ce.Value as IDirectorySource;
+                originalType = _source.OriginalType;
+            }
+            else if (mce != null)
+            {
+                //
+                // Should be extension methods on Queryable.
+                //
+                if (mce.Method.DeclaringType != typeof(Queryable))
+                    throw new NotSupportedException("Detected invalid top-level method-call.");
+
+                Parse(mce.Arguments[0]);
+
+                //
+                // First parameter to the method call represents the (unary) lambda in LINQ style.
+                // E.g. (user => user.Name == "Bart") for a Where  clause
+                //      (user => new { user.Name })   for a Select clause
+                //
+                switch (mce.Method.Name)
+                {
+                    //
+                    // Builds the query LDAP expression.
+                    //
+                    case "Where":
+                        BuildPredicate(((UnaryExpression)mce.Arguments[1]).Operand as LambdaExpression);
+                        break;
+                    //
+                    // Builds the projection and filters the required properties.
+                    //
+                    case "Select":
+                        BuildProjection(((UnaryExpression)mce.Arguments[1]).Operand as LambdaExpression);
+                        break;
+                    default:
+                        throw new NotSupportedException("Unsupported query operator: " + mce.Method.Name);
+                }
+            }
+            else
+                throw new NotSupportedException("Invalid expression node detected.");
+        }
+
+        #region Projection support
+
+        /// <summary>
+        /// Helper method for projection clauses (Select).
+        /// </summary>
+        /// <param name="p">Lambda expression representing the projection.</param>
+        private void BuildProjection(LambdaExpression p)
+        {
+            //
+            // Store projection information including the compiled lambda for subsequent execution
+            // and a minimal set of properties to be retrieved (improves efficiency of queries).
+            //
+            project = p.Compile();
+
+            //
+            // Original type is kept for reflection during querying.
+            //
+            originalType = p.Parameters[0].Type;
+
+            //
+            // Support for (anonymous) type initialization based on "member init expressions".
+            //
+            MemberInitExpression mi = p.Body as MemberInitExpression;
+            if (mi != null)
+                foreach (MemberAssignment b in mi.Bindings)
+                    FindProperties(b.Expression);
+            //
+            // Support for identity projections (e.g. user => user), getting all properties back.
+            //
+            else
+                foreach (PropertyInfo i in originalType.GetProperties())
+                    properties.Add(i.Name);
+        }
+
+        /// <summary>
+        /// Recursive helper method to finds all required properties for projection.
+        /// </summary>
+        /// <param name="e">Expression to detect property uses for.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        private void FindProperties(Expression e)
+        {
+            //
+            // Record member accesses to properties or fields from the entity.
+            //
+            if (e.NodeType == ExpressionType.MemberAccess)
+            {
+                MemberExpression me = e as MemberExpression;
+                if (me.Member.DeclaringType == originalType)
+                {
+                    DirectoryAttributeAttribute[] da = me.Member.GetCustomAttributes(typeof(DirectoryAttributeAttribute), false) as DirectoryAttributeAttribute[];
+                    if (da != null && da.Length != 0)
+                    {
+                        if (da[0].QuerySource != DirectoryAttributeType.ActiveDs)
+                            properties.Add(me.Member.Name);
+                    }
+                    else
+                        properties.Add(me.Member.Name);
+                }
+            }
+            else
+            {
+                BinaryExpression b;
+                UnaryExpression u;
+                ConditionalExpression c;
+                InvocationExpression i;
+                LambdaExpression l;
+                ListInitExpression li;
+                MemberInitExpression mi;
+                MethodCallExpression mc;
+                NewExpression n;
+                NewArrayExpression na;
+                TypeBinaryExpression tb;
+
+                if ((b = e as BinaryExpression) != null)
+                {
+                    FindProperties(b.Left);
+                    FindProperties(b.Right);
+                }
+                else if ((u = e as UnaryExpression) != null)
+                {
+                    FindProperties(u.Operand);
+                }
+                else if ((c = e as ConditionalExpression) != null)
+                {
+                    FindProperties(c.IfFalse);
+                    FindProperties(c.IfTrue);
+                    FindProperties(c.Test);
+                }
+                else if ((i = e as InvocationExpression) != null)
+                {
+                    FindProperties(i.Expression);
+                    foreach (Expression ex in i.Arguments)
+                        FindProperties(ex);
+                }
+                else if ((l = e as LambdaExpression) != null)
+                {
+                    FindProperties(l.Body);
+                    foreach (Expression ex in l.Parameters)
+                        FindProperties(ex);
+                }
+                else if ((li = e as ListInitExpression) != null)
+                {
+                    FindProperties(li.NewExpression);
+                    foreach (ElementInit init in li.Initializers)
+                        foreach (Expression ex in init.Arguments)
+                            FindProperties(ex);
+                }
+                else if ((mi = e as MemberInitExpression) != null)
+                {
+                    FindProperties(mi.NewExpression);
+                    foreach (MemberAssignment ma in mi.Bindings)
+                        FindProperties(ma.Expression);
+                }
+                else if ((mc = e as MethodCallExpression) != null)
+                {
+                    FindProperties(mc.Object);
+                    foreach (Expression ex in mc.Arguments)
+                        FindProperties(ex);
+                }
+                else if ((n = e as NewExpression) != null)
+                {
+                    foreach (Expression ex in n.Arguments)
+                        FindProperties(ex);
+                }
+                else if ((na = e as NewArrayExpression) != null)
+                {
+                    foreach (Expression ex in na.Expressions)
+                        FindProperties(ex);
+                }
+                else if ((tb = e as TypeBinaryExpression) != null)
+                {
+                    FindProperties(tb.Expression);
+                }
+            }
+        }
+
+        #endregion
+
+        #region Query predicate support
+
+        /// <summary>
+        /// Helper method to build the LDAP query.
+        /// </summary>
+        /// <param name="q">Lambda expression to be translated to LDAP.</param>
+        private void BuildPredicate(LambdaExpression q)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            //
+            // Recursive tree traversal to build the LDAP query (prefix notation).
+            //
+            ParsePredicate(q.Body, sb);
+
+            query = sb.ToString();
+        }
+
+        /// <summary>
+        /// Recursive helper method for query parsing based on the given expression tree.
+        /// </summary>
+        /// <param name="e">Expression tree to be translated to LDAP.</param>
+        /// <param name="sb">Accummulative query string used in recursion.</param>
+        private void ParsePredicate(Expression e, StringBuilder sb)
+        {
+            BinaryExpression b;
+            UnaryExpression u;
+            MethodCallExpression m;
+
+            sb.Append("(");
+            //
+            // Support for boolean operators & and |. Support for "raw" conditions (like equality).
+            //
+            if ((b = e as BinaryExpression) != null)
+            {
+                switch (b.NodeType)
+                {
+                    case ExpressionType.AndAlso:
+                        sb.Append("&");
+                        ParsePredicate(b.Left, sb);
+                        ParsePredicate(b.Right, sb);
+                        break;
+                    case ExpressionType.OrElse:
+                        sb.Append("|");
+                        ParsePredicate(b.Left, sb);
+                        ParsePredicate(b.Right, sb);
+                        break;
+                    default: //E.g. Equal, NotEqual, GreaterThan
+                        sb.Append(GetCondition(b));
+                        break;
+                }
+            }
+            //
+            // Support for boolean negation.
+            //
+            else if ((u = e as UnaryExpression) != null)
+            {
+                if (u.NodeType == ExpressionType.Not)
+                {
+                    sb.Append("!");
+                    ParsePredicate(u.Operand, sb);
+                }
+                else
+                    throw new NotSupportedException("Unsupported query operator detected: " + u.NodeType);
+            }
+            //
+            // Support for string operations.
+            //
+            else if ((m = e as MethodCallExpression) != null)
+            {
+                MemberExpression o = (m.Object as MemberExpression);
+                if (m.Method.DeclaringType == typeof(string))
+                {
+                    switch (m.Method.Name)
+                    {
+                        case "Contains":
+                            {
+                                ConstantExpression c = m.Arguments[0] as ConstantExpression;
+                                sb.AppendFormat("{0}=*{1}*", GetFieldName(o.Member), c.Value);
+                                break;
+                            }
+                        case "StartsWith":
+                            {
+                                ConstantExpression c = m.Arguments[0] as ConstantExpression;
+                                sb.AppendFormat("{0}={1}*", GetFieldName(o.Member), c.Value);
+                                break;
+                            }
+                        case "EndsWith":
+                            {
+                                ConstantExpression c = m.Arguments[0] as ConstantExpression;
+                                sb.AppendFormat("{0}=*{1}", GetFieldName(o.Member), c.Value);
+                                break;
+                            }
+                        default:
+                            throw new NotSupportedException("Unsupported string filtering query expression detected. Cannot translate to LDAP equivalent.");
+                    }
+                }
+                else
+                    throw new NotSupportedException("Unsupported query expression detected. Cannot translate to LDAP equivalent.");
+            }
+            else
+                throw new NotSupportedException("Unsupported query expression detected. Cannot translate to LDAP equivalent.");
+            sb.Append(")");
+        }
+
+        /// <summary>
+        /// Helper expression to translate conditions to LDAP filters.
+        /// </summary>
+        /// <param name="e">Conditional expression to be translated to an LDAP filter.</param>
+        /// <returns>String representing the condition in LDAP.</returns>
+        private string GetCondition(BinaryExpression e)
+        {
+            string val, attrib;
+
+            bool neg;
+
+            //
+            // Find the order of the operands in the binary expression. At least one should refer to the entity type.
+            //
+            if (e.Left is MemberExpression && ((MemberExpression)e.Left).Member.DeclaringType == originalType)
+            {
+                neg = false;
+
+                attrib = GetFieldName(((MemberExpression)e.Left).Member);
+                val = Expression.Lambda(e.Right).Compile().DynamicInvoke().ToString();
+            }
+            else if (e.Right is MemberExpression && ((MemberExpression)e.Right).Member.DeclaringType == originalType)
+            {
+                neg = true;
+
+                attrib = GetFieldName(((MemberExpression)e.Right).Member);
+                val = Expression.Lambda(e.Left).Compile().DynamicInvoke().ToString();
+            }
+            else
+                throw new NotSupportedException("A filtering expression should contain an entity member selection expression.");
+
+            //
+            // Normalize some common characters that cannot be used in LDAP filters.
+            //
+            val = val.ToString().Replace("(", "0x28").Replace(")", "0x29").Replace(@"\", "0x5c");
+
+            //
+            // Determine the operator and swap the operandi if necessary (LDAP requires a field=value order).
+            //
+            switch (e.NodeType)
+            {
+                case ExpressionType.Equal:
+                    return String.Format(CultureInfo.InvariantCulture, "{0}={1}", attrib, val);
+                case ExpressionType.NotEqual:
+                    return String.Format(CultureInfo.InvariantCulture, "!({0}={1})", attrib, val);
+                case ExpressionType.GreaterThanOrEqual:
+                    if (!neg)
+                        return String.Format(CultureInfo.InvariantCulture, "{0}>={1}", attrib, val);
+                    else
+                        return String.Format(CultureInfo.InvariantCulture, "{0}<={1}", attrib, val);
+                case ExpressionType.GreaterThan:
+                    if (!neg)
+                        return String.Format(CultureInfo.InvariantCulture, "&({0}>={1})(!({0}={1}))", attrib, val);
+                    else
+                        return String.Format(CultureInfo.InvariantCulture, "&({0}<={1})(!({0}={1}))", attrib, val);
+                case ExpressionType.LessThanOrEqual:
+                    if (!neg)
+                        return String.Format(CultureInfo.InvariantCulture, "{0}<={1}", attrib, val);
+                    else
+                        return String.Format(CultureInfo.InvariantCulture, "{0}>={1}", attrib, val);
+                case ExpressionType.LessThan:
+                    if (!neg)
+                        return String.Format(CultureInfo.InvariantCulture, "&({0}<={1})(!({0}={1}))", attrib, val);
+                    else
+                        return String.Format(CultureInfo.InvariantCulture, "&({0}>={1})(!({0}={1}))", attrib, val);
+                default:
+                    throw new NotSupportedException("Unsupported filtering operator detected: " + e.NodeType);
+            }
+        }
+
+        /// <summary>
+        /// Gets the mapped field name for the specified entity type member.
+        /// </summary>
+        /// <param name="member">Entity type member.</param>
+        /// <returns>Mapped field name. If no mapping is applied to the specified member, the member's name will be returned (default mapping).</returns>
+        private static string GetFieldName(MemberInfo member)
+        {
+            DirectoryAttributeAttribute[] da = member.GetCustomAttributes(typeof(DirectoryAttributeAttribute), false) as DirectoryAttributeAttribute[];
+            if (da != null && da.Length != 0 && da[0] != null)
+            {
+                if (da[0].QuerySource == DirectoryAttributeType.ActiveDs)
+                    throw new InvalidOperationException("Can't execute query filters for ADSI properties.");
+                else
+                    return da[0].Attribute;
+            }
+            else
+                return member.Name;
+        }
+
+        #endregion
+
+        #endregion
+
+        #endregion
+    }
+}

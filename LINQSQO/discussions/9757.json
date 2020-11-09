@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "31686",
+    "ThreadId": "9757",
+    "Html": "\r\nHi Bart,<br /><br />When you mentioned \"This allows to illustrate LINQ in a C# 2.0 context:\" in <a href=\"http://community.bartdesmet.net/blogs/bart/archive/2007/04/12/linq-sqo-v0-9-rtw.aspx\" class=\"externalLink\">your blog post on linq-sqo<span class=\"externalLinkIcon\" style=\"font-family:Consolas, Courier New, Courier, Monospace;\"></span></a>, I decided to give it a try, using <i>C# 2005 Express</i> - this is the story (read the post first)... <br /><br />I commented out the <i>hash-define CS30</i>, but couldn't compile without a HashSet implementation. I downloaded <a href=\"http://www.wintellect.com/PowerCollections.aspx\" class=\"externalLink\">Wintellect PowerCollections<span class=\"externalLinkIcon\" style=\"font-family:Consolas, Courier New, Courier, Monospace;\"></span></a> to get a <b>HashSet</b> class in .NET 2.0; and replace the <b>HashSet</b> references with <b>Set</b> in Union() and Distinct() - as well as add the relevant namespace.<br /><br />Then I setup the test data source (person class and collection) <br /><pre style=\"background-color:#ECECEC; border:dashed .1em #3E62A6; font-family:Consolas, Courier New, Courier, Monospace; font-size:1em; margin-top:0; padding:.5em; height:auto; overflow:auto; overflow-x:auto; overflow-y:auto;\">\r\npublic class Person\r\n{\r\n    private string _FirstName;\r\n    private string _LastName;\r\n    public int Age;\r\n    public string FirstName\r\n    { \r\n        get { return _FirstName; } \r\n    }\r\n    public string LastName\r\n    {\r\n        get { return _LastName; } \r\n    }\r\n    public Person(string f, string l, int a)\r\n    {\r\n        _FirstName = f; _LastName = l; Age = a; \r\n    }\r\n    public override string ToString()\r\n    {\r\n        return String.Format(\"(Person) {0} {1}\", _FirstName, _LastName);\r\n    }\r\n}\r\npublic static List&lt;Person&gt; GetTestPeople()\r\n{ \r\n    List&lt;Person&gt; output = new List&lt;Person&gt;();\r\n    output.Add(new Person(\"Scott\", \"Guthrie\", 32));\r\n    output.Add(new Person(\"Bill\", \"Gates\", 50));\r\n    output.Add(new Person(\"Joe\", \"Smith\", 22));\r\n    return output;\r\n}\r\n</pre><br />But still couldn't get it to compile due to this error...<br /><span class=\"codeInline\" style=\"font-family:Consolas, Courier New, Courier, Monospace;\">The type arguments for method 'BdsSoft.Linq.Enumerable.Select&lt;TSource,TResult&gt;(System.Collections.Generic.IEnumerable&lt;TSource&gt;, BdsSoft.Linq.Func&lt;TSource,TResult&gt;)' cannot be inferred from the usage. Try specifying the type arguments explicitly.</span><br /><br />Turns out I also needed to explicity cast the delegate as follows<br /><span class=\"codeInline\" style=\"font-family:Consolas, Courier New, Courier, Monospace;\">(Func&lt;Person,string&gt;)delegate(Person p) { return p.FirstName + \" \" + p.LastName; </span>}<br /><br />At this point the code compiled, but when I ran it the first few times I couldn't figure out why it wasn't working (hint, I was checking the values in the <b>results</b>, and they were all null). Of course, I wasn't <i>enumerating</i> over it. D'uh - I forgot about \"delayed execution\". Adding a foreach loop to view the results worked, and I got the output I expected: Bill Gates!<br /><br />The remainder of the code I used to test follows:<br /><pre style=\"background-color:#ECECEC; border:dashed .1em #3E62A6; font-family:Consolas, Courier New, Courier, Monospace; font-size:1em; margin-top:0; padding:.5em; height:auto; overflow:auto; overflow-x:auto; overflow-y:auto;\">\r\nIEnumerable&lt;Person&gt; source = GetTestPeople();\r\n \r\nIEnumerable&lt;string&gt; results = Enumerable.Select(\r\n                     (IEnumerable&lt;Person&gt;)Enumerable.Where(\r\n                        source,\r\n                        delegate(Person p) { return p.FirstName.StartsWith(\"B\"); }\r\n                     ),\r\n                     (Func&lt;Person,string&gt;)delegate(Person p) { return p.FirstName + \" \" + p.LastName; }\r\n                  );\r\n \r\nforeach (string s in results)\r\n{\r\n    Console.WriteLine(s);\r\n}\r\n</pre><br />So that's a start with the underlying queries working in .NET 2.0. Now to come up with some more complex data and queries... Thanks for the code!<br />",
+    "PostedDate": "2007-04-30T06:24:54.653-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "32246",
+    "ThreadId": "9757",
+    "Html": "\r\nHi Craig,<br /><br />This is a bug indeed. The need for a HashSet was added recently but the test matrix didn't run outside Orcas on a plain .NET 2.0 installation. I'll take a look into this. Thanks for the comment and your interest in the project!<br /><br />Cheers,<br />-Bart<br />",
+    "PostedDate": "2007-05-05T10:02:23.03-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "32247",
+    "ThreadId": "9757",
+    "Html": "\r\nThis discussion has been copied to a work item. Click here to <a href=\"http://www.codeplex.com/LINQSQO/WorkItem/View.aspx?WorkItemId=10100\">go to the work item and continue the discussion</a>.<br />",
+    "PostedDate": "2007-05-05T10:03:32.89-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "42670",
+    "ThreadId": "9757",
+    "Html": "\r\nIt's been some time now. Are there any plans to add this code change to the source? I would like to evaluate this in .NET 2.0.<br /><div class=\"quote\" style=\"border: dotted .1em #aaa; border-left: none; border-right: none; font-style: italic; margin: 1em 0em 2.5em 3em;padding: .2em;\"><br />bdesmet wrote:<br />This discussion has been copied to a work item. Click here to <a href=\"http://www.codeplex.com/LINQSQO/WorkItem/View.aspx?WorkItemId=10100\">go to the work item and continue the discussion</a>.<br /><br /></div>",
+    "PostedDate": "2007-07-26T10:54:03.883-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

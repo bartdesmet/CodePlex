@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "671115",
+    "ThreadId": "272416",
+    "Html": "\r\n<p>Hello,</p>\r\n<p>Is there a way to get all users from AD but with email, firstname, lastname ?</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks,</p>\r\n",
+    "PostedDate": "2011-09-13T05:08:12.217-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "771676",
+    "ThreadId": "272416",
+    "Html": "<p>Yes. You just need to model your you DirectoryEntity for your ADUser like so:</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>[DirectorySchema(<span style=\"color: #a31515;\">\"user\"</span>, <span style=\"color: blue;\">typeof</span>(IADsUser))]\r\n<span style=\"color: blue;\">public</span> <span style=\"color: blue;\">class</span> ADUser : DirectoryEntity\r\n{\r\n\t[DirectoryAttribute(<span style=\"color: #a31515;\">\"givenName\"</span>)]\r\n\t<span style=\"color: blue;\">public</span> <span style=\"color: blue;\">string</span> FirstName { <span style=\"color: blue;\">get</span>; <span style=\"color: blue;\">set</span>; }\r\n\t\r\n\t[DirectoryAttribute(<span style=\"color: #a31515;\">\"Mail\"</span>)]\r\n\t<span style=\"color: blue;\">public</span> <span style=\"color: blue;\">string</span> EmailAddress { <span style=\"color: blue;\">get</span>; <span style=\"color: blue;\">set</span>; }\r\n\t\r\n\t[DirectoryAttribute(<span style=\"color: #a31515;\">\"sn\"</span>)]\r\n\t<span style=\"color: blue;\">public</span> <span style=\"color: blue;\">string</span> LastName { <span style=\"color: blue;\">get</span>; <span style=\"color: blue;\">set</span>; }\r\n\t\r\n}\r\n</pre>\r\n</div>",
+    "PostedDate": "2012-02-16T16:18:36.62-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

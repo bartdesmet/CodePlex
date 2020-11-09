@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "This is a feature request to add the ability to do cross list queries. This would be incredibly valuable for looking across multiple sites using a consistent mechanism as searching a single list.\n \nI'd love to help with this if possible. I'm still trying to wrap my head around the custom LINQ provider architecture and the LINQ to SharePoint implementation, but I'm sure with just a little direction, I could help with this.",
+    "LastUpdatedDate": "2013-02-14T11:46:11.2-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2008-02-22T06:37:42.377-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Support Cross List Queries",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 3,
+    "Id": 9404
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

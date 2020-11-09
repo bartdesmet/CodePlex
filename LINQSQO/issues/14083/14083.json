@@ -1,0 +1,66 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "Fixed as of Changeset 29220.",
+    "ClosedDate": "2007-12-16T13:16:07.24-08:00",
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I've attached an updated sln containing an updated Enumerable.  The issue with the current one is that the runtime behavior does not match the one in System.Core when it comes to when argument exceptions are thrown.  In the framework version's, it throws an exception immediately upon calling the method with an invalid parameter.  With the one currently checked in the exception will be thrown upon the first MoveNext call as it's all in iterator.\n \nI've refactored (extracted into private static methods) the iterator portion of the affected methods so that the behavior matches the \"real\" one.  All unit tests continue to pass.",
+    "LastUpdatedDate": "2013-05-15T16:35:20.19-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQSQO",
+    "ReportedDate": "2007-11-26T10:23:49.61-08:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Updated Enumerable",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 14083
+  },
+  "FileAttachments": [
+    {
+      "FileId": 5458,
+      "FileName": "Query.zip",
+      "DownloadUrl": ".\\5458"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "Thanks for the feedback; I'll take a look into this.",
+      "PostedDate": "2007-11-26T12:46:55.367-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2007-12-16T13:16:07.24-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-13T11:51:42.133-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-05-15T16:35:20.19-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi Bart,\nGeneration tools are not working when site is not at the root. for example http://localhost/site/MyPublishingSite gives an error \"cannot connect to sharepoint\". The site must be at the root \"http://localhost\"",
+    "LastUpdatedDate": "2013-02-14T11:46:11.757-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2007-12-26T03:28:34.53-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Not working when list is not on root web",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 5,
+    "Id": 9109
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Thanks for the feedback. Do you have a repro with an outline of the WSS setup and site structure you're using?\r\n\r\n-Bart",
+      "PostedDate": "2008-02-07T00:33:34.97-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2008-03-17T14:49:16.047-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Hi Bart,\r\nI had the same situation, so I had to modify the ObjectModelSharePointDataProvider constructor to support SPWeb as a parameter. I also changed the related class members and the generator code, so now I can work on lists not on the root site of the site collection. Actually I would be happy to share my improvements and ideas with the community, but I do not know how I could join the project.\r\nThanks\r\nDaniel",
+      "PostedDate": "2008-03-17T15:07:49.327-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2008-04-29T15:59:50.433-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2009-12-24T03:44:09.19-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "I have this working on a subsite actually. I think this is an incorrect geenralization",
+      "PostedDate": "2010-03-18T10:49:47.33-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:46:11.757-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

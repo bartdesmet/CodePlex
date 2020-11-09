@@ -1,0 +1,45 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "First of all excellet work!\nNow the bad news: I have a VPN access to AD, I have noticed slow performace querying AD, and the bottleneck that I have found is on AssignResultProperty function.\nI have threading access to this function (tagged with MAXG, see attach), improving access and using half-time.\nI hope there is useful\n \nMaxG",
+    "LastUpdatedDate": "2013-02-14T11:56:58.853-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2009-01-21T06:48:48.953-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Threading AssignResultProperty",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 3648
+  },
+  "FileAttachments": [
+    {
+      "FileId": 1164,
+      "FileName": "BdsSoft.DirectoryServices.Linq.zip",
+      "DownloadUrl": ".\\1164"
+    }
+  ],
+  "Comments": []
+}

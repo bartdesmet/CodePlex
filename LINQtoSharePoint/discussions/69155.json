@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "235295",
+    "ThreadId": "69155",
+    "Html": "<p>Hi,<br><br>I am just wondering if it is possible to use this library to extract Tasks, Announcements, Team Discussions ...etc from SharePoint ?<br><br>I noticed that the framework will generate C# classes for the lists that I create myself on SharePoint ..but it will not generate classes for Tasks or Calendar for example .<br><br>if this is possible how to query Tasks ?<br><br><br><br>Thanks</p>",
+    "PostedDate": "2009-09-16T12:59:26.793-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "235336",
+    "ThreadId": "69155",
+    "Html": "<p>I guess I figured it out, selecting all lists in the wizard will not generated classes ..but If I select only one list like (Tasks) , I will get the classes generated ..</p>\r\n<p>this framework is really great.</p>",
+    "PostedDate": "2009-09-16T14:39:08.847-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "235346",
+    "ThreadId": "69155",
+    "Html": "<p>It seems that for some reason selecting a list that consist of two words (space between them) like &quot;Shared Documents&quot; or &quot;Team Discussions&quot; will not work !!</p>\r\n<p>classes are not generated for these list ? any help ?</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2009-09-16T15:01:13.743-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

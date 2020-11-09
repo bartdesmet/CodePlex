@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "671092",
+    "ThreadId": "272408",
+    "Html": "\r\n<p>Hello,</p>\r\n<p>Is there a way to get all the Groups (not the users) available in the Organization Unit (OU) &quot;Security Groups&quot; ?</p>\r\n<p>Thanks,</p>\r\n",
+    "PostedDate": "2011-09-13T04:22:24.747-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "771667",
+    "ThreadId": "272408",
+    "Html": "<p>I think this is basically what' you're looking for.</p>\r\n<p>1) Create the Group class modeling from the example provided in this framework:</p>\r\n<p>2) Create a basic Context class;</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>    <span style=\"color: blue;\">sealed</span> <span style=\"color: blue;\">class</span> MyContext : DirectoryContext\r\n    {\r\n        <span style=\"color: blue;\">public</span> MyContext(DirectoryEntry searchRoot)\r\n            : <span style=\"color: blue;\">base</span>(searchRoot)\r\n        {\r\n        }\r\n        [DirectorySearchOptions(SearchScope.Subtree)]\r\n        <span style=\"color: blue;\">public</span> DirectorySource&lt;ADGroup&gt; Groups { <span style=\"color: blue;\">get</span>; <span style=\"color: blue;\">set</span>; }\r\n    }\r\n</pre>\r\n</div>\r\n<p>3) Query you data. Just sent the OU path to where you want to query.</p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre>\t\r\nMyContext ctx = <span style=\"color: blue;\">new</span> MyContext(<span style=\"color: blue;\">new</span> DirectoryEntry(<span style=\"color: #a31515;\">\"LDAP://OU=Users,OU=TEST,DC=mydc,DC=com\"</span>)); \r\n\r\n<span style=\"color: blue;\">var</span> groups = <span style=\"color: blue;\">from</span> x <span style=\"color: blue;\">in</span> ctx.Groups\r\n\t\t <span style=\"color: blue;\">where</span> x.Name.StartsWith(<span style=\"color: #a31515;\">\"Test\"</span>)\r\n\t\t <span style=\"color: blue;\">select</span> x;\r\n\r\n<span style=\"color: blue;\">foreach</span> (<span style=\"color: blue;\">var</span> g <span style=\"color: blue;\">in</span> groups)\r\n{\r\nConsole.WriteLine(g.Name);\r\n}\r\n</pre>\r\n</div>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2012-02-16T16:16:44.16-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

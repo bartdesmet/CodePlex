@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinLinq", "MinLinq\MinLinq.csproj", "{E7612174-7B57-4B20-A226-62095E4CC6AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "EssentialsTest\Test.csproj", "{0EF601FA-970A-4AB0-BC29-8887F112C06C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A2F34832-4DA7-4DE7-B0DE-4F0BD6E1B0D7}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		MinLinq.vsmdi = MinLinq.vsmdi
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RayTracer", "RayTracer\RayTracer.csproj", "{03364AC5-32FD-4B89-9F3A-CBFDF912A085}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs01.codeplex.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = MinLinq\\MinLinq.csproj
+		SccProjectName1 = MinLinq
+		SccLocalPath1 = MinLinq
+		SccProjectUniqueName2 = EssentialsTest\\Test.csproj
+		SccProjectName2 = EssentialsTest
+		SccLocalPath2 = EssentialsTest
+		SccProjectUniqueName3 = RayTracer\\RayTracer.csproj
+		SccProjectName3 = RayTracer
+		SccLocalPath3 = RayTracer
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MinLinq.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7612174-7B57-4B20-A226-62095E4CC6AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7612174-7B57-4B20-A226-62095E4CC6AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7612174-7B57-4B20-A226-62095E4CC6AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7612174-7B57-4B20-A226-62095E4CC6AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EF601FA-970A-4AB0-BC29-8887F112C06C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EF601FA-970A-4AB0-BC29-8887F112C06C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EF601FA-970A-4AB0-BC29-8887F112C06C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EF601FA-970A-4AB0-BC29-8887F112C06C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03364AC5-32FD-4B89-9F3A-CBFDF912A085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03364AC5-32FD-4B89-9F3A-CBFDF912A085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03364AC5-32FD-4B89-9F3A-CBFDF912A085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03364AC5-32FD-4B89-9F3A-CBFDF912A085}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

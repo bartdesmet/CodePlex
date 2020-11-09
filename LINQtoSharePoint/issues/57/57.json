@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "SpMetal",
+      "DisplayName": "SpMetal"
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Try to export the Calendar list from SharePoint and observe the lack of the \"Start time\" field since it is inherited from the base type; this restriction should be dropped.",
+    "LastUpdatedDate": "2013-06-14T00:01:41.907-07:00",
+    "PlannedForRelease": "0.1.2.0 Alpha",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "High",
+      "Severity": 150,
+      "Id": 3
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2007-04-26T03:41:39.663-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "SpMetal exports are missing important fields inherited from the base type",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 57
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

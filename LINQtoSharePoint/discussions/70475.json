@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "240083",
+    "ThreadId": "70475",
+    "Html": "<p>I would like to generate an entity class for each lists in my SharePoint site. The documentation is written as follows:</p>\r\n<p>-list:&lt;list&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Name of the list to export (* = all lists)</p>\r\n<p>My understanding is that I would use the * to export all lists like the following:</p>\r\n<p>\r\n<pre>spmetal -url:foo.com -list:*</pre>\r\n</p>\r\n<p>Doing so, however, causes the following error: Failed to generate SPML. Cannot load the list definition for *</p>\r\n<p>What am I doing wrong?</p>",
+    "PostedDate": "2009-09-29T09:42:48.593-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

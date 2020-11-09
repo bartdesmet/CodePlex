@@ -1,0 +1,66 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I needed to be able to filter based on pwdLastSet in a query using LINQ to AD and using the SearchResult to get values instead of a DirectoryEntry made this possible. Attached is my patch for LINQ to AD that modifies DirectoryQuery.GetResults and DirectoryQuery.AssignResultProperty slightly to use the SearchResult object directly for most property lookups to allow automatic marshalling.",
+    "LastUpdatedDate": "2017-12-07T18:31:55.737-08:00",
+    "PlannedForRelease": "LINQ to Active Directory Refresh Release 1.0.1",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Medium",
+      "Severity": 100,
+      "Id": 2
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2008-07-14T11:12:49.83-07:00",
+    "Status": {
+      "Name": "Active",
+      "Id": 2
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Suggestion: Making fields like pwdLastSet usable",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 2443
+  },
+  "FileAttachments": [
+    {
+      "FileId": 827,
+      "FileName": "DirectorySource.cs.patch",
+      "DownloadUrl": ".\\827"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "Thanks for your feedback. This will be adressed in the 1.0.1 Refresh Release.\r\n\r\nThanks,\r\n-Bart",
+      "PostedDate": "2008-07-31T05:29:33.15-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2010-07-16T00:05:45.047-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:59.8-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2017-12-07T18:31:55.737-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "A patch has been uploaded to http://www.codeplex.com/LINQSQO/SourceControl/PatchList.aspx.",
+    "ClosedDate": "2007-08-14T08:03:04.44-07:00",
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "A HashSet<T> collection type is missing in .NET 2.0 causing the non-CS30 compile to fail on VS2005.",
+    "LastUpdatedDate": "2013-05-15T16:35:20.703-07:00",
+    "PlannedForRelease": "0.9.1 ReleaseCandidate",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Medium",
+      "Severity": 100,
+      "Id": 2
+    },
+    "ProjectName": "LINQSQO",
+    "ReportedDate": "2007-05-05T10:03:25.197-07:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Missing HashSet when compiling for .NET 2.0",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 10100
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

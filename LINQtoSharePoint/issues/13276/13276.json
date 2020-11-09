@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I got a issue like this:\nvar list = new list<string>();\nlist.add(\"a\");\nlist.add(\"b\");\n \n var res = from u in users\n             where list.Contains(u.FirstName)\n \nLordan\nThanks",
+    "LastUpdatedDate": "2013-02-14T11:46:09.873-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2009-05-17T23:13:01.8-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "SP0007: Query predicate contains a method call on a non-entity property: Contains.",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 13276
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

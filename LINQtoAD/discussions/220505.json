@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "470542",
+    "ThreadId": "220505",
+    "Html": "<p>How can I create a user (group, OU etc) with the library?</p>\r\n<p>Hope it's possible - just missing sample.</p>\r\n<p>Thanks</p>",
+    "PostedDate": "2010-07-21T12:06:28.543-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "471837",
+    "ThreadId": "220505",
+    "Html": "<p>At the moment, there are no insert or delete operations supported; use the plain DirectoryEntry API instead. In the future this may get added.</p>",
+    "PostedDate": "2010-07-23T13:19:51.507-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

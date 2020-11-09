@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "186877",
+    "ThreadId": "55342",
+    "Html": "Hi there,<br>\r\n<br>\r\nI hope somebody can help me although i guess this project is dead anyway...<br>\r\n<br>\r\nIn the examples of &quot;how to use LINQ to SharePoint&quot;, it is mentioned that I have to use a type named &quot;SharePointDataSource&quot; to write queries against the SharePoint list. Anyhow, I can't find this type in the BdsSoft.SharePoint.Linq.dll ... Can anyone give me a hint?<br>\r\n<br>\r\nso long,<br>\r\nsancho<br>\r\n",
+    "PostedDate": "2009-05-05T03:24:33.293-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "186878",
+    "ThreadId": "55342",
+    "Html": "ok guys...<br>\r\n<br>\r\ni just tried a bit around and i got it (maybe the example is from an older version of LINQ to SharePoint):<br>\r\n<br>\r\nit should be like this:<br>\r\nvar t = new SharePointList&lt;T&gt;(new SharePointDataContext(new Uri(&quot;http://&lt;insert servername here&gt;&quot;)));<br>\r\n<br>\r\nso long<br>\r\nsancho<br>\r\n",
+    "PostedDate": "2009-05-05T03:30:47.077-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

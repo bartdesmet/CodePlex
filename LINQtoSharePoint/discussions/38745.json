@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "128544",
+    "ThreadId": "38745",
+    "Html": "Sorry if i missed something and this is a stupid question. In all the example code i've seen uses a Uri to connect to the site. I saw that the Sharepoint constructor that accepts a Uri object uses the <strong>WebServicesSharePointDataProvider</strong>. So I assume that's the way to connect to the site using&nbsp; the SharePoint webservices. The other construtor takes a <strong>ISharepointDataProvider</strong>, but the only <br>\r\ndefined in the <strong>BdsSoft.SharePoint.Linq.Providers</strong> namespace is the&nbsp;<strong>WebServicesSharePointDataProvider. </strong>So how do you connect using the object model?<strong> &nbsp;</strong> <br>\r\n<br>\r\nThanks<br>\r\nMichael<br>\r\n",
+    "PostedDate": "2008-10-29T02:43:18.28-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

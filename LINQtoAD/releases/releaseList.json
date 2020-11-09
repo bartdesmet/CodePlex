@@ -1,0 +1,36 @@
+[
+  {
+    "Id": "0",
+    "Name": "LINQ to Active Directory Refresh Release 1.0.1",
+    "DevelopmentStatus": "None",
+    "Description": "! Refresh Release 1.0.1\n\nIncludes bug fixes and support for:\n\n* byte[]- and *GUID-valued directory attributes*.\n* *Bug fix* for non-constant EndsWith, BeginsWith and Contains clauses.\n* Introduction of *DirectoryContext* with support for nested contexts and direct update support.\n* *Extension methods* for DirectorySearcher and DirectoryEntry classes to create queryable objects on the fly.\n* Support for *DirectorySearcher* in data source and context constructors enabling more flexibility for search options.\n* *Updated samples* to use the new available features.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2008-07-31T14:15:24.853-07:00",
+    "Files": [
+      {
+        "Id": "cc436e5b-7034-4a17-952b-d5de80be7a5c",
+        "FileName": "LINQtoAD.zip",
+        "Url": "./0/cc436e5b-7034-4a17-952b-d5de80be7a5c",
+        "Type": "Source Code",
+        "UploadDate": "2008-07-31T14:15:24.853-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "1",
+    "Name": "LINQ to Active Directory RTW",
+    "DevelopmentStatus": "None",
+    "Description": "Gold release of the LINQ to Active Directory sample.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2007-11-25T23:07:30.873-08:00",
+    "Files": [
+      {
+        "Id": "c68acf89-5437-48f7-8ea0-709e34a7f458",
+        "FileName": "LINQtoAD CodePlex Release.zip",
+        "Url": "./1/c68acf89-5437-48f7-8ea0-709e34a7f458",
+        "Type": "Source Code",
+        "UploadDate": "2007-11-25T23:07:30.887-08:00"
+      }
+    ]
+  }
+]

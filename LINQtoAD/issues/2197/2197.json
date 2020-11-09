@@ -1,0 +1,80 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "The current release does what&#39;s requested. A future release will do proper closure capturing and be stricter about capturing outer state in order not to give the user the impression lots of operations get remoted.",
+    "ClosedDate": "2010-07-16T00:02:33.75-07:00",
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I was playing around with your demo project and substituted static string text by a variable, so for example:\n \n           string test = \"A\";\n            var res6 = from grp in groups\n                       where grp.Name.StartsWith(test)  <-- NOTE: Here I replaced static text with test variable\n                       select new { grp.Name, MemberCount = grp.Members.Length };\n \nNow I get the error 'System.NullReferenceException was unhandled', the error occurs at case statement:\n \n                       case \"StartsWith\":\n                            {\n                                ConstantExpression c = m.Arguments[0] as ConstantExpression;\n                                sb.AppendFormat(\"{0}={1}*\", GetFieldName(o.Member), c.Value); <--- EXCEPTION: on variable 'c'\n                                break;\n                            }\n \nBy the way thanks for this Linq class!! Excellent work!\n \nYours sincerely,\n \nEvert Wiesenekker",
+    "LastUpdatedDate": "2013-05-16T02:18:25.973-07:00",
+    "PlannedForRelease": "LINQ to Active Directory Refresh Release 1.0.1",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Medium",
+      "Severity": 100,
+      "Id": 2
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2008-05-18T12:17:58.623-07:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Error when using parameters inside where clause",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 3,
+    "Id": 2197
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Just wanted to point out I had found a solution to this (after a lot of hair tearing out as this is a frustrating bug)\r\n\r\nYou can delete the line : ConstantExpression c = m.Arguments[0] as ConstantExpression;\r\n\r\nand then replace c.Value with : (string) Expression.Lambda(m.Arguments[0]).Compile().DynamicInvoke()\r\n\r\n.. it then works fine ! (found after much searching in a comment at the bottom of here: http://weblogs.asp.net/okloeten/archive/2007/10/03/4327290.aspx)\r\n\r\nHope this helps people trying to use this !\r\n\r\n[mRg]",
+      "PostedDate": "2008-05-30T04:25:41.137-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2008-07-01T13:45:06.343-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "I can confirm that this works.  I'd be happy to merge these changes VIA team explorer in if I'm added as a developer to the project.",
+      "PostedDate": "2008-07-01T13:56:34.943-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "This issue will be resolved in the 1.0.1 Refresh Release.\r\n\r\nThanks for the feedback,\r\n-Bart",
+      "PostedDate": "2008-07-31T05:17:02.49-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2010-07-16T00:01:20.907-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2010-07-16T00:02:33.75-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:59.973-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-05-16T02:18:25.973-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "80551",
+    "ThreadId": "24037",
+    "Html": "\r\nIn my \"Tasks\" list in Sharepoint I have specified serveral custom columns. They all get mapped correctly in the SPML but once i try to query against it i get \"SP0099: Unsupported query expression detected.\". If I remove the WHERE against the column and simply enumerate the results and print out the column value i get nothing, the value is nothing...although in sharepoint it does have a value.<br /><br />I am running:<br />MOSS 2007<br />VS2008 (project targetted at 3.5)<br /><br />The column is mapped like this in my SPML:<br />&lt;Field Name=\"S<i>x002d</i>Order\" DisplayName=\"S-Order\" Type=\"Text\" Description=\"Serviceorder\" Id=\"92219223-79d9-46d7-99e9-8811e0ab41c8\" /&gt;<br /><br />Thankful for any help! =)<br />",
+    "PostedDate": "2008-03-14T01:19:50.253-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "80600",
+    "ThreadId": "24037",
+    "Html": "\r\nPlease, attach some detailed information regarding your custom field. SchemaXml would be nice - like this: &lt;Field ID=\"{038D1503-4629-40f6-ADAF-B47D1AB2D4FE}\" Name=\"Company\" SourceID=\"http://schemas.microsoft.com/sharepoint/v3\" StaticName=\"Company\" Group=\"Core Contact and Calendar Columns\" DisplayName=\"Company\" Type=\"Text\" /&gt;.<br />",
+    "PostedDate": "2008-03-14T07:00:35.107-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "81012",
+    "ThreadId": "24037",
+    "Html": "<div class=\"quote\" style=\"border: dotted .1em #aaa; border-left: none; border-right: none; font-style: italic; margin: 1em 0em 2.5em 3em;padding: .2em;\"><br />smartin wrote:<br />Please, attach some detailed information regarding your custom field. SchemaXml would be nice - like this: &lt;Field ID=\"{038D1503-4629-40f6-ADAF-B47D1AB2D4FE}\" Name=\"Company\" SourceID=\"http://schemas.microsoft.com/sharepoint/v3\" StaticName=\"Company\" Group=\"Core Contact and Calendar Columns\" DisplayName=\"Company\" Type=\"Text\" /&gt;.<br /><br /><br /></div>Ok, but how do I get the SchemaXML of the field out of sharepoint. I have looked in the database but cannot find where the fields are stored.<br />Thanks!<br />",
+    "PostedDate": "2008-03-17T00:38:40.31-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "81025",
+    "ThreadId": "24037",
+    "Html": "\r\nYou can use SharePoint Explorer http://blog.mondosoft.com/ontolica/archive/2007/02/15/SharePoint-Explorer-for-WSS3.aspx<br />",
+    "PostedDate": "2008-03-17T02:48:38.673-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "81044",
+    "ThreadId": "24037",
+    "Html": "<div class=\"quote\" style=\"border: dotted .1em #aaa; border-left: none; border-right: none; font-style: italic; margin: 1em 0em 2.5em 3em;padding: .2em;\"><br />smartin wrote:<br />You can use SharePoint Explorer http://blog.mondosoft.com/ontolica/archive/2007/02/15/SharePoint-Explorer-for-WSS3.aspx<br /><br /><br /></div>Thank you very much! This looks like a great tool, awesome!. So here's my SchemaXML for the field:<br /><br />&lt;Field Type=\"Text\" DisplayName=\"S-Order\" Required=\"FALSE\" MaxLength=\"255\" ID=\"{e938e162-c1c3-49c5-9971-793673a16765}\" SourceID=\"{304f80d5-33ab-460d-b0a8-743c4638223f}\" StaticName=\"S<i>x002d</i>Order\" Name=\"S<i>x002d</i>Order\" ColName=\"nvarchar5\" RowOrdinal=\"0\" Version=\"2\"&gt;&lt;Default /&gt;&lt;/Field&gt;<br />",
+    "PostedDate": "2008-03-17T04:45:13.027-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

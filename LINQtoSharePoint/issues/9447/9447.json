@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "If you have list with folders, ObjectModelSharePointDataProvider searches only root folder. It should support:\n1) Recursive search (root folder and all subfolders)\n- new SharePointDataContext bool property RecursiveQuery?\n2) Search specific folder\n- new SharePointDataContext string property FolderUrl?\n \nFast fix at this moment, add line 137 to ObjectModelSharePointDataProvider.cs.\nq.ViewAttributes = \"Scope=\\\"RecursiveAll\\\"\";",
+    "LastUpdatedDate": "2013-02-14T11:46:11.033-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2008-02-29T10:02:39.14-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Support lists with folders",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 3,
+    "Id": 9447
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

@@ -1,0 +1,71 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Environment:\nwindows 2003 sp2 Simplified Chinese \nvs2008 sp1 Simplified Chinese \nError Message:\nvisual studio 2008 configuration failed.",
+    "LastUpdatedDate": "2013-02-14T11:46:10.197-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2008-10-27T02:34:28.84-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Install failed.",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 11519
+  },
+  "FileAttachments": [
+    {
+      "FileId": 1512,
+      "FileName": "Register Templates Manually.docx",
+      "DownloadUrl": ".\\1512"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "Hi,\r\n\r\nI had the same issue with a VS2008 SP1 Spanish. To solve this do the steps that you can see in the file that is attached.\r\n\r\nPS: Sorry about my english :(\r\n",
+      "PostedDate": "2008-12-03T10:35:25.68-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2008-12-03T10:35:28.383-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Hi\r\ni'm facing the same problem, also when i run lessmsi.exe, nothing happen. only a command prompt window open, then after a few seconds close. can anybody help me to workaround this problem ?",
+      "PostedDate": "2009-12-07T06:41:17.533-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "FYI: A more recent version of lessmsi.exe is available at the following location: http://code.google.com/p/lessmsi\r\nIf anyone has a problem please upload an issue on that site and attach the msi and I will investigate.",
+      "PostedDate": "2009-12-22T20:40:16.77-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:46:10.197-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

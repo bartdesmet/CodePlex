@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "198317",
+    "ThreadId": "58589",
+    "Html": "<p>Hi,</p>\r\n<p>It looks like there are no changes on this project since more than 18 months, is it still alive ?</p>\r\n<p>&nbsp;</p>\r\n<p>Manitra.</p>",
+    "PostedDate": "2009-06-05T09:51:34.383-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "200903",
+    "ThreadId": "58589",
+    "Html": "<p>Yea it looks like its dead for a long time.</p>\r\n<p>I will start using it so I might do changes and upload them as patches if I am able</p>",
+    "PostedDate": "2009-06-12T09:53:54.33-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "264401",
+    "ThreadId": "58589",
+    "Html": "<p>This project might be dead on codeplex, but not gone for good. They made spmetal a OOB tool in 2010 and Linq is OOB in 2010 too.</p>\r\n<p>I've been playing with Linq on 2010 and love it. Just tried to get Linq working on 2007 and am really disappointed. spmetal on codeplex is sooo buggy. Looks like someone made the decision to rewrite it for 2010 and stop supporting it for 2007</p>",
+    "PostedDate": "2009-12-07T02:41:12.687-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "264793",
+    "ThreadId": "58589",
+    "Html": "Ok, thanks for your answer. I'm waiting for the SP 2010 then :)<br><br><div>2009/12/7 alxdean <span dir=ltr>&lt;<a href=\"mailto:notifications@codeplex.com\">notifications@codeplex.com</a>&gt;</span><br>\r\n<blockquote style=\"margin:0pt 0pt 0pt 0.8ex;padding-left:1ex\">   <div> <p>From: alxdean</p> <div><p>This project might be dead on codeplex, but not gone for good. They made spmetal a OOB tool in 2010 and Linq is OOB in 2010 too.</p>\r\n\r\n<p>I've been playing with Linq on 2010 and love it. Just tried to get Linq working on 2007 and am really disappointed. spmetal on codeplex is sooo buggy. Looks like someone made the decision to rewrite it for 2010 and stop supporting it for 2007</p>\r\n</div> <div> <p>Read the <a href=\"http://linqtosharepoint.codeplex.com/Thread/View.aspx?ThreadId=58589&ANCHOR#Post264401\">full discussion online</a>.</p> <p>To add a post to this discussion, reply to this email (<a href=\"mailto:LINQtoSharePoint@discussions.codeplex.com?subject=[LINQtoSharePoint:58589]\">LINQtoSharePoint@discussions.codeplex.com</a>)</p>\r\n <p>To start a new discussion for this project, email <a href=\"mailto:LINQtoSharePoint@discussions.codeplex.com\">LINQtoSharePoint@discussions.codeplex.com</a></p> <p>You are receiving this email because you subscribed to this discussion on CodePlex. You can <a href=\"http://www.codeplex.com/site/discussions/thread/unsubscribe/58589\">unsubscribe</a> on codePlex.com.</p>\r\n <p>Please note: Images and attachments will be removed from emails. Any posts to this discussion will also be available online at <a href=\"http://codeplex.com\">codeplex.com</a></p> </div> </div> </blockquote>\r\n</div><br><br clear=all><br>-- <br>Cordialement,<br>Manitra Andriamitondra<br>+33 6 42 75 06 12<br>Pour des infos en live sur le spectacle du STK =&gt; <a href=\"http://wiki.tanora.org\">http://wiki.tanora.org</a><br>",
+    "PostedDate": "2009-12-08T00:08:55.36-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

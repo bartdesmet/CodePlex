@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "522072",
+    "ThreadId": "234715",
+    "Html": "\r\n<p>After the <a id=\"x_fileDownload0\" tabindex=\"9\" href=\"http://linqtosharepoint.codeplex.com/releases/view/8713#DownloadId=22852\">\r\nLINQ to SharePoint v0.2.4.msi</a>&nbsp;installation, i don't see Microsft.sharepoint.dll file in C:\\Program Files\\BdsSoft LINQ to SharePoint folder. Please let me know how to get this file so that i can give reference in the visualstudio project.</p>\r\n",
+    "PostedDate": "2010-11-15T04:38:28.59-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

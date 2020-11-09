@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "566807",
+    "ThreadId": "246190",
+    "Html": "\r\n<p>I am getting this issue when using LinqToSharePoint to query a SPList with LookupMulti field.</p>\r\n<p>For example, I have a SPList called User, in this list, there is a column called CostCenters, which is a lookup field (allow multiple value) links to CostCenter, another SPList. When I query the User list using the following statement, say there are 5 entries\r\n in the User list,</p>\r\n<p><strong>var users = from u in context.User select u;</strong></p>\r\n<p>If all 5 entries have value (any # of value) in the CostCenters column, it will return me 5 (users).</p>\r\n<p>If any entry has empty CostCenters, the query will return <strong>null</strong> for the users. I actually still expect 5 users.</p>\r\n<p>Has anybody encountered the same issue? Is this a bug?</p>\r\n<p>I have spent a couple days trying to figure this out. If this doesn't work, that means I have to switch back to CAMLQuery... !@#!%!</p>\r\n<p>Thanks,</p>\r\n<p>Gary</p>\r\n",
+    "PostedDate": "2011-02-15T15:53:45.833-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

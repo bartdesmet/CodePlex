@@ -1,0 +1,180 @@
+<div class="wikidoc"><b><u>Note</u>: This page contains sample code based on the 0.2.0.0 release and earlier. Some samples don&#39;t work with the 0.2.2.0 release anymore because of API changes. The samples page will be updated accordingly shortly.</b><br />
+<h1>Samples</h1>
+This page contains a set of samples that illustrate how to use LINQ to SharePoint.<br />
+<h2>Getting started</h2>
+In order to take a jumpstart with LINQ to SharePoint, view the <b>Getting started with LINQ to SharePoint video</b> (<a href=".\5a25c976-8c8a-4eb7-8f7b-e050e99e0fe8">C&#35;</a> - <a href=".\29fd870c-5e7e-4151-92d9-9e25e7e65237">Visual Basic</a>).<br />
+<h3>General information</h3>
+Before you start, download binaries and check the machine configuration:
+<ol><li>Download the <b>LINQ to SharePoint binaries</b> from CodePlex (see Releases tab). Check for an update regularly.</li>
+<li>Download and install the <b>Windows SharePoint Services 3.0 SDK</b> from <a href="http://www.microsoft.com/downloads/details.aspx?familyid=05E0DD12-8394-402B-8936-A07FE8AFAFFD&amp;displaylang=en">http://www.microsoft.com/downloads/details.aspx?familyid=05E0DD12-8394-402B-8936-A07FE8AFAFFD&amp;displaylang=en</a></li></ol>
+<br />LINQ to SharePoint is built around the following concepts:
+<ul><li><b>Entity objects</b> represent rows from SharePoint lists in a strongly-typed fashion. Entity type definitions can be exported from a SharePoint list definition using the <b><a href="https://linqtosharepoint.codeplex.com/wikipage?title=SPMetal&referringTitle=Samples">SpMetal</a></b> tool that comes with LINQ to SharePoint.</li>
+<li>A SharePoint list is characterized as a <b><a href="https://linqtosharepoint.codeplex.com/wikipage?title=SharePointDataSource&referringTitle=Samples">SharePointDataSource&#60;T&#62;</a></b> in LINQ to SharePoint, where T is an entity type as explained above.</li></ul>
+<br />To use LINQ to SharePoint in your .NET 3.5 project:
+<ol><li>Add a reference to <i>BdsSoft.SharePoint.Linq.dll</i> and to <i>Microsoft.SharePoint.dll</i> of the Windows SharePoint Services Object Model.</li>
+<li>Drag-and-drop entity type definition files that were generated using <a href="https://linqtosharepoint.codeplex.com/wikipage?title=SPMetal&referringTitle=Samples">SpMetal</a> from Windows Explorer to the project node in Solution Explorer.</li>
+<li>Create a <a href="https://linqtosharepoint.codeplex.com/wikipage?title=SharePointDataSource&referringTitle=Samples">SharePointDataSource&#60;T&#62;</a> object to write queries against the SharePoint list. Import the <i>BdsSoft.SharePoint.Linq</i> namespace to access the <a href="https://linqtosharepoint.codeplex.com/wikipage?title=SharePointDataSource&referringTitle=Samples">SharePointDataSource&#60;T&#62;</a> type.</li></ol>
+
+<h3>A first sample</h3>
+The following piece of C# 3.0 code shows how to write a LINQ query against a SharePoint data source using LINQ to SharePoint:<br /><br /><pre>
+using System;
+using BdsSoft.SharePoint.Linq;
+
+class Program
+{
+   static void Main()
+   {
+      var users = new SharePointDataSource&lt;User&gt;(new Uri(&quot;http://www.mysite.com&quot;));
+      var res = from u in users
+                orderby u.MemberSince descending
+                where u.Age &gt;= 24 &amp;&amp; u.FirstName.StartsWith(&quot;B&quot;)
+                select new { Name = u.FirstName + &quot; &quot; + u.LastName, u.Age, u.MemberSince };
+
+      foreach (var u in res)
+         Console.WriteLine(u);
+   }
+}
+</pre><br /><b>Tip:</b> To examine the CAML queries and additional query information at runtime, use the <a href="https://linqtosharepoint.codeplex.com/wikipage?title=SharePointDataSource&referringTitle=Samples">SharePointDataSource&#60;T&#62;</a>&#39;s Log property as shown below:<br /><br /><pre>
+      var users = new SharePointDataSource&lt;User&gt;(new Uri(&quot;http://www.mysite.com&quot;));
+      users.Log = Console.Out;
+
+      var res = from u in users
+                ...
+</pre><br />
+<h3>Under the covers</h3>
+The CAML query for the sample above looks as follows:<br /><br /><pre>
+&lt;Query&gt;
+  &lt;Where&gt;
+    &lt;And&gt;
+      &lt;Geq&gt;
+        &lt;Value Type=&quot;Number&quot;&gt;24&lt;/Value&gt;
+        &lt;FieldRef Name=&quot;Age&quot; /&gt;
+      &lt;/Geq&gt;
+      &lt;BeginsWith&gt;
+        &lt;FieldRef Name=&quot;First_x0020_name&quot; /&gt;
+        &lt;Value Type=&quot;Text&quot;&gt;B&lt;/Value&gt;
+      &lt;/BeginsWith&gt;
+    &lt;/And&gt;
+  &lt;/Where&gt;
+  &lt;OrderBy&gt;
+    &lt;FieldRef Name=&quot;Member_x0020_since&quot; Ascending=&quot;FALSE&quot; /&gt;
+  &lt;/OrderBy&gt;
+&lt;/Query&gt;
+&lt;ViewFields&gt;
+  &lt;FieldRef Name=&quot;First_x0020_name&quot; /&gt;
+  &lt;FieldRef Name=&quot;Last_x0020_name&quot; /&gt;
+  &lt;FieldRef Name=&quot;Age&quot; /&gt;
+  &lt;FieldRef Name=&quot;Member_x0020_since&quot; /&gt;
+&lt;/ViewFields&gt;
+</pre><br />Notice that the projection results in the creation of a &lt;ViewFields&gt; element that restricts the columns returned by the query.<br />
+<h2>Guidelines for writing queries</h2>
+<h3>Supported operations</h3>
+LINQ to SharePoint implements a subset of the <a href="http://msdn2.microsoft.com/en-us/library/ms467521.aspx">Query schema of CAML</a>. It supports the following CAML elements:
+<ul><li>Query
+<ul><li>Where
+<ul><li><b>Logical joins</b>
+<ul><li>And</li>
+<li>Or</li></ul></li>
+<li><b>Comparison Operators</b>
+<ul><li>BeginsWith</li>
+<li>Contains</li>
+<li>Eq</li>
+<li>Neq</li>
+<li>Gt</li>
+<li>Geq</li>
+<li>Lt</li>
+<li>Leq</li>
+<li>IsNull</li>
+<li>IsNotNull</li></ul></li></ul></li>
+<li>OrderBy</li></ul></li></ul>
+<br />There&#39;s no support for the <a href="http://msdn2.microsoft.com/en-us/library/ms436080.aspx">DateRangesOverlap</a> and <a href="http://msdn2.microsoft.com/en-us/library/ms415157.aspx">GroupBy</a> elements.<br />
+<h3>Writing valid conditions</h3>
+LINQ to SharePoint requires leaf-level conditions (i.e. conditions without Boolean operators) to written in a fixed format with only one reference to an <b>entity type property</b>. Valid examples include:<br /><br /><pre>
+u.FirstName == &quot;Bart&quot;
+u.Age &gt;= 24
+1234 &lt; u.AccountBalance
+u.FirstName.StartsWith(&quot;B&quot;)
+</pre><br />It&#39;s invalid to have more than one entity property reference in a leaf-level condition, like this:<br /><br /><pre>
+u.Age &lt; u.DoubleAge
+u.FirstName.Contains(u.NickName)
+</pre><br />All <b>calculations</b> should occur on the value side of the condition. The following condition is valid:<br /><br /><pre>
+u.Age &lt; 2 * someVariable
+</pre><br />but the next one isn&#39;t valid:<br /><br /><pre>
+u.Age / 2 &lt; someVariable
+</pre>
+<h3>Inverse order</h3>
+Conditions in LINQ can be written in reverse order, like this:<br /><br /><pre>
+24 &lt;= u.Age
+&quot;Bart&quot; == u.Name
+true != u.IsMember
+</pre><br />LINQ to SharePoint will reverse the order of the condition operandi automatically before making the translation to CAML. This is required because CAML conditions always compare the <a href="http://msdn2.microsoft.com/en-us/library/ms442728.aspx">FieldRef</a> with the <a href="http://msdn2.microsoft.com/en-us/library/ms441886.aspx">Value</a> in that order.<br />
+<h3>String operations</h3>
+The following methods on System.String are supported in LINQ to SharePoint:<br />
+<ul><li><b>StartsWith</b> (&lt;BeginsWith&gt;...&lt;/BeginsWith&gt;)</li>
+<li><b>Contains</b> (&lt;Contains&gt;...&lt;/Contains&gt;)</li>
+<li><b>Equals</b> (&lt;Eq&gt;...&lt;/Eq&gt;)</li></ul>
+<br />Excessive <b>ToString</b> calls are stripped off automatically when using == or != comparisons:<br />
+<ul><li>u.FirstName.ToString().ToString() == &quot;Bart&quot; becomes u.FirstName == &quot;Bart&quot;</li></ul>
+<br />The entity property reference should always occur on the left-hand side of the condition when using these methods:<br /><br /><pre>
+u.FirstName.StartsWith(&quot;B&quot;)
+u.LastName.Contains(&quot;Smet&quot;)
+u.City.Equals(&quot;Ghent&quot;)
+</pre><br />The operator overloads <b>==</b> and <b>!=</b> are supported too and have an equivalent meaning as Equals or its negation.<br />
+<h3>Nullable types</h3>
+Entity properties that have been marked as Nullable because it aren&#39;t reference types and the field is not defined as required in the SharePoint list definition can be checked for null values in two ways:<br /><br /><pre>
+u.Age.HasValue
+u.Age != null
+</pre><br />To reference the value of the nullable property, two approaches exist as well:<br /><br /><pre>
+u.Age == 24
+u.Age.Value == 24
+</pre><br />In Visual Basic, the second approach has to be followed, while C# provides more flexibility so that you can drop the .Value property call.<br />
+<h3>Working with Choice and MultiChoice fields</h3>
+Choice and MultiChoice fields are mapped on enum types by the <a href="https://linqtosharepoint.codeplex.com/wikipage?title=SPMetal&referringTitle=Samples">SpMetal</a> tool. Each <a href="http://msdn2.microsoft.com/en-us/library/ms439235.aspx">CHOICE</a> from SharePoint is mapped on a field in the target enumeration, possibly decorated with a <b>ChoiceAttribute</b> to indicate a different underlying name (for example [Choice(&quot;Laurel &amp; Hardy&quot;)] will be applied on an enum field LaurelHardy). MultiChoice fields (represented by radio buttons in SharePoint) are mapped on a [Flags] enumeration where all values are powers of two to allow bitwise combination. Examples are shown below:<br /><br /><pre>
+[Flags]
+enum FavoriteFood
+{
+   Pizza = 1,
+   Lasagna = 2,
+   Hamburger = 4
+}
+
+enum MembershipType
+{
+   Gold,
+   Silver,
+   Bronze
+}
+</pre><br /><br />Conditions on <b>Choice fields</b> should look like this:<br /><br /><pre>
+u.MembershipType == MembershipType.Silver
+u.MembershipType != MembershipType.Gold
+</pre><br />and are translated into &lt;Eq&gt; or &lt;Neq&gt; CAML conditions. Comparison operators like &lt;, &lt;=, &gt; and &gt;= won&#39;t trigger compilation or runtime errors but shouldn&#39;t be used.<br /><br />Conditions on <b>MultiChoice fields</b> should look like this:<br /><br /><pre>
+u.FavoriteFood == FavoriteFood.Pizza
+u.FavoriteFood != FavoriteFood.Pizza
+u.FavoriteFood == (FavoriteFood.Pizza | FavoriteFood.Lasagna)
+</pre><br /><b>Warning:</b> There&#39;s a semantic mismatch between LINQ queries for MultiChoice fields and what you normally expect in C#.
+<ul><li>The first condition means that Pizza should be <u>one of</u> the choices applied for the list item. To that respect, it&#39;s equivalent to the <i>(u.FavoriteFood &amp; FavoriteFood.Pizza) == FavoriteFood.Pizza</i> syntax normally used to check enumeration flags. This syntax isn&#39;t supported though.</li>
+<li>In a similar fashion, the second condition means that Pizza shouldn&#39;t be in the list of favorite foods of the list item; it doesn&#39;t restrict any other values though.</li>
+<li>The last condition is equivalent to <i>u.FavoriteFood == FavoriteFood.Pizza || u.FavoriteFood == FavoriteFood.Lasagna</i> but again it doesn&#39;t rule out the presence of other choices on the list item.</li></ul>
+If you want to use an absolute equality check, it should be written manually. For example, to find people who only like Pizza (and nothing but that), you&#39;d have to write <i>u.FavoriteFood == FavoriteFood.Pizza &amp;&amp; u.FavoriteFood != FavoriteFood.Lasagna &amp;&amp; u.FavoriteFood != FavoriteFood.Hamburger</i>.<br /><br />Fields with <b>fill-in choices</b> will have an additional mapping field of type string that can be null (no fill-in choice made) or set to some string. This mapping field is cross-linked from the original field using the <b>OtherChoice</b> property of the <b>FieldAttribute</b> mapping, like this:<br /><br /><pre>
+    /// &lt;summary&gt;
+    /// Favorite food
+    /// &lt;/summary&gt;
+    [Field(&quot;Favorite food&quot;, FieldType.MultiChoice, Id = &quot;c48610a1-098e-438c-9f77-6e65c6a392cb&quot;, OtherChoice = &quot;FavoriteFoodOther&quot;)]
+    public FavoriteFood? FavoriteFood { get; set; }
+
+    /// &lt;summary&gt;
+    /// Favorite food &#39;Fill-in&#39; value
+    /// &lt;/summary&gt;
+    [Field(&quot;Favorite food&quot;, FieldType.Text, Id = &quot;c48610a1-098e-438c-9f77-6e65c6a392cb&quot;)]
+    public string FavoriteFoodOther { get; set; }
+</pre><br /><br />The fill-in choice entity property can used in queries too:<br /><br /><pre>
+u.FavoriteFoodOther == &quot;Steak&quot;
+u.FavoriteFoodOther != &quot;Steak&quot;
+</pre><br />Again, the semantic mismatch applies and putting a condition on the fill-in choice doesn&#39;t say anything about the possible presence of other choices. Therefore, the first condition will retrieve all the people who like Steak but necessarily <u>only</u> Steak. The last condition retrieves everyone who doesn&#39;t like Steak.<br /><br />In the current implementation, the fill-in choice field can also be used to put restrictions on known choice values. For example, you could rewrite <i>u.FavoriteFood == FavoriteFood.Pizza</i> with <i>u.FavoriteFoodOther == &quot;Pizza&quot;</i>. To this respect, the &#39;Other&#39; suffix on fill-in choice fields is a bit of a misnomer. This flexibility allows the list definition to be extended with new CHOICE values, without having to change the code. For example, u.FavoriteFoodOther == &quot;Steak&quot; will keep working even when Steak is added as a recognized pre-defined CHOICE value on the field.<br />
+<h3>Boolean negation</h3>
+Boolean negation isn&#39;t supported directly in CAML, but LINQ to SharePoint knows how to invert most of the supported comparison operators and implements <a href="http://en.wikipedia.org/wiki/De_Morgan&#39;s_laws">De Morgan&#39;s laws</a> to transform Boolean conditions with negations into a negation-less equivalent. A few examples:<br />
+<ul><li>!(u.Age == 24) becomes u.Age != 24 (&lt;Neq&gt;...&lt;/Neq&gt;)</li>
+<li>!(u.Age &lt;= 24) becomes u.Age &gt; 24 (&lt;Lt&gt;...&lt;/Lt&gt;)</li>
+<li>!(u.Age &gt; 24 &amp;&amp; u.FirstName == &quot;Bart&quot;) becomes u.Age &lt;= 24 || u.FirstName != &quot;Bart&quot; (&lt;Or&gt;&lt;Leq&gt;...&lt;/Leq&gt;&lt;Neq&gt;...&lt;/Neq&gt;&lt;/Or&gt;)</li>
+<li>!(u.Age &gt;= 24 || !(u.FirstName == &quot;Bart&quot; &amp;&amp; u.AccountBalance &lt; 1234)) becomes u.Age &lt; 24 &amp;&amp; (u.FirstName == &quot;Bart&quot; &amp;&amp; u.AccountBalance &lt; 1234) (&lt;And&gt;&lt;Lt&gt;...&lt;/Lt&gt;&lt;And&gt;&lt;Eq&gt;...&lt;/Eq&gt;&lt;Lt&gt;...&lt;/Lt&gt;&lt;/And&gt;&lt;/And&gt;)</li></ul>
+<br />Negation of the BeginsWith and Contains operators isn&#39;t supported though.</div><div class="ClearBoth"></div>

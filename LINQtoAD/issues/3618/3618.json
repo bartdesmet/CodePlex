@@ -1,0 +1,76 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I work for an organization with over 18K users and the Linq To AD code only returned 1000 records. I have adjusted the code to handle these two issues:\n \n1)  1000 limit on returned records.\n2) Possible memory leak due to not properly disposing of (DirectorySearcher.FindAll Method) as reported on the FindAll help page, remarks section, on MSDN.\n \nIn fixing the code I have do the following using on the client side to accomodate for issue #2 :\n \nusing ( var usersDS = new DirectorySource<User>( ROOT, SearchScope.Subtree ) )\n{\n \n    users = from usr in usersDS\n            select usr;\n \n    users = users.OrderBy( user => user.Name ).ToList(); // Sort by name after the fact.\n}\n \nI have uploaded my DirectorySource.cs which addresses those two issues.",
+    "LastUpdatedDate": "2014-04-23T05:44:38.8-07:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2009-01-14T10:08:38.36-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Code to Handle results greater than 1000",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 4,
+    "Id": 3618
+  },
+  "FileAttachments": [
+    {
+      "FileId": 1152,
+      "FileName": "DirectorySource.cs",
+      "DownloadUrl": ".\\1152"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "Is this mod to the latest version?\r\nJust a quick browse and one constructor seems to be missing from DirectorySource class (compared to latest version)\r\n",
+      "PostedDate": "2009-01-19T18:22:29.477-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2009-03-23T05:29:52.663-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2010-11-08T03:11:57.38-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:59.08-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-10-02T09:42:47.013-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "thank you OmegaMan\nYour changes works perfectly\r\n\r\nOne question.\nI don´t see the differences with the original file.\nWhy the original file returns only 1000 records?\r\n\r\nWhat changes have you made ​​in your DirectorySource to solve the problem?\r\n\r\nIt's just for my knowledge\r\n\r\nThanks",
+      "PostedDate": "2014-04-23T05:44:38.8-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

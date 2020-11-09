@@ -1,0 +1,50 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Just downloaded the project, but I can't run it. Getting this error in the DirectorySource.GetResults() method. Shouldn't the COM server be registered when the project is compiled?\n \n \nSystem.Runtime.InteropServices.COMException was unhandled\n  Message=\"The server is not operational.\\r\\n\"\n  Source=\"System.DirectoryServices\"\n  ErrorCode=-2147016646\n  StackTrace:\n       at System.DirectoryServices.DirectoryEntry.Bind(Boolean throwIfFail)\n       at System.DirectoryServices.DirectoryEntry.Bind()\n       at System.DirectoryServices.DirectoryEntry.get_AdsObject()\n       at System.DirectoryServices.DirectorySearcher.FindAll(Boolean findMoreThanOne)\n       at System.DirectoryServices.DirectorySearcher.FindAll()\n       at BdsSoft.DirectoryServices.Linq.DirectoryQuery`1.<GetResults>d__0.MoveNext() in C:\\CGI\\LINQtoAD CodePlex Release\\BdsSoft.DirectoryServices.Linq\\DirectorySource.cs:line 361\n       at Demo.Program.Main(String[] args) in C:\\CGI\\LINQtoAD CodePlex Release\\Demo\\Program.cs:line 47\n       at System.AppDomain._nExecuteAssembly(Assembly assembly, String[] args)\n       at System.AppDomain.ExecuteAssembly(String assemblyFile, Evidence assemblySecurity, String[] args)\n       at Microsoft.VisualStudio.HostingProcess.HostProc.RunUsersAssembly()\n       at System.Threading.ThreadHelper.ThreadStart_Context(Object state)\n       at System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)\n       at System.Threading.ThreadHelper.ThreadStart()\n  InnerException:",
+    "LastUpdatedDate": "2013-02-14T11:56:58.227-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2009-02-19T04:17:08.047-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "COM Exception Unhandled: DirectorySource.cs",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 3829
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "If you haven't found your issue; the following message:\r\n\r\nMessage=\"The server is not operational.\\r\\n\"\r\n\r\nMeans that the active directory domain specified did not respond to the query. You do have to be connected to an Active Directory domain, and any time you see the LDAP:// it has to be followed by a domain controller.",
+      "PostedDate": "2009-06-13T23:36:26.72-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:58.227-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

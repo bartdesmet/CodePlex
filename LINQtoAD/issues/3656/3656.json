@@ -1,0 +1,50 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I notice that on Function ParsePredicate of DirectorySource missing Equals. There are Contains, StartWith and EndWith, obvioulsy  is simple to implement\n                            \n                            case \"Equals\":\n                            {\n                                string value = GetStringOperandValue(m);\n                                sb.AppendFormat(\"{0}={1}\", GetFieldName(o.Member), value);\n                                break;\n                            }\nThanks",
+    "LastUpdatedDate": "2013-02-14T11:56:58.613-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2009-01-22T09:01:10.65-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Equals on ParsePredicate",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 3656
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Thanks!",
+      "PostedDate": "2010-01-08T10:16:13.317-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:58.613-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

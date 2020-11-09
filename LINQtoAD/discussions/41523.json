@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "137794",
+    "ThreadId": "41523",
+    "Html": "I see that your user class has predefined list of attributes. How would one reference a passin attribute name? Or an attribute that you don't know ahead of time?\r\n",
+    "PostedDate": "2008-12-04T12:51:16.913-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "201260",
+    "ThreadId": "41523",
+    "Html": "<p>There's not a way to do this.</p>\r\n<p>The entities.cs file contains all that a user will ever contain within the scope of your project.&nbsp; Any attribute that you may require needs to be defined within this Entities.cs.</p>",
+    "PostedDate": "2009-06-13T23:32:07.697-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "255171",
+    "ThreadId": "41523",
+    "Html": "<p>Hi,</p>\r\n<p>For my own need, i have added an anonymous type support that allow to skip (for simple read-only use case) the &quot;pre-declare entities&quot; process. It goes like this:</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<div style=\"color:Black;background-color:White\">\r\n<pre>            <span style=\"color:Blue\">var</span> users = DirectorySource.CreateInstance(ROOT, SearchScope.Subtree, <span style=\"color:#A31515\">&quot;user&quot;</span>, <span style=\"color:Blue\">new</span>\r\n                {\r\n                    cn = <span style=\"color:Blue\">default</span>(<span style=\"color:Blue\">string</span>),\r\n                    distinguishedName = <span style=\"color:Blue\">default</span>(<span style=\"color:Blue\">string</span>),\r\n                    whenCreated = <span style=\"color:Blue\">default</span>(DateTime),\r\n                    lastLogon = <span style=\"color:Blue\">default</span>(DateTime),\r\n                    memberOf = <span style=\"color:Blue\">default</span>(<span style=\"color:Blue\">string</span>[])\r\n                });\r\n\r\n            <span style=\"color:Blue\">var</span> res1 = <span style=\"color:Blue\">from</span> usr <span style=\"color:Blue\">in</span> users <span style=\"color:Blue\">where</span> usr.cn.StartsWith(<span style=\"color:#A31515\">&quot;H&quot;</span>) <span style=\"color:Blue\">select</span> usr;\r\n\r\n            <span style=\"color:Blue\">foreach</span> (<span style=\"color:Blue\">var</span> w <span style=\"color:Blue\">in</span> res1)\r\n                Console.WriteLine(<span style=\"color:#A31515\">&quot;cn: {0}\\nlastLogon: {1}\\nmemberOf: \\n{2}\\n&quot;</span>, w.cn, w.lastLogon, String.Join(<span style=\"color:#A31515\">&quot;\\n- &quot;</span>,w.memberOf));\r\n\r\n\r\n</pre>\r\n</div>\r\n<p>&nbsp;</p>\r\n<p>If someone is interested i can elaborate.</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2009-11-09T10:40:38.28-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "467081",
+    "ThreadId": "41523",
+    "Html": "<p>This is definitely a good technique to work around the issue you uncovered. In fact, this is related to <a href=\"http://haskell.org/haskellwiki/Phantom_type\">phantom types</a> found in functional languages like Haskell. An upcoming version of LINQ to AD may support this.</p>\r\n<p>Cheers,<br>-Bart</p>",
+    "PostedDate": "2010-07-13T22:25:58.517-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

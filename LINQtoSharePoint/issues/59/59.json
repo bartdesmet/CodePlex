@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "Query parser",
+      "DisplayName": "Query parser"
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Choice and MultiChoice fields are not assigned properly when initializing entity objects; they remain null.",
+    "LastUpdatedDate": "2013-06-14T00:01:41.62-07:00",
+    "PlannedForRelease": "0.1.2.0 Alpha",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "High",
+      "Severity": 150,
+      "Id": 3
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2007-04-26T04:55:26.727-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "(Multi)Choice fields do not get assigned properly on entity fields",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 59
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

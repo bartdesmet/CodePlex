@@ -1,0 +1,50 @@
+[
+  {
+    "Id": "63508",
+    "ThreadId": "19275",
+    "Html": "\r\nI was using the SPML wizard in VS 2008 and it was working great. Suddenly when I create new SPML items, they have no associated code behind file like the first SPML file did. When I select \"Run custom tool\" from the SPML context menu in Solution Explorer, I get the error \"The custom tool 'LinqtoSharePointGenerator' failed\". I have done the repair option in the installation tool, rebooted, etc. to no avail.<br />",
+    "PostedDate": "2007-12-17T08:07:50.967-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "63646",
+    "ThreadId": "19275",
+    "Html": "\r\nThis is very strange behavior indeed. Can you check whether spmetal.exe (in the installation folder) experiences the same issue when you pass it the SPML file? Essentially the back-end for both the VS-integrated code generator and the spmetal tool is the same but VS catches all exceptions masking these as \"The custom tool xyz failed.\" while spmetal should bail out with a more specific exception.<br /><br />Thanks,<br />-Bart<br />",
+    "PostedDate": "2007-12-17T18:14:56.153-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "63788",
+    "ThreadId": "19275",
+    "Html": "\r\nOK I tried what you suggested. To clarify something first though; I only get that error message when I go through the context menu \"run custom tool\". When I run through the SPML wizard, no error is thrown, it just doesn't create any code behind file. Now when I try what you mentioned I get:<br /><br />\"Invalid Lookup field list reference encountered: list {79d9e61d-e6ec-405d-8e63-62a17f801a7f} referred to by field ListServs is unknown in the SharePoint context.\"<br /><br />I can tell you that this particular list does have a look up field in it. I fell back to using SPMetal yesterday after Visual Studio was unable to help me, and low and behold, it did appear to create the lookup fields. In this case it was:<br /><br />private global::BdsSoft.SharePoint.Linq.EntitySet&lt;ListServs&gt; _ListServs<br />",
+    "PostedDate": "2007-12-18T08:24:31.827-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "84977",
+    "ThreadId": "19275",
+    "Html": "\r\nHi,<br /><br />I have the same problem.<br />The error I'm getting is:<br /><br />Invalid Lookup field list reference encountered: list Docs referred to by field<br />_CheckinComment is unknown in the SharePoint context.<br /><br />Thanx<br />",
+    "PostedDate": "2008-04-04T06:04:36.99-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "168648",
+    "ThreadId": "19275",
+    "Html": "Hi there,<br>\r\n<br>\r\nI was having the same issue... Based on what apauluhn was getting...it looks like this solution does not like the lookup / referenced columns... \r\n",
+    "PostedDate": "2009-03-16T10:56:26.777-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "204194",
+    "ThreadId": "19275",
+    "Html": "<p>From looking at the code, it looks like the referenced list needs to be in the same SP context - i.e. in the same SPML file.</p>\r\n<p><a href=\"http://code.google.com/p/uniframework/source/browse/trunk/sources/Uniframework.SharePoint.Linq.EntityGenerator/EntityGenerator.cs\">http://code.google.com/p/uniframework/source/browse/trunk/sources/Uniframework.SharePoint.Linq.EntityGenerator/EntityGenerator.cs</a></p>\r\n<p>I added all my lists under the &lt;Lists&gt; element in the SPML file and this seemed to fix this problem.</p>",
+    "PostedDate": "2009-06-22T12:30:05.8-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

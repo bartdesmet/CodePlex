@@ -1,0 +1,132 @@
+[
+  {
+    "Id": "0",
+    "Name": "1.0 RTM",
+    "DevelopmentStatus": "None",
+    "Description": "LINQ to Objects Standard Query Operators (SQO) implementation conform with .NET Framework 3.5 RTM.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2007-11-22T11:53:20.11-08:00",
+    "Files": [
+      {
+        "Id": "cded50eb-0963-49df-97ca-4b36a97d8322",
+        "FileName": "LINQSQO-RTM.zip",
+        "Url": "./0/cded50eb-0963-49df-97ca-4b36a97d8322",
+        "Type": "Source Code",
+        "UploadDate": "2007-11-22T11:53:20.327-08:00"
+      }
+    ]
+  },
+  {
+    "Id": "1",
+    "Name": "0.9.2 Release Candidate",
+    "DevelopmentStatus": "None",
+    "Description": "LINQ to Objects Standard Query Operators (SQO) implementation conform with Orcas Beta 2 (August 07).",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2007-07-28T17:09:06.05-07:00",
+    "Files": [
+      {
+        "Id": "f4a74907-37da-4d35-b822-a344420c9fbe",
+        "FileName": "LINQSQO-August07-all.zip",
+        "Url": "./1/f4a74907-37da-4d35-b822-a344420c9fbe",
+        "Type": "Source Code",
+        "UploadDate": "2007-07-28T17:09:06.067-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "2",
+    "Name": "0.9.1 ReleaseCandidate",
+    "DevelopmentStatus": "None",
+    "Description": "LINQ-to-Objects Standard Query Operators (SQO) implementation conform with Orcas Beta 1 (April 07).",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2007-04-29T16:10:44.577-07:00",
+    "Files": [
+      {
+        "Id": "987010ac-4c53-4a25-b186-07a1e87f041f",
+        "FileName": "LINQSQO-April07-all.zip",
+        "Url": "./2/987010ac-4c53-4a25-b186-07a1e87f041f",
+        "Type": "Source Code",
+        "UploadDate": "2007-04-29T16:09:39.57-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "3",
+    "Name": "0.9 Release Candidate",
+    "DevelopmentStatus": "None",
+    "Description": "LINQ-to-Objects Standard Query Operators (SQO) implementation conform with March 07 CTP.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2007-04-06T06:52:15.687-07:00",
+    "Files": [
+      {
+        "Id": "fab87fb9-bd53-4841-8a37-78e62c939e3c",
+        "FileName": "LINQSQO-March07-all.zip",
+        "Url": "./3/fab87fb9-bd53-4841-8a37-78e62c939e3c",
+        "Type": "Source Code",
+        "UploadDate": "2007-04-06T06:51:49.793-07:00"
+      },
+      {
+        "Id": "2d55ec1e-14e3-423b-a2e1-93437a7e2f5d",
+        "FileName": "LINQSQO-March07-sources.zip",
+        "Url": "./3/2d55ec1e-14e3-423b-a2e1-93437a7e2f5d",
+        "Type": "Source Code",
+        "UploadDate": "2007-04-06T06:49:49.813-07:00"
+      },
+      {
+        "Id": "3012ccac-732f-4008-882f-18cf57c0f677",
+        "FileName": "LINQSQO-March07-tests.zip",
+        "Url": "./3/3012ccac-732f-4008-882f-18cf57c0f677",
+        "Type": "Example",
+        "UploadDate": "2007-04-06T06:51:49.76-07:00"
+      },
+      {
+        "Id": "6848ff5d-99f5-466d-a425-1b18e34ecc3a",
+        "FileName": "LINQSQO-March07-binaries-debug.zip",
+        "Url": "./3/6848ff5d-99f5-466d-a425-1b18e34ecc3a",
+        "Type": "Application",
+        "UploadDate": "2007-04-06T06:51:49.777-07:00"
+      },
+      {
+        "Id": "0776d4fa-0f64-483a-9c1d-8b549ac820ab",
+        "FileName": "LINQSQO-March07-binaries-release.zip",
+        "Url": "./3/0776d4fa-0f64-483a-9c1d-8b549ac820ab",
+        "Type": "Application",
+        "UploadDate": "2007-04-06T06:51:49.793-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "4",
+    "Name": "0.8 Release Candidate",
+    "DevelopmentStatus": "None",
+    "Description": "",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "0001-01-01T00:00:00",
+    "Files": [
+      {
+        "Id": "c3df3e6c-e8f5-4276-a425-e47f441d2252",
+        "FileName": "LINQSQO-2345.zip",
+        "Url": "./4/c3df3e6c-e8f5-4276-a425-e47f441d2252",
+        "Type": "Source Code",
+        "UploadDate": "2006-08-04T15:32:39.8-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "5",
+    "Name": "LINQSQO v4.0 and MinLINQ v1.0",
+    "DevelopmentStatus": "Stable",
+    "Description": "! LINQSQO v4.0 and MinLINQ v1.0\n\n!! Standard Query Operators\nThis release contains an implementation of the Standard Query Operators as available in .NET 4.0, including the new Zip operator. Compared to the v3.5 release, lots of clean-up has been performed to remove code duplication and cover some issues around proper resource disposal.\n\n!! MinLINQ\nNew in this release in a first version of MinLINQ, meant as an example to provide insights in the conceptual layering of LINQ to Objects operators, based on the theory of monads and other functionally inspired tehcniques. Essentially, MinLINQ derives most query operators from three primitive ones called Ana, Bind and Cata. More information can be found at [url:http://blogs.bartdesmet.net/blogs/bart/archive/2010/01/01/the-essence-of-linq-minlinq.aspx].\n\n!! Terms of use\nNone of the implementations provided here should be used in production and are merely meant as illustrations of the technology, providing insight in how LINQ works. Because of this vision, code hasn't been optimized for performance and may exhibit faulty behavior compared to the official LINQ implementation found in .NET 3.5 and higher. All of the source code may be used in presentations of LINQ or for other educational purposes, but references to [url:http://www.codeplex.com/LINQSQO] and the blog post referred to above - \"The Essence of LINQ - MinLINQ\" - are required.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2010-01-02T07:41:17.71-08:00",
+    "Files": [
+      {
+        "Id": "7af659fd-31f0-4ac4-8c53-e1cdf7644922",
+        "FileName": "LINQSQO v4.0 and MinLINQ v1.0.zip",
+        "Url": "./5/7af659fd-31f0-4ac4-8c53-e1cdf7644922",
+        "Type": "Source Code",
+        "UploadDate": "2010-01-02T07:41:17.553-08:00"
+      }
+    ]
+  }
+]

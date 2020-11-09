@@ -1,0 +1,50 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi Bart ,\n \nThe actual (i.e. version 9623) implementation of \"==\" operator overloads in EntitySet leads to a StackOverflowException.\n \nThe way it is now implemented is apparently a common thing that we could write according to msdn ;-) :\n \n[...] A common error in overloads of operator == is to use (a == b), (a == null), or (b == null) to check for reference equality. This instead results in a call to the overloaded operator ==, causing an infinite loop. Use ReferenceEquals or cast the type to Object, to avoid the loop.\n \nhttp://msdn2.microsoft.com/en-us/library/ms173147(vs.80).aspx\n \n \nHope this helps !\n \nNote : I looove your project :-D\n \n-cik",
+    "LastUpdatedDate": "2013-02-14T11:46:12.283-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2007-09-05T13:15:36.143-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Operator Overloads in EntitySet problem",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 6096
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "We're aware of this issue; our unit tests don't cover this scenario yet; the overload was put in to be parsed in expression trees rather than to be called directly. The latter case will be supported obviously but testing will occur as part of the \"entity update\" release wave (0.3 beta).",
+      "PostedDate": "2007-11-29T00:45:53.813-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:46:12.283-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

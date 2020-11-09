@@ -1,0 +1,35 @@
+362a363,364
+>                 DirectoryEntry e = sr.GetDirectoryEntry();
+> 
+368c370
+<                     entity.DirectoryEntry = sr.GetDirectoryEntry();
+---
+>                     entity.DirectoryEntry = e;
+373c375
+<                         AssignResultProperty(helper, sr, result, p.Name);
+---
+>                         AssignResultProperty(helper, e, result, p.Name);
+384c386
+<                         AssignResultProperty(helper, sr, result, prop);
+---
+>                         AssignResultProperty(helper, e, result, prop);
+399c401
+<         /// <param name="sr">The current search result.</param>
+---
+>         /// <param name="e">Directory entry containing the data for the current result.</param>
+402c404
+<         private void AssignResultProperty(Type helper, SearchResult sr, object result, string prop)
+---
+>         private void AssignResultProperty(Type helper, DirectoryEntry e, object result, string prop)
+413c415
+<                         i.SetValue(result, p.GetValue(sr.GetDirectoryEntry().NativeObject, null), null);
+---
+>                         i.SetValue(result, p.GetValue(e.NativeObject, null), null);
+419c421
+<                     var pvc = sr.Properties[da[0].Attribute];
+---
+>                     PropertyValueCollection pvc = e.Properties[da[0].Attribute];
+437c439
+<                 var pvc = sr.Properties[prop];
+---
+>                 PropertyValueCollection pvc = e.Properties[prop];

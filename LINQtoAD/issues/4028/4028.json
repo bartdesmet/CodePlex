@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hello\nI've created two User entities.  One is UserBase:DirectoryEntity and other is User:UserBase.\nI have a property called Dn (distinguishedName) in UserBase which works fine if I create an instance of UserBase and use Linq on Dn.\nHowever if I use an instance of User and query Dn=\"blah\", I get an error in DirectorySource method GetCondition(BinaryExpression e)\n         \n            //\n            // Find the order of the operands in the binary expression. At least one should refer to the entity type.\n            //\n            if (e.Left is MemberExpression && ((MemberExpression)e.Left).Member.DeclaringType == originalType)\n  \nSince property Dn is in class UserBase, DeclaringType is UserBase whereas originalType is User and thus the code throws an exception. \n \nUserBase contains key information about users where as User contains a more expanded property list.",
+    "LastUpdatedDate": "2013-02-14T11:56:58.03-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2009-03-10T17:10:07.727-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Subclassing an Entity class fails",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 4028
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

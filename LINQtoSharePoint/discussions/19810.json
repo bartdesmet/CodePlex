@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "65615",
+    "ThreadId": "19810",
+    "Html": "\r\nHi, <br /><br />Is there any plan that you will include aggregation functions on this? (max, min, etc)<br />(I don't know if any CAML translation is available for those though).<br /><br />thanks'<br /><br />",
+    "PostedDate": "2008-01-01T19:49:48.18-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "65802",
+    "ThreadId": "19810",
+    "Html": "\r\nHi,<br /><br />just a direct workaround (not necessarily related to your project though).<br />I just created a more direct approach to listitems via an extender class, who knows it might help.<br />here<a href=\"http://asadewa.wordpress.com/2008/01/03/direct-linq-to-splistitemcollection/\" class=\"externalLink\">http://asadewa.wordpress.com/2008/01/03/direct-linq-to-splistitemcollection/<span class=\"externalLinkIcon\" style=\"font-family:Consolas, Courier New, Courier, Monospace;\"></span></a><br />",
+    "PostedDate": "2008-01-02T23:08:22.847-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "72286",
+    "ThreadId": "19810",
+    "Html": "\r\nThanks for the suggestion and the link to your post. We're limited indeed by what CAML can do (one design goal is to enforce explicitness to distinguish between local and remote execution) but this is definitely on the radar for further investigations. The way to accomplish aggregates today is like this:<br /><br />var totalPrice = (from p in ctx.Products select p.UnitPrice).AsEnumerable().Sum();<br /><br />where AsEnumerable() transitions from remote execution into local (LINQ to Objects) execution.<br /><br />Hope this helps,<br />-Bart<br />",
+    "PostedDate": "2008-02-07T00:01:15.697-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

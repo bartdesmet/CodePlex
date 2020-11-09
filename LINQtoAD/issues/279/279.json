@@ -1,0 +1,70 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "Fixed.",
+    "ClosedDate": "2010-07-15T23:58:25.57-07:00",
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Looking at the sample, you're manually creating DirectorySources, passing in a common root.  I suggest that you follow the lead of LINQ to SQL and create a DirectoryContext type which accepts the root URI, and which will auto-matically instantiate DirectorySource fields.  You could also forward the setting of the Log property if you wanted.\n \nThen you could have:\n \nclass LocalContext: DirectoryServicesContext\n{\n    [DirectorySearchScope(SearchScope.Subtree)]\n    public DirectorySource<User> Users;\n \n    public LocalContext(string uri)\n    : base(uri) // instantiates and stores root, instantiates Users\n    {\n    }\n}\n \nand\n \nstatic void Main(string[] args)\n{\n    var ldap = new LocalContext(\"LDAP://localhost\");\n \n    var res1 = from usr in ldap.Users select usr;\n \n    // and nothing to prevent you from creating a new DirectorySource within that context:\n \n    var myUsers = ldap.GetDirectorySource<MyUser>(SearchScope.SubTree);\n \n    var res2 = from myUser in myUsers select myUser;\n}",
+    "LastUpdatedDate": "2013-05-16T02:18:26.66-07:00",
+    "PlannedForRelease": "LINQ to Active Directory RTW",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2007-11-27T01:54:06.64-08:00",
+    "Status": {
+      "Name": "Closed",
+      "Id": 4
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Suggestion: DirectoryServicesContext",
+    "Type": {
+      "Name": "Feature",
+      "Id": 1
+    },
+    "VoteCount": 2,
+    "Id": 279
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Hi Keith,\r\n\r\nThanks for the feedback - I'm aware of this issue but didn't consider it for implementation in the initial LINQ to LDAP sample series on my blog to reduce overhead. This RTM release is a straightforward adaption of the article series and hence the principle of having a data context hasn't made it to implementation. However, this principle has been applied in the LINQ to SharePoint project.\r\n\r\nOver time I plan to update this project to follow the same design, maybe in a 1.1 release.\r\n\r\nThanks,\r\n-Bart",
+      "PostedDate": "2007-12-02T21:42:13.973-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2007-12-17T05:42:53.093-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2010-07-15T23:58:12.143-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2010-07-15T23:58:25.57-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:57:00.547-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-05-16T02:18:26.66-07:00",
+      "Id": -2147483648
+    }
+  ]
+}

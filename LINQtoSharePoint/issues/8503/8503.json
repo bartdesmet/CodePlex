@@ -1,0 +1,75 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "This is what I get, when using one of my lists:\n   SPML validation failed.\n   Schema validation messages:\n   - [ERROR] The 'Version' attribute is invalid - The value '285' is invalid according to its\n   datatype 'http://www.w3.org/2001/XMLSchema:unsignedByte' - The string '285' is not a valid Byte value. (0,0)\n \nI have changed the SPML.xsd (in ..EntityGenerator) from\n   <xs:attribute name=\"Version\" type=\"xs:unsignedByte\" use=\"required\" />\nto\n   <xs:attribute name=\"Version\" type=\"xs:int\" use=\"required\" />\nbut I am not sure if this is OK.\n \nAfter the change, I now have the following error message:\n   Invalid Lookup field list reference encountered: list Docs referred to by field _CheckinComment\n   is unknown in the SharePoint context.\n \nAny ideas?\nCheers Harry",
+    "LastUpdatedDate": "2013-02-14T11:46:12.137-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2007-11-08T14:56:19.91-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Issue with Version Attribute (datatype) / _CheckinComment (Docs)",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 8503
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "We'll fix this in our next bug bash.",
+      "PostedDate": "2007-11-29T00:43:47.597-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "I am having this problem as well and made the same fix, but it still doesn't seem to be working, I'm guessing because its still using the schema located on this site. Its a 15-second change, perhaps someone could do it so we can continue using this?",
+      "PostedDate": "2007-12-26T07:40:09.84-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Oops, nevermind, I had to rebuild. It works!",
+      "PostedDate": "2007-12-26T07:44:25.447-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "A fix is pending for the next release.",
+      "PostedDate": "2008-02-07T00:32:01.567-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2008-02-29T09:48:32.733-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Will that be post 0.2.4.0?",
+      "PostedDate": "2009-08-11T03:58:17.75-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:46:12.137-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

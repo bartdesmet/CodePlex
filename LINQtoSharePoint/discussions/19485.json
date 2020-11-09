@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "64403",
+    "ThreadId": "19485",
+    "Html": "\r\nIn the following code, if I remove the string.Empty 'place holder' and move p.ID to the front of the list, I get a compile error when referencing p.ID in the string.Format statement later on:<br /><br /><i>AnonymousType#1' does not contain a definition for 'ID' and no extension method 'ID' accepting a first argument of type 'AnonymousType#1' could be found (are you missing a using directive or an assembly reference?</i><br /><br />        static void Main(string[] args)<br />        {<br />            var ctx = new RemoverSharePointDataContext();<br />            ctx.Log = Console.Out;<br /><br />            // get some information about the discussion board<br />            var res = from p in ctx.WGDiscussionTopics<br />                      where p.ID &gt; 0<br />                      orderby p.DateCreated descending<br /><b>select new { WgDiscussionTopic = string.Empty, p.EMailSender, p.ID, p.Subject, p.DateCreated };</b><br /><br />            foreach (var p in res)<br />            {<br /><b>string message = string.Format(\"ID = {0}, Subject = {1}, Date Created = {2}\"</b><br /><b>, p.ID, p.Subject , p.DateCreated);</b><br />                Console.WriteLine(message);<br />            }<br /><br />            Console.WriteLine(\"Press Enter when finished.\");<br />            Console.ReadLine();<br />        }<br />",
+    "PostedDate": "2007-12-20T12:58:41.687-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "72285",
+    "ThreadId": "19485",
+    "Html": "\r\nThanks for your comment; sorry for the delay it took to answer. LINQ to SharePoint doesn't interfere with the front-end language compiler in any way, so this seems to be a pure C# 3.0 question. The code you posted should compile (assuming the list entity has the referenced properties), moving the order of property initializers in the anonymous type definition shouldn't change that. The conceptual problem might be the reuse of \"p\" as a variable name: once for the dummy inside the expression and once for the foreach loop variable. Inside the loop, p is of type \"whatever the projection (select clause) of res produces\". Essentailly your code is rewritten as:<br /><br />var res = from p in ctx.WGDiscussionTopics<br />where p.ID &gt; 0<br />orderby p.DateCreated descending<br />select new { WgDiscussionTopic = string.Empty, EMailSender = p.EMailSender, ID = p.ID, Subject = p.Subject, DateCreated = p.DateCreated };<br /><br />meaning the type inside the loop has properties WgDiscussionTopic, EMailSender, ID, Subject and DateCreated. If you change it like this:<br /><br />var res = from p in ctx.WGDiscussionTopics<br />where p.ID &gt; 0<br />orderby p.DateCreated descending<br />select new { WgDiscussionTopic = p.ID, EMailSender = p.EMailSender, Subject = p.Subject, DateCreated = p.DateCreated };<br /><br />the projected type has properties WgDiscussionTopic, EMailSender, Subject and DateCreated (no ID), so you loop code needs to be:<br /><br />foreach (var p in res)<br />{<br />string message = string.Format(\"ID = {0}, Subject = {1}, Date Created = {2}\"<br />, p.WgDiscussionTopic, p.Subject , p.DateCreated);<br />Console.WriteLine(message);<br />}<br /><br />in that case. My advice: avoid reuse of dummy variable names outside the query (inside the same method block scope) to avoid confusion, although it's technically no problem (the reason for that being that the dummy 'p' inside the query expression becomes a local dummy variable for the lambda expressions under the covers).<br /><br />Hope this helps,<br />-Bart<br />",
+    "PostedDate": "2008-02-06T23:58:33.1-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

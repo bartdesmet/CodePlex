@@ -1,0 +1,51 @@
+<div class="wikidoc"><h2>Introduction</h2>LINQ to Active Directory implements a custom LINQ query provider that allows querying objects in Active Directory. Internally, queries are translated into LDAP filters which are sent to the server using the System.DirectoryServices .NET Framework library. LINQ stands for Language Integrated Query and is one of the core features of Microsoft&#39;s .NET Framework 3.5 release. More information can be found via the MSDN website on <a href="http://msdn.microsoft.com">http://msdn.microsoft.com</a>.<br />
+<h2>Features</h2>
+<ul><li>Translates into <b>LDAP filters</b> according to <a href="http://www.faqs.org/rfcs/rfc2254.html">RFC 2254</a>.</li>
+<li>Simple and approachable <b>entity model</b> with support of propagating <b>updates</b> back.</li>
+<li>Supports mappings to both the <b>System.DirectoryServices</b> (.NET) and <b>ActiveDs</b> (COM) APIs.</li>
+<li>Ships with a set of <b>samples</b>.</li></ul>
+
+<h2>Disclaimer</h2>
+This project is meant as a basic sample on implementing custom LINQ query providers. It hasn&#39;t been tested thoroughly and we do not provide any support whatsoever. Do not use it in a production environment without proper testing and validation of the technology&#39;s behavior. Users are most welcome to report issues and bugs through the Issue Tracker on this site.<br />
+<h2>Samples</h2>
+<h3>C# sample</h3>
+<pre>
+    // NOTE: Entity type definition &quot;User&quot; omitted in sample - see samples in release.
+
+    var users = new DirectorySource&lt;User&gt;(ROOT, SearchScope.Subtree);
+    users.Log = Console.Out;
+
+    var res = from usr in users
+              where usr.FirstName.StartsWith(&quot;B&quot;) &amp;&amp; usr.Office == &quot;2525&quot;
+              select new { Name = usr.FirstName + &quot; &quot; + usr.LastName, usr.Office, usr.LogonCount };
+
+    foreach (var u in res)
+    {
+        Console.WriteLine(u);
+        u.Office = &quot;5252&quot;;
+        u.SetPassword(pwd);
+    }
+
+    users.Update();
+</pre><br />
+<h3>Visual Basic sample</h3>
+<pre>
+    &#39; NOTE: Entity type definition &quot;User&quot; omitted in sample - see samples in release.
+
+    Dim users As New DirectorySource(Of User)(ROOT, SearchScope.Subtree)
+    users.Log = Console.Out
+
+    Dim res = From usr In users
+              Where usr.FirstName.StartsWith(&quot;B&quot;) And usr.Office = &quot;2525&quot;
+              Select New With { Name = usr.FirstName + &quot; &quot; + usr.LastName, usr.Office, usr.LogonCount }
+
+    For Each u In res
+        Console.WriteLine(u)
+        u.Office = &quot;5252&quot;
+        u.SetPassword(pwd)
+    Next
+
+    users.Update()
+</pre><br />
+<h2>About the project founder</h2>
+A former Visual C# MVP, <b>Bart De Smet</b> now works at Microsoft Corporation on the WPF dev team in an SDE role. Prior to this new challenge, Bart was active in the Belgian community evangelizing various Microsoft technologies, most of the time focusing on CLR, language innovation and frameworks. In his evangelism role, he&#39;s been speaking at various events and attended several international conferences including TechEd Europe, IT Forum and the PDC. In 2005, Bart graduated as a Master of Informatics from Ghent University, Belgium. Two years later, Bart became a Master of Computer Science Software Engineering from the same university.<br /><br />You can visit Bart&#39;s blog on <a href="http://blogs.bartdesmet.net/bart">http://blogs.bartdesmet.net/bart</a></div><div class="ClearBoth"></div>

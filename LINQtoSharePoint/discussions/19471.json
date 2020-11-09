@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "64364",
+    "ThreadId": "19471",
+    "Html": "\r\nI get the following error after I (1) start a C# console application in VS 2008 RTM (2) Add references for BdsSoft.SharePoint.Linq, BdsSoft.SharePoint.Linq.ObjectModelProvider, BdsSoft.SharePoint.Linq.Tools.DebuggerVisualizer (3) try to Add New Item ... LINQ To SharePoint File:<br /><br />Could not load file of assembly 'BdsSoft.SharePoint.Linq.Tools.EntityGenerator, Version=0.2.4.0, Culture=neutral, PublicKey Token=c9246ff4557ee8a2' <br />or one of its dependencies.  The system cannot find the file specified.<br /><br />I am using version 0.2.4.0 on Windows Server 2003 R2 Enterprise Edition with Service Pack 1.<br />",
+    "PostedDate": "2007-12-20T10:00:15.127-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "65479",
+    "ThreadId": "19471",
+    "Html": "\r\nHi, I got the exact same error message.<br /><br />update:<br />Hi, I got a workaround on my case. instead of adding the LINQToSharepoint item, I created the entity class using SPMetal and then add it to my project, and started my way from there. Who knows it will help you was well.<br />",
+    "PostedDate": "2007-12-30T22:23:10.843-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "67317",
+    "ThreadId": "19471",
+    "Html": "\r\nSame problem here.<br />",
+    "PostedDate": "2008-01-11T00:49:56.26-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "69375",
+    "ThreadId": "19471",
+    "Html": "\r\nOk. It is no problem here. Just register *.dll files from C:\\Program Files\\BdsSoft LINQ to SharePoint\\ in GAC. And reboot your computer. And you are feeeel the power !!! :) <br />",
+    "PostedDate": "2008-01-22T13:28:33.377-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "72292",
+    "ThreadId": "19471",
+    "Html": "\r\nHi folks,<br /><br />Thanks for reporting the issue. We've had some issues with the installer causing the assembly to be missing in the GAC. The workaround suggested by frozzzyy is the right one (thanks for helping out!).<br /><br />-Bart<br />",
+    "PostedDate": "2008-02-07T00:13:43.237-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

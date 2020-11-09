@@ -1,0 +1,118 @@
+[
+  {
+    "Id": 53,
+    "Title": "Orcas Beta 1 update"
+  },
+  {
+    "Id": 54,
+    "Title": "Missing Title field in SpMetal exports"
+  },
+  {
+    "Id": 55,
+    "Title": "SpMetal crash for choice fields without FillInChoice attribute"
+  },
+  {
+    "Id": 56,
+    "Title": "Entity class compilation problem with choices that start with digit"
+  },
+  {
+    "Id": 57,
+    "Title": "SpMetal exports are missing important fields inherited from the base type"
+  },
+  {
+    "Id": 58,
+    "Title": "Default list view is too restrictive, a ViewFields elements should be calculated to retrieve all required fields"
+  },
+  {
+    "Id": 59,
+    "Title": "(Multi)Choice fields do not get assigned properly on entity fields"
+  },
+  {
+    "Id": 76,
+    "Title": "DateTime field parsing error"
+  },
+  {
+    "Id": 77,
+    "Title": "Support for Lookup fields"
+  },
+  {
+    "Id": 1656,
+    "Title": "Lookup field subqueries without results cause the query parser to crash"
+  },
+  {
+    "Id": 2032,
+    "Title": "DateTime query predicates don't handle hh:MM:ss portion correctly; Now support problem."
+  },
+  {
+    "Id": 2410,
+    "Title": "Debugger Visualizer issues"
+  },
+  {
+    "Id": 6096,
+    "Title": "Operator Overloads in EntitySet problem"
+  },
+  {
+    "Id": 8503,
+    "Title": "Issue with Version Attribute (datatype) / _CheckinComment (Docs)"
+  },
+  {
+    "Id": 9078,
+    "Title": "Adding \"Linq to SharePoint File\" does not work"
+  },
+  {
+    "Id": 9109,
+    "Title": "Not working when list is not on root web"
+  },
+  {
+    "Id": 9281,
+    "Title": "installing on vista with VS2008"
+  },
+  {
+    "Id": 9323,
+    "Title": "Unable to run the LINQtoSharePointGenerator tool"
+  },
+  {
+    "Id": 9404,
+    "Title": "Support Cross List Queries"
+  },
+  {
+    "Id": 9447,
+    "Title": "Support lists with folders"
+  },
+  {
+    "Id": 9448,
+    "Title": "Missing list for lookup field"
+  },
+  {
+    "Id": 9449,
+    "Title": "Hardcoded CultureInfo en-us"
+  },
+  {
+    "Id": 9450,
+    "Title": "Use InternalName when getting value from SPListItem"
+  },
+  {
+    "Id": 10911,
+    "Title": "Exception at comparison of values of type System.Nullable<System.DateTime> with null"
+  },
+  {
+    "Id": 11519,
+    "Title": "Install failed."
+  },
+  {
+    "Id": 13275,
+    "Title": "List version mismatch between entity type and list definition on the server."
+  },
+  {
+    "Id": 13276,
+    "Title": "SP0007: Query predicate contains a method call on a non-entity property: Contains."
+  },
+  {
+    "Id": 14416,
+    "Title": "Error message not accurate in the wizard"
+  },
+  {
+    "Id": 21541,
+    "Title": "Linq to sharepoint(Issue after list name change)"
+  }
+]

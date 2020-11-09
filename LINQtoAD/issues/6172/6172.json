@@ -1,0 +1,55 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "When I do a query to get all users in a group like the one below (where \"MyGroups\" is AD Groups):\n                var res = from i in ctx.MyGroups\n                          where i.Name == GroupName\n                          select i.Members;\nThe results are limited to 1500 records.  I believe there is some way to get around this limitation of the Directory Searcher using the \"range\": \n \nDirectorySearcher groupMember = new DirectorySearcher\n    (group,\"(objectClass=*)\",new string[]{\"member;Range=0-500\"},SearchScope.Base);\n (http://bcheul.tistory.com/archive/200811)\n \nIt would be nice if your LINQ provider knew when it had hit 1500, then did another query for the next 1500 and so on until it had all users, then merged the results into the one list.  At the moment I am going to have to try and do this manually.",
+    "LastUpdatedDate": "2013-02-14T11:56:57.36-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2009-11-08T18:12:44.46-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Trying to get all users in a group is limited to 1500 records",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 6172
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "I am also having this issue, has anyone able to get around it?",
+      "PostedDate": "2010-10-08T22:18:17.74-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "This has to do with the paging of results returned from AD. If you wrap the FindAll() call in DirectoryQuery<T>.GetResults() with a using and set a page size, it will continue until it retrieves all the results. Something like:\r\n\r\nusing ( var s = new DirectorySearcher( root, q, properties.ToArray(), _source.Scope ) )\r\n{\r\n           s.PageSize = 1000;\r\n           ...\r\n           foreach (SearchResult sr in s.FindAll())\r\n           ...\r\n}\r\n\r\n\r\n",
+      "PostedDate": "2012-04-30T07:41:38.74-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:57.36-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi Friends,\n \nwhen we create clasess for linq to sharepoint using spmetal utility\n \nand suppose some one rename list name from front end\n \nwill it work with exiting class(linq to sharepoint)\n \n \n \nDataContext data = new DataContext(SPContext.Current.Web.Url);\nListname = data.GetList<Listname>(\"List name\");\n \nabove code will not working if user change list name\n \nis it possible to use list url instead of List name in spmetal utility\n \n \n \n \n \n \n \nSachin walunj\n \nsachin.walunj@mphasis.com",
+    "LastUpdatedDate": "2013-02-14T11:46:09.143-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2011-09-20T22:56:17.927-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Linq to sharepoint(Issue after list name change)",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 21541
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

@@ -1,0 +1,65 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hope this will help someone else as well.\nFor example if you clear the address details of a user and update the context, DirectoryEntry CommitChanges will fail.\nThere are two work arounds for this issue - in your higher level classes (Entity or even higher) check if value is \"\" \\ string.empty and change it to null.\n \n2nd option: In DirectorySource class inside Update() method:\nreplace instances of     i.GetValue(e.Key, null)       with\n(i.GetValue(e.Key, null)==String.Empty?null:i.GetValue(e.Key, null))\n \nthis should correct the issue from a lower level class.\n \nPlease note i have NOT tested this for attributes which as of ActiveDS type.\n \nregards\n \nafraan",
+    "LastUpdatedDate": "2013-02-14T11:56:57.813-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2009-04-08T21:05:31.08-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "directory attribute update fails when value is String.Empty",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 4219
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "acutally might get compile type warnings so changed code to the following:\r\n\r\n(i.PropertyType==typeof(String)&& ((String)i.GetValue(e.Key, null))==String.Empty?null:i.GetValue(e.Key, null))",
+      "PostedDate": "2009-04-08T21:37:10.957-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2009-06-08T14:48:15.707-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "I've ran into the exact same issue",
+      "PostedDate": "2009-06-08T14:48:38.323-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Thanks! I can see where this would have been an issue for me.",
+      "PostedDate": "2010-01-08T10:11:08.633-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:57.813-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

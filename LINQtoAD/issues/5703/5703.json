@@ -1,0 +1,61 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Introduction:\n--------------------------\n \nFirst let me thank the author of this library. I am only starting to learn linq for the last three days. I am really fascinated and thinking of moving to .NET 3.5 because of this (I have to develop an extensive data driven application). I read book chapters and looked online for examples. I was also seeking ways to integrate LDAP to linq and found this site. Out of the box, the code worked for me (just replaced the ROOT location to point to my AD).\n \n \nProblem:\n--------------------------\n \nWhile using this library (Version/Name of package: linqtoad-12012.zip), I immediately encountered the following problems:\n1.\tSLOW: The Performance was very slow. I ran the query on an OU that returned 567 users. But this was very slow and the operation to convert to an arraylist took 34 seconds (average).\n2.\tGUID SEARCH: I can get the GUID field for a user, but when I search by GUID to locate a user, the query fails. \n3.\tDATETIME FIELD: When I map a DateTime Field for example pwdLastSet, I cannot assign DateTime type.\n                a.\t I have two options:\n                                 i.\tUse the NativeObject mapping as author suggested see below:\n                                                          [DirectoryAttribute(\"PasswordLastChanged\", DirectoryAttributeType.ActiveDs)]\n                                                          public DateTime PasswordLastSet { get; set; }\n                                 ii.\tUse long as the data type and use a typecasting/conversion during every use.\n                 b.\tBut I can’t do the following:\n                                         [DirectoryAttribute(\"PwdLastSet\")]\n                                         public DateTime PasswordLastSet { get; set; }\n                 c.\tThis is not to say that the authors approach is wrong. It is infact correct. It uses ActiveDs helper object to map the datatype correctly. But the problem is speed (our problem 1). Calls to DirectoryEntry.NativeObject is slow.\n \n \nSolution:\n--------------------------\nA Solution to these problems is attached (just replace the DirectorySource.cs file of package :\nReaders should be aware that my understanding of LINQ is really shady at the moment. I barely have a working knowledge. I just tested my solution driven by my own need for speed, but it may as well break some functionality. So, please test the code before and after you replace the module DirectorySource.cs in linqtoad-12012.zip). \nIn the attached code you will find a comment with my name wherever I have applied a change. For example:\n// ****** Code Modified (Commented by: Russel Ahmed Apu, russel_ahmed_apu @ hotmail dot com) *********\n// Disable this because we dont want to call GetDirectoryEntry() if we dont need it\n//DirectoryEntry e = sr.GetDirectoryEntry();\n// ******************************** END Of Modification *****************************************\n \nSo, if you don’t want a certain change you can certainly go back to the old code. Please use your judgment and always test your code. \n********************************************************\nUSING THE CHANGES PROPOSED BELOW, \nI MANAGED TO SPEEDUP A QUERY THAT TOOK *34* SECONDS \nTO *0.25* SECONDS!!!\n********************************************************\nAlso, I can now map DateTime and Guid fields accordingly.\nI can also search by guid objects, like this:\nIn Entity.cs\n~~~~~~~~~~~~~~~~~~~~~~~~~~\n...\n[DirectoryAttribute(\"objectGUID\")]\npublic Guid Id { get; set; }\n[DirectoryAttribute(\"PwdLastSet\")]\npublic DateTime PasswordLastSet { get; set; }\n...\nIn Program.cs\n~~~~~~~~~~~~~~~~~~~~~~~~~~\n...\nGuid myguid = new Guid(\"39267f96-e560-49dc-884c-4f036f78be0b\");\nvar AllUsers = from usr in dtx.Canada.Users where usr.ObjectCategory == \"Person\" && usr.Id==myguid select usr;\nforeach (var u in AllUsers)\n{\n   Console.WriteLine(\"{0}  -  {1}\",u.Name, u.Id);\n}\n...\n \n \nExplanation For Speedup:\n-----------------------------\nThe reason for this slow speed is the call to SearchResult.GetDirectoryEntry(). This method is called from Method GetResults() and AssignResultPropery() methods implemented by the original author. The AD GetDirectoryEntry is called to retrieve every single property, so it’s called many times for each query row. \nTo resolve this issue, I took an alternative track. I initialized the DirectorySearcher object by adding s.PropertiesToLoad.Add(…) method calls for every properties that must be extracted from AD. I removed calls to GetDirectoryEntry whenever possible and instead used SearchResult.Properties[] to get  the property values directly from the SearchResult object. This makes information retrieval very fast.\nThe only places where GetDirectoryEntry is needed is when you want to apply changes to certain objects and need to map properties using the ActiveDs helper object (i.e. PasswordLastChanged). Thus, if you can avoid nativeobject, this MOD will be very fast (It will be slower for updates).",
+    "LastUpdatedDate": "2013-02-14T11:56:57.58-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2009-10-02T11:16:47.067-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Fixing slow query speed, Guid Filter and DateTime mapping (on linqtoad-12012.zip)",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 5703
+  },
+  "FileAttachments": [
+    {
+      "FileId": 1907,
+      "FileName": "DirectorySource.cs",
+      "DownloadUrl": ".\\1907"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "Thanks! I just implemented all the changes. My site still works! Thanks!",
+      "PostedDate": "2010-01-08T10:47:52.297-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2010-07-18T03:56:39.067-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:57.58-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

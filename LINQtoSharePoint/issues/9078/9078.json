@@ -1,0 +1,86 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi Bart,\n \nI have started using linq2sharepoint using this blog post :\n \nhttp://technoblogy.spaces.live.com/blog/cns!29F7CF27A98D236F!284.entry\n \nI used the 0.2.4 msi to install the project\n \nAfter creating the console application and adding the  \"Linq to SharePoint File\" I get the error that I attached.\n \nAm I doing something wrong?",
+    "LastUpdatedDate": "2013-02-14T11:46:11.973-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2007-12-19T02:08:44.987-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Adding \"Linq to SharePoint File\" does not work",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 3,
+    "Id": 9078
+  },
+  "FileAttachments": [
+    {
+      "FileId": 676,
+      "FileName": "l2sp.jpg",
+      "DownloadUrl": ".\\676"
+    },
+    {
+      "FileId": 680,
+      "FileName": "Remover.spml",
+      "DownloadUrl": ".\\680"
+    }
+  ],
+  "Comments": [
+    {
+      "Message": "I experienced the same error.   In a admittedly \"Mr. Magoo blind stab in the dark\" move, I tired adding several of the BdsSoft DLL's to the GAC (that were not already there), which helped a little bit (the Add dialog will come up and run), but when I was finished adding a LINQ to SharePoint File to my project, it did not have the xxxxxx.designer.cs partial class, so there is still some other issue with this particular release.\r\n\r\nI'm working with Visual Studio Team System 2008 Development Edition on Windows Server 2003 R2 SP1 + SQL 2005 SP2 + WSS 3.0 + MOSS 2007.  I haven't been brave enough to install WSS 3.0 SP1 or MOSS 2007 SP1 yet, but will do so if you think it will help this particular issue.",
+      "PostedDate": "2007-12-20T10:43:02.827-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "In my case, I found what causes the error.  If the list (a Discussion Board in my case) has the following field, the xxxxx.designer.cs partical class will silently not be created:\r\n\r\n<Field Name=\"ItemChildCount\" DisplayName=\"Replies\" Type=\"Lookup\" Id=\"b824e17e-a1b3-426e-aecf-f0184d900485\" ReadOnly=\"true\" LookupList=\"Docs\" LookupField=\"ItemChildCount\" />\r\n\r\nIf I exclude the above field, the xxxxxx.designer.cs class gets generated.",
+      "PostedDate": "2007-12-20T11:26:11.623-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2007-12-20T11:26:11.967-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2008-01-11T00:51:22.02-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Thanks for the feedback. The assembly load problem is caused by an issue in the setup package causing some core assemblies to be missing in the GAC. Work-item 9281 tracks this issue. Concerning the lookup field, I've checked your attached spml file (thanks for including it) and the transitive closure of referenced lists seems to be wrong. Essentially, the ItemChildCount Lookup field refers to a LookupList called \"Docs\" but there's no SPML definition for that list. If the Docs list is available in the mapping wizard step, include it over there if you need the Lookup field to work. This shoudl resolve this issue. If you don't need the Lookup field, disable the field mapping for it.\r\n\r\nWe'll work on better diagnostics and error messages for such cases in a subsequent release. Ideally, the entity wizard should catch these issues early but where're not quite there yet.\r\n\r\n-Bart",
+      "PostedDate": "2008-02-07T00:40:28.613-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2009-10-13T07:45:41.947-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:46:11.973-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

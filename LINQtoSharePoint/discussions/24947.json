@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "83648",
+    "ThreadId": "24947",
+    "Html": "\r\nWhen I access a sharepoint list field with a null value (no entry), I get an exception error. <br /><br />I have suucessully connected to the list and I am trying to populate a SQL Server Compact Edition (sdf) database. When I interate throuhg the query, if a filed has null value, it gives me an error and I had to work around using try / catch exception.  I am sure there is a better way and I am missing something.<br /><br />HEre is a portion of the code:<br /><br />             string conn =\"|DataDirectory|\\\\Schedule.sdf\";<br />                DataContext ds = new DataContext(conn);<br />                Table&lt;ScheduleData&gt; Schedules = ds.GetTable&lt;ScheduleData&gt;();<br />                Table&lt;Rooms&gt; Rms = ds.GetTable&lt;Rooms&gt;();<br />                Table&lt;Resources&gt; Rsc = ds.GetTable&lt;Resources&gt;();<br /><br />                var ct = new ScheduleDataSharePointDataContext();<br />                var dt = from p in ct.MTCEngagements<br />                         where p.StartDate12 &gt; DateTime.Today.AddDays(-1)<br />                         orderby p.StartDate12<br />                         select p;<br />              //ct.Log = Console.Out;<br />                //ds.Log = Console.Out;<br /><br /><br />                    foreach (var q in dt)<br />                    {<br /><br /><br />                        string lead= null;<br />                          try<br />                        {<br />                           lead = q.Lead.ResourceAlias;                                 // I get an error if the Lead.ResourceAlias is null.......<br /><br />                        }<br />                        catch (Exception)<br />                        {<br />                            lead = \"None\";<br />                        }<br /><br />                  .........<br />",
+    "PostedDate": "2008-03-28T21:49:51.837-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

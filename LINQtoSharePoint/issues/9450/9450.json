@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I've field DisplayName=\"Description\", InternalName=\"Description_x0020_2\". InternalName should be used instead of ColumnName. ObjectModelSharePointDataProvider.cs line 189 doesn't work correctly in this case because ColumnName=\"Description 2\":\nobject o = item[col.ColumnName];\n \nQuick fix:\nitem[XmlConvert.EncodeName(col.ColumnName)];",
+    "LastUpdatedDate": "2013-02-14T11:46:10.543-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2008-02-29T11:44:02.577-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Use InternalName when getting value from SPListItem",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 7,
+    "Id": 9450
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

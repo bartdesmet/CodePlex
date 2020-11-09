@@ -1,0 +1,65 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "The following line causes a memory leak:\n\"foreach (SearchResult sr in s.FindAll())\"\n \nThe reason for this can be found here:\nhttp://msdn.microsoft.com/en-us/library/system.directoryservices.directorysearcher.findall.aspx\n \nUltimately, any time you use a SearchResultCollection object (such as when you call DirectorySearcher.FindAll), you must dispose the SearchResultCollection object yourself. A fix would be to put the s.FindAll() result into a variable managed by a USING block.",
+    "LastUpdatedDate": "2017-12-07T18:31:56.403-08:00",
+    "PlannedForRelease": "LINQ to Active Directory Refresh Release 1.0.1",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "High",
+      "Severity": 150,
+      "Id": 3
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2010-03-18T12:08:16.953-07:00",
+    "Status": {
+      "Name": "Active",
+      "Id": 2
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Memory Leak in DirectoryQuery.GetResults()",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 7443
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Had wrong class name.",
+      "PostedDate": "2010-03-18T12:13:47.063-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Will be addressed in an upcoming release.",
+      "PostedDate": "2010-07-16T00:06:25.917-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2011-06-04T06:32:05.53-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:56.68-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2017-12-07T18:31:56.403-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

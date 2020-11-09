@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "506966",
+    "ThreadId": "230835",
+    "Html": "<p>I am a total newbie to programming, Visual Basic, Visual Studio, and LINQ.&nbsp; I am trying to build a very simple web application to manage *contact* items&nbsp;at any given OU in Active Directory.&nbsp; I would like to use&nbsp;LINQ to Active Directory to allow me to get the list of contacts, as well as create new contacts, and updated and delete existing contacts.&nbsp; I have been doing a *lot* of reading for the past two weeks trying to get this to work, but I have not yet been able to accomplish what I need to do.&nbsp; It would be great if someone would be so kind to explain&nbsp;how to use LINQ to AD in Visual Studio 2010 so that I can do what I have described above step-by-step.&nbsp; Alternatively, if you think I should be trying something totally different, please be so kind and point me in the corrent direction.&nbsp;</p>\r\n<p>Thank you all very much for any help you might be able to provide.</p>",
+    "PostedDate": "2010-10-13T18:13:39.713-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

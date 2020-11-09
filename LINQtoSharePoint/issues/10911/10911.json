@@ -1,0 +1,50 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi, i wish to construct such expression:\n \n   from n in ctx.News\n   where n.Validity != null\n          || n.Validity >= DateTime.UtcNow\n   select n;\n \nHere Validity has type System.Nullable<System.DateTime>.\nHowever i have exception.\n \nThanks!",
+    "LastUpdatedDate": "2013-02-14T11:46:10.387-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2008-08-05T01:25:10.617-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Exception at comparison of values of type System.Nullable<System.DateTime> with null",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 10911
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "I think your problem may actually lie in the fact that you're using an OR (||) operator instead of an AND (&&) operator with the null check\r\n\r\nfrom n in ctx.News\r\nwhere n.Validity != null\r\n&& n.Validity >= DateTime.UtcNow\r\nselect n;\r\n\r\n--Jason",
+      "PostedDate": "2008-08-05T10:22:19.397-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:46:10.387-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

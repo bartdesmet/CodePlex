@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "75308",
+    "ThreadId": "22546",
+    "Html": "\r\nI have a SharePoint list with a few multi-choice lookup fields.  With LINQ to SharePoint, I'd like to get a flat table that includes those lookup fields.  For example, suppose my SharePoint list has the following fields:<br /><br /><ul><li>Name</li><li>Title</li><li>ReportsTo (a lookup to the employee list)</li><li>ManagerOf (another lookup to the employee list)</li></ul><br />A record might appear on the site as:<br /><br /><ul><li>Bob Smith, IT Director, Joe Noonan, Mike Jones;Sarah Rose;Bill Dobbs</li></ul><br />I'd like to have returned a flat recordset that contains the following:<br /><br /><ul><li>Bob Smith, IT Director, Joe Noonan, Mike Jones</li><li>Bob Smith, IT Director, Joe Noonan, Sarah Rose</li><li>Bob Smith, IT Director, Joe Noonan, Bill Dobbs</li></ul><br />Is this possible with LINQ to SharePoint?<br />",
+    "PostedDate": "2008-02-20T11:57:22.923-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

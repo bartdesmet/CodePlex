@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "120026",
+    "ThreadId": "36185",
+    "Html": "<span id=UniqueID1222087478925>I am having a problem with LinqToSharePoint v0.2.4. The code I wrote is as follows:<br>\r\n<br>\r\nvar context - new TasksSharePointDataContext();<br>\r\nvar res = from t in context.LinqTasks<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select t.Title;<br>\r\n<br>\r\nThis works fine, where t.Title is the Title field in the SharePoint list called LinqTasks. However, if I write this:<br>\r\n<br>\r\nvar context - new TasksSharePointDataContext();<br>\r\nvar res = from t in context.LinqTasks<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select t.Title, t.Status;<br>\r\n<br>\r\nThis should work because Status is a field in LinqTasks. However, when I type the second t.&nbsp;intellisense is not available and the error I get on t.Status is Invalid Expression Term ','.&nbsp;If I write select new (), as follows:<br>\r\n<br>\r\nvar context - new TasksSharePointDataContext();<br>\r\nvar res = from t in context.LinqTasks<br>\r\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select new&nbsp;( Task = t.Title, t.Status );<br>\r\n<br>\r\nintellisense works for t.Status(and any other fields in LinqTasks), however, I get an error on the first parentheses '('&nbsp;stating: Type Expected.<br>\r\n<br>\r\nIs this a bug in v0.2.4 or my code or configuration?<br>\r\n</span>\r\n",
+    "PostedDate": "2008-09-22T06:35:41.987-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

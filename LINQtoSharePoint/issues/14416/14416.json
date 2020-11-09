@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi,\n \nI'm using the wizard for the first time. In the \"connect to sharepoint site\" page, I entered a valid WSDL url.\nWhen I hit \"Test connection\" an error message is displayed: \"Failed to connect to the sharepoint site.\".\n \nThis message is not really helpfull. Is this a DNS error? A network timeout? Is the TCP port closed? Is this a wrong url? Authentication failure? Printing the exception message might be okay.\n \nBye.",
+    "LastUpdatedDate": "2013-02-14T11:46:09.69-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2009-10-13T07:58:54.863-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Error message not accurate in the wizard",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 14416
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

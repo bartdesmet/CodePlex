@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Thank you for this nice implementation of Linq to Ldap, which I use a lot in my projects.\n \nI would like to contribute with a suggestion and this little piece of code I wrote to take into account that Ldap attributes can be multiple. As an \n \nexample a same record can have several cn attributes such a cn=ms-windows and cn=windows.\n \nThis translates into your entity class as:\n<code>\n[DirectoryAttribute(\"cn\")]\npublic string[] CommonNames\n{\n   .....\n}\n</code>\n \nI use this Linq query to find a record:\n<code>\nvar q = from r in this.ldap.ldapTest.Tests\n        where r.CommonNames.Contains(\"windows\")  // Not the Contains() method on string!\n        select r;\n</code>\n \n \nThis is the small piece of code that implements the Linq parsing query Contains() on enumerable types:\n \n<code>\nelse if ((m = e as MethodCallExpression) != null)\n{\n    if (m.Method.DeclaringType == typeof(string))\n    {\n        .....\n    }\n    // Added by ericdes, for methods involving enumable types: \n    else if (m.Method.DeclaringType == typeof(Enumerable)) \n    {\n        MemberExpression o = (m.Arguments[0] as MemberExpression);\n        switch (m.Method.Name)\n        {\n             case \"Contains\":\n             {\n                 string value = GetEnumerableOperandValue(m);\n                 sb.AppendFormat(\"{0}={1}\", GetFieldName(o.Member), value);\n                 break;\n             }\n             default:\n                 throw new NotSupportedException(\"Unsupported enumarable method query expression detected. Cannot translate to LDAP equivalent.\");\n         }\n    }\n    .....\n</code>\n \nand\n<code>\nprivate static string GetEnumerableOperandValue(MethodCallExpression m)\n{\n      string value;\n      value = Expression.Lambda(m.Arguments[1]).Compile().DynamicInvoke() as string;\n      if (value == null)\n      {\n           throw new NotSupportedException(m.Method.Name + \" can only be used with enumerable objects.\");\n      }\n      return value;\n}\n</code> \n \nI did not test it extensively but it has worked fine for what I have done with it so far. You might want to generalize it for a future release of \n \nLinq for Ldap.",
+    "LastUpdatedDate": "2013-02-14T11:56:59.253-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2008-12-06T02:15:43.287-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Multi-valueds attributes, some code to deal with them",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 3440
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

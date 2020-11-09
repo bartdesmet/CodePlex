@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "73570",
+    "ThreadId": "22059",
+    "Html": "\r\nWith Northwind Products, Categories, and Suppliers uploaded from Access 2007 to WSS 3.0, the following query in a VB LINQ to SharePoint project fails with a NotSupportedException in ParseErrors:<br /><br />            Dim Prods = From p In ctxNwind.Products _<br />                        Where p.Discontinued = False _<br />                        Order By p.ProductName _<br />                        Select p.ProductID, ProductName = p.ProductName, _<br />                               SKU = p.QuantityPerUnit, UnitPrice = p.UnitPrice, _<br />                               Category = p.CategoryID.CategoryName, _<br />                               Supplier = p.SupplierID.CompanyName, _<br />                               Inventory = p.UnitsInStock, OnOrder = p.UnitsOnOrder<br /><br />            Dim lstProds = Prods.ToList()<br />            dgvLists.DataSource = lstProds<br /><br />dgvLists is a DataGridView.<br /><br />The following query works fine in C#:<br /><br />                var prods = from p in ctxNwind.Products<br />                            where p.Discontinued == false<br />                            orderby p.ProductName<br />                            select new { ProductID = p.ProductID, ProductName = p.ProductName,<br />                                         SKU = p.QuantityPerUnit, UnitPrice = p.UnitPrice, <br />                                         Category = p.CategoryID.CategoryName, <br />                                         Supplier = p.SupplierID.CompanyName,<br />                                         Inventory = p.UnitsInStock, OnOrder = p.UnitsOnOrder };<br /><br />                var lstProds = prods.ToList();<br />                dgvLists.DataSource = lstProds;<br /><br />Although it takes 17 seconds to execute until the lookup is cached.<br /><br />--rj<br />",
+    "PostedDate": "2008-02-13T08:00:03.74-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

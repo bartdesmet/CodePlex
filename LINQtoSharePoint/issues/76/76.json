@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "Query parser",
+      "DisplayName": "Query parser"
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "DateTime fields aren't parsed correctly when retrieved from the result set (invalid format). Will have to use the appropriate format string to perform the correct parsing (24 hour notation).",
+    "LastUpdatedDate": "2013-06-14T00:01:41.193-07:00",
+    "PlannedForRelease": "0.1.2.0 Alpha",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "High",
+      "Severity": 150,
+      "Id": 3
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2007-04-26T11:57:56.377-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "DateTime field parsing error",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 76
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

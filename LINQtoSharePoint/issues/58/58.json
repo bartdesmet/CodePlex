@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "Query parser",
+      "DisplayName": "Query parser"
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "An empty <ViewField> element will yield only those items in the default view, which is too restrictive in case of an equiprojection (from x in y select x). A ViewFields element should be created that reflects all mapped fields from the original entity type.",
+    "LastUpdatedDate": "2013-06-14T00:01:41.773-07:00",
+    "PlannedForRelease": "0.1.2.0 Alpha",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "High",
+      "Severity": 150,
+      "Id": 3
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2007-04-26T04:25:22.68-07:00",
+    "Status": {
+      "Name": "Resolved",
+      "Id": 7
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Default list view is too restrictive, a ViewFields elements should be calculated to retrieve all required fields",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 58
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

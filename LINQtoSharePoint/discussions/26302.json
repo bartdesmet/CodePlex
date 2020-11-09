@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "87986",
+    "ThreadId": "26302",
+    "Html": "\r\nHi,<br /><br />I'm using SPMetal to general code for one of our big sharepoint lists that has several lookups into other lists.<br />One of those other lists has 2 calculated fields to concat \"Last Name\" and \"First Name\" fields into a \"Full Name\" field using the formula:<br /><br />=[Last Name]&amp;\",\"&amp;\" \"&amp;[First Name]<br /><br />SPMetal seems to throw an error when it encounters those fields:<br /><br />Invalid Lookup field list reference encountered: list {a1cc3412-9fb5-4387-98ea-5e4cc93ea259} referred to by field Main_x0020_Contact is unknown in the SharePoint context.<br /><br />The list the error references does exist.<br /><br />Can anyone advise if SPMetal should be able to cope with these calculated fields?<br /><br />Thanks<br /><br />JKI<br />",
+    "PostedDate": "2008-04-21T02:58:33.243-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

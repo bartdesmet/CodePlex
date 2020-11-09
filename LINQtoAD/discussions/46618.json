@@ -1,0 +1,90 @@
+[
+  {
+    "Id": "155771",
+    "ThreadId": "46618",
+    "Html": "The project is still alive ?<br>\r\nIf the project is death and someone is interested to develop can post to give the avalialability to split-off the project.<br>\r\nI'm interested to developing it.<br>\r\n<br>\r\nThanks\r\n",
+    "PostedDate": "2009-02-09T06:16:44.143-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "167592",
+    "ThreadId": "46618",
+    "Html": "To be quite frank, I haven't got much experience in Directory Service programming.<br>\r\nBut I'm eager to see this project alive somehow.<br>\r\n<br>\r\n",
+    "PostedDate": "2009-03-12T19:16:41.467-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "268449",
+    "ThreadId": "46618",
+    "Html": "<p>&gt;The project is still alive ?</p>\r\n<p><span style=\"font-size:10pt;color:black\" lang=EN-US>Seems not :</span><span style=\"font-size:10pt;color:black\">)</span></p>\r\n<p><span style=\"font-size:10pt;color:#30332d\" lang=EN-US>&gt;If the project is death and someone is interested to develop can post to give the avalialability to split-off the project.</span></p>\r\n<p><span style=\"font-size:10pt;color:black\" lang=EN-US>I&rsquo;m currently using this project in my program. Probably I'll fix some issues, but actually I don&rsquo;t want to develop this project. If someone will create brunch and give me access to sources, I&rsquo;ll fix bug or two. Or I can create brunch myself and give access to anyone who wants to develop.</span></p>",
+    "PostedDate": "2009-12-17T04:46:52.88-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "464918",
+    "ThreadId": "46618",
+    "Html": "I'm using the project as well and had to do a few updates to fix the memory leak issues.  However, in my project I removed the change-set tracking because it caused huge performance problems for us and I removed ActiveDs because I don't like working with COM directly :p.  I also added support for Take and Order operations.  Anyone know how I would go about branching this project?  I reused a lot of the source code so i'm not sure what the ethics are behind branching it to another open source project.",
+    "PostedDate": "2010-07-08T09:02:10.447-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "467077",
+    "ThreadId": "46618",
+    "Html": "<p>In fact a brand new version of LINQ to AD will appear fairly soon. I've been busy doing quite an extensive rewrite of the query translator as part of my day-to-day job. Check out <a href=\"http://blogs.bartdesmet.net/bart\">http://blogs.bartdesmet.net/bart</a> for some hints as to what I'm up to nowadays. While I can't give a firm timeframe just yet, I'd encourage you to keep an eye on the website.</p>\r\n<p>Cheers,<br>-Bart</p>",
+    "PostedDate": "2010-07-13T22:21:17.83-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "519003",
+    "ThreadId": "46618",
+    "Html": "\r\n<p>Which calendar year is &quot;quite soon&quot; in?</p>\r\n",
+    "PostedDate": "2010-11-08T13:47:40.89-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "546453",
+    "ThreadId": "46618",
+    "Html": "\r\n<p>Any news, Bart?</p>\r\n",
+    "PostedDate": "2011-01-09T21:32:27.093-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "571769",
+    "ThreadId": "46618",
+    "Html": "<p>Im going to implement it in <a href=\"http://orchardopenauth.codeplex.com/\">http://orchardopenauth.codeplex.com/</a> Could you tell us when your going to release a new version?</p>",
+    "PostedDate": "2011-02-24T13:24:18.77-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "612764",
+    "ThreadId": "46618",
+    "Html": "<p>Jetski5822,</p>\n<p>You're welcome to use&nbsp;<a title=\"http://linqtoldap.codeplex.com/\" href=\"http://linqtoldap.codeplex.com/\" target=\"_blank\"></a><a href=\"http://linqtoldap.codeplex.com/\">http://linqtoldap.codeplex.com/</a>. However, I use System.DirectoryServices.Protocols to  get broader LDAP server support so if you're use to just System.DirectoryServices there's a slight learning curve (if you want to dig into the internals). &nbsp;If LINQ to AD gets updated I'll delete this post, but right now this project looks dead.</p>",
+    "PostedDate": "2011-05-14T09:44:02.047-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "660252",
+    "ThreadId": "46618",
+    "Html": "<blockquote style=\"padding-bottom: 0px; font-style: italic; margin: 0.25em 1em 0px; padding-left: 0.25em; padding-right: 0.25em; padding-top: 0px; border: #ccc 0.1em solid;\"><strong>bdesmet wrote:</strong><br />\r\n<p>In fact a brand new version of LINQ to AD will appear fairly soon. I've been busy doing quite an extensive rewrite of the query translator as part of my day-to-day job. Check out <a href=\"http://blogs.bartdesmet.net/bart\">http://blogs.bartdesmet.net/bart</a> for some hints as to what I'm up to nowadays. While I can't give a firm timeframe just yet, I'd encourage you to keep an eye on the website.</p>\r\n<p>Cheers,<br />-Bart</p>\r\n</blockquote>\r\n<p><br />Hi Bart,</p>\r\n<p>We're using&nbsp; this project in several of our internal solutions and I've recently come up against the \"special characters\" issue and was wondering how soon is \"fairly soon\"? This post was quite some time ago and I'd really rather not have to assume the technical debt of pulling out your solution and replacing it with the LinqToLDAP solution. Please advise.</p>\r\n<p>Thanks.</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2011-08-18T14:29:22.31-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "663610",
+    "ThreadId": "46618",
+    "Html": "<p>jkinter,</p>\r\n<p>Here's the extension method I use to clean filter values:</p>\r\n<p>\r\n<div style=\"color: black; background-color: white;\">\r\n<pre><span style=\"color: blue;\">public</span> <span style=\"color: blue;\">static</span> <span style=\"color: blue;\">string</span> CleanFilterValue(<span style=\"color: blue;\">this</span> <span style=\"color: blue;\">string</span> value)\r\n{\r\n    <span style=\"color: blue;\">var</span> sb = <span style=\"color: blue;\">new</span> StringBuilder();\r\n    <span style=\"color: blue;\">foreach</span> (<span style=\"color: blue;\">var</span> curChar <span style=\"color: blue;\">in</span> value)\r\n    {\r\n        <span style=\"color: blue;\">switch</span> (curChar)\r\n        {\r\n            <span style=\"color: blue;\">case</span> '\\\\':\r\n                sb.Append(<span style=\"color: #a31515;\">\"\\\\5c\"</span>);\r\n                <span style=\"color: blue;\">break</span>;\r\n            <span style=\"color: blue;\">case</span> <span style=\"color: #a31515;\">'*'</span>:\r\n                sb.Append(<span style=\"color: #a31515;\">\"\\\\2a\"</span>);\r\n                <span style=\"color: blue;\">break</span>;\r\n            <span style=\"color: blue;\">case</span> <span style=\"color: #a31515;\">'('</span>:\r\n                sb.Append(<span style=\"color: #a31515;\">\"\\\\28\"</span>);\r\n                <span style=\"color: blue;\">break</span>;\r\n            <span style=\"color: blue;\">case</span> <span style=\"color: #a31515;\">')'</span>:\r\n                sb.Append(<span style=\"color: #a31515;\">\"\\\\29\"</span>);\r\n                <span style=\"color: blue;\">break</span>;\r\n            <span style=\"color: blue;\">case</span> <span style=\"color: #a31515;\">'\\u0000'</span>:\r\n                sb.Append(<span style=\"color: #a31515;\">\"\\\\00\"</span>);\r\n                <span style=\"color: blue;\">break</span>;\r\n            <span style=\"color: blue;\">default</span>:\r\n                sb.Append(curChar);\r\n                <span style=\"color: blue;\">break</span>;\r\n        }\r\n    }\r\n    <span style=\"color: blue;\">return</span> sb.ToString();\r\n}\r\n</pre>\r\n</div>\r\n</p>\r\n<p>You could call this on the value and pass in the result so you won't have to change your apps. &nbsp;It's been a while since I've looked at the LINQ to AD source so I'm not sure where you could add this in there. &nbsp;I hope this helps.</p>",
+    "PostedDate": "2011-08-25T20:29:48.303-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

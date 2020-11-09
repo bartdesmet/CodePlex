@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "102559",
+    "ThreadId": "30838",
+    "Html": "Hi, <br>\r\nThis is a great tool and I'm really excited about using it. I think it's just what SharePoint needs to get the 'messy' data into something to code against. <br>\r\n<br>\r\nWhen I run spmetal against a document library I get the the following error: <br>\r\n<em><br>\r\nFailed to generate spml. Cannot load the list definition for docs</em><br>\r\n<br>\r\nThe library is a document library. (Perhaps it does not support doc libs?)<br>\r\n<br>\r\nDoes anyone know what this error is caused by?<br>\r\nThanks<br>\r\n",
+    "PostedDate": "2008-07-03T13:49:36.293-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "203529",
+    "ThreadId": "30838",
+    "Html": "<p>I have the same issue... does any =one confirm this tool will not work with Doc library??</p>\r\n<p>&nbsp;</p>\r\n<p>Thanks</p>\r\n<p>P</p>",
+    "PostedDate": "2009-06-19T14:13:58.573-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

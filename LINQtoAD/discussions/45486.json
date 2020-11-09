@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "151780",
+    "ThreadId": "45486",
+    "Html": "For some accounting project I need to query all users. Now I saw Active Directory returns for the 'user' objectClass a maximum of 5000 records. After doing some research I found you can do something with 'someSearcher.PropertiesToLoad.Add(String.Format(&quot;member;range={0}-{1}&quot;, rangeStart, rangeEnd))'. Other scripts do something like getting all users starting with 'a*' then 'b*'. The last I think is very tricky stuff...<br>\r\n<br>\r\nFor this CodePlex project method 'private IEnumerator&lt;T&gt; GetResults()' contains the following code: <br>\r\n<br>\r\n            DirectorySearcher s = new DirectorySearcher(root, q, properties.ToArray(), _source.Scope);<br>\r\n<br>\r\nThis 'properties' HashSet is 'filled' in method 'FindProperties'. So I think there must be some support for what I want but I cannot find out how. <br>\r\n<br>\r\nBy the way, I tried adding it myself directly to the codeplex (for testing purposes) but this did not seem to work (so adding 's.PropertiesToLoad.Add(String.Format(&quot;member;range={0}-{1}&quot;, 0, 50));' into method 'GetResults'.<br>\r\n<br>\r\nThanks for any help!<br>\r\n<br>\r\nYours sincerely,<br>\r\n<br>\r\nEvert Wiesenekker\r\n",
+    "PostedDate": "2009-01-28T06:51:37.46-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "152481",
+    "ThreadId": "45486",
+    "Html": "Well I had overlooked/missed the 'Issue Tracker'. Someone named 'afraan' wrote an enhanced version of the 'DirectorySource' class, see issue '<span id=\"ctl00_ctl00_MasterContent_Content_TitleLabel\">Code to Handle results greater than 1000'.<br>\r\n<br>\r\nEvert</span>\r\n",
+    "PostedDate": "2009-01-30T04:42:15.847-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

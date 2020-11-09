@@ -1,0 +1,168 @@
+! SpMetal SharePoint List Definition Export tool
+
+!! Introduction
+
+SpMetal is a tool that comes with LINQ-to-SharePoint and allows to auto-generate entity types based on a list definition. It uses the SharePoint Lists web service to get the schema of a list.
+
+!! Syntax
+
+The full syntax of the tool is shown below:
+
+{{
+Bart De Smet SpMetal SharePoint List Definition Export version 0.1.2.0
+Copyright (C) Bart De Smet 2007. All rights reserved.
+
+No inputs specified
+
+Usage: SpMetal.exe -url:<url> -list:<list> [-out:<file>] [-language:<language>]
+                   [-user:<user> -password:<password> [-domain:<domain>]]
+
+  -url:<url>            URL to the root of the SharePoint site
+  -list:<list>          Name of the list
+  -out:<file>           Output file
+  -language:<language>  Code language used for output (VB or CS)
+                        (Default: CS)
+
+  -user:<user>          User name for connection to SharePoint site
+  -password:<password>  Password for connection to SharePoint site
+  -domain:<domain>      Domain for connection to SharePoint site
+}}
+
+* Basic usage of the tool requires only two parameters: *-url* to point to the root of the SharePoint site where the list resides and *-list* for specifying the list's name.
+* The output file can be specified using *-out* and will take the list's name plus the language file extension if not set.
+* Both Visual Basic and C# are supported as output languages and can be specified using *-language*. By default, C# is used.
+* SpMetal will use _Windows integrated authentication_ to authenticate with to the SharePoint web service. If this doesn't work in your environment, you'll need to specify a username and password using *-user* and *-password*, optionally specifying a domain name too using *-domain*.
+
+!! Sample
+
+Assume you're exporting a list called Users from http://vsmar2007ctp:
+
+{{
+> SpMetal.exe -url:http://vsmar2007ctp -list:users
+Bart De Smet SpMetal SharePoint List Definition Export version 0.1.2.0
+Copyright (C) Bart De Smet 2007. All rights reserved.
+
+Connecting to server... Done
+Loading schema... Done
+
+Processing list Users (e2abfbd2-f198-4fea-8a41-68eb23c8b220) version 12... Done
+Exported 10 properties and 1 helper enums
+
+Writing file Users.cs... Done
+}}
+A file called Users.cs will be generated, containing an entity type definition like the following:
+
+{{
+using System;
+using BdsSoft.SharePoint.Linq;
+
+/// <summary>
+/// Users
+/// </summary>
+[List("Users", Id = "e2abfbd2-f198-4fea-8a41-68eb23c8b220", Version = 12, Path = "/Lists/Users")]
+class Users
+{
+    /// <summary>
+    /// First name
+    /// </summary>
+    [Field("First name", FieldType.Text, Id = "aa224957-7c27-4995-938e-95864c47e632")]
+    public string FirstName { get; set; }
+
+    /// <summary>
+    /// Last name
+    /// </summary>
+    [Field("Last name", FieldType.Text, Id = "1c3df335-b743-4ad8-993e-2319a522d1ad")]
+    public string LastName { get; set; }
+
+    /// <summary>
+    /// Age
+    /// </summary>
+    [Field("Age", FieldType.Number, Id = "80faaac7-9f73-4cdf-ba4a-d5cccfa7da71")]
+    public double Age { get; set; }
+
+    /// <summary>
+    /// Account balance
+    /// </summary>
+    [Field("Account balance", FieldType.Currency, Id = "d4311ef9-bf76-405f-85b2-154269c5d483")]
+    public double? AccountBalance { get; set; }
+
+    /// <summary>
+    /// Favorite food
+    /// </summary>
+    [Field("Favorite food", FieldType.MultiChoice, Id = "c48610a1-098e-438c-9f77-6e65c6a392cb", OtherChoice = "FavoriteFoodOther")]
+    public FavoriteFood? FavoriteFood { get; set; }
+
+    /// <summary>
+    /// Favorite food 'Fill-in' value
+    /// </summary>
+    [Field("Favorite food", FieldType.Text, Id = "c48610a1-098e-438c-9f77-6e65c6a392cb")]
+    public string FavoriteFoodOther { get; set; }
+
+    /// <summary>
+    /// Birthdate
+    /// </summary>
+    [Field("Birthdate", FieldType.DateTime, Id = "c6950879-064d-42c6-813e-f93a2c6fa06c")]
+    public System.DateTime Birthdate { get; set; }
+
+    /// <summary>
+    /// Sportive
+    /// </summary>
+    [Field("Sportive", FieldType.Boolean, Id = "a2ce8327-41e1-4531-b30c-e3c797126ccd")]
+    public bool? Sportive { get; set; }
+
+    /// <summary>
+    /// Homepage
+    /// </summary>
+    [Field("Homepage", FieldType.URL, Id = "e6efe0b7-cfe9-4ec3-af79-852138133efe")]
+    public Url Homepage { get; set; }
+
+    /// <summary>
+    /// CatYears
+    /// </summary>
+    [Field("CatYears", FieldType.Number, Id = "c46c4f9e-c7f2-4c09-9d5a-c021cb4fc9c0", ReadOnly = true, Calculated = true)]
+    public double? CatYears { get; set; }
+
+    /// <summary>
+    /// Full name
+    /// </summary>
+    [Field("Full name", FieldType.Text, Id = "6a0470eb-58c0-4f3f-92f7-9e0c3acf24b7", ReadOnly = true, Calculated = true)]
+    public string FullName { get; set; }
+}
+
+[Flags] enum FavoriteFood : uint { Pizza = 1, Lasagne = 2, Hamburger = 4 }
+}}
+
+Notice the use of C# 3.0 automatic properties in the entity definition. A similar class will be generated when using Visual Basic as the output language.
+
+! How mapping works
+
+!! List
+
+The entity type is decorated with information about the SharePoint list it's referring to, in a *ListAttribute* custom attribute. LINQ-to-SharePoint keeps the name of the list, the list's unique identifier (Id), the version of the list (Version) in order to perform list version matching checks when requested, and the relative path (Path) to the list starting from the SharePoint web site URL.
+
+!! Fields
+
+Each non-hidden and non-system column of the SharePoint list will be exported to the entity type. Currently the following column types are supported:
+* Boolean (bool)
+* Calculated (_result type_)
+* Choice (enum)
+* Currency (double)
+* DateTime (System.DateTime)
+* Integer (int)
+* MultiChoice ([Flags] enum)
+* Note (string)
+* Number (double)
+* Text (string)
+* URL (BdsSoft.SharePoint.Linq.Url)
+
+Each field contains a *FieldAttribute* for _field mapping_. In each mapping, the name of the underlying column is specified as well as the corresponding SharePoint type from an enum called *FieldType* (this enum mimicks Microsoft.SharePoint.SPFieldType and has the same enum field values). Additional information is kept about the unique identifier (Id) of the column, whether the column is ReadOnly and/or Calculated. For MultiChoice fields with fill-in choice in SharePoint, a reference _OtherChoice_ is kept to a helper field that contains the fill-in choice.
+
+*Note:* Only properties with a FieldAttribute mapping will be recognized by [SharePointDataSource<T>|SharePointDataSource]. This is important if you decide to create your own mapping entity types without the assistance of SpMetal.
+
+!!! Nullability
+
+Fields that are defined as non-required fields in SharePoint are defined as Nullable<T> in the entity type definition, using the C# 2.0 (and higher) ? syntax or the Nullable(Of T) syntax in Visual Basic. In the sample above, Age is a required field while AccountBalance isn't as indicated by the double*?* type.
+
+!!! Choices
+
+Choices in SharePoint lists are mapped on enums in the corresponding entity types. In case of radio-button choices, a simple enum will be generated. For checkbox choices, a flags enum will be generated, allowing arbitrary combinations of enum values. If the user is allowed to specify a custom value (_fill-in choice_), an additional helper field will be created which is always of type string.

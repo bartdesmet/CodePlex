@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "71503",
+    "ThreadId": "21469",
+    "Html": "\r\nHi <br /><br />I have successfully created the .smpl file using custom credentials, I can access the objects and create a linq query but when I run the console app I am getting the <br />The request failed with HTTP status 401: Unauthorized<br />Exception when I try and access the lists.<br /><br />Cheers <br />",
+    "PostedDate": "2008-02-03T19:13:08.337-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "72290",
+    "ThreadId": "21469",
+    "Html": "\r\nHi,<br /><br />I assume you're using the built-in web service provider based on what I infer from your explanation on how the spml got generated using custom credentials. Currently we don't store the user name and password used in entity generation in the generated code; this is done because most likely the developer will specify his/her own (administrator?) account while we don't want to:<br /><br />a) leak those credentials<br />b) enforce that user account to be used at runtime<br /><br />Instead, the used default account are the Windows network credentials of the user executing the code. If you want to override these, you'll have to set the Credentials property on the context object like this:<br /><br />var ctx = new MySharePointDataContext();<br />ctx.Credentials = new NetworkCredential(user, password, domain);<br />...<br /><br />This is consistent with the way generated web service proxies in .NET work (see <a href=\"http://msdn2.microsoft.com/en-us/library/system.web.services.protocols.webclientprotocol.credentials.aspx\" class=\"externalLink\">http://msdn2.microsoft.com/en-us/library/system.web.services.protocols.webclientprotocol.credentials.aspx<span class=\"externalLinkIcon\" style=\"font-family:Consolas, Courier New, Courier, Monospace;\"></span></a>).<br /><br />Thanks,<br />-Bart<br />",
+    "PostedDate": "2008-02-07T00:11:58.98-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "72308",
+    "ThreadId": "21469",
+    "Html": "\r\nThanks Bart   works perfectly  , I am looking forward to the prod release <br /><br />Cheers <br />",
+    "PostedDate": "2008-02-07T01:21:08.85-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

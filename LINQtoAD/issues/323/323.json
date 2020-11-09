@@ -1,0 +1,65 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "First of all I want to congratuate you on this great job. But I met some worries with getting properties which type is System.Byte[] as objectGUID property. LinqToAD throws an unhandled exception: System.InvalidCastException: Object cannot be stored in an array of this type. (in AssignResultProperty method). Any idea ?",
+    "LastUpdatedDate": "2013-02-14T11:57:00.333-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2007-11-30T00:29:53.63-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Problem to get System.Byte[] type properties.",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 323
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Hi Zim,\r\n\r\nThanks for your interest in this project. The primary goal of this project is to illustrate how to create LINQ providers, hence you shouldn't expect topmost quality :-).\r\n\r\nNevertheless, if you can send me a simple repro (add a comment to this thread and attach a file) to illustrate the faulty behavior, I'll definitely investigate this issue.\r\n\r\nThanks,\r\n-Bart",
+      "PostedDate": "2007-12-02T21:46:12.743-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Hi Bart,\r\n\r\nI solved my problem:\r\nthe problem with GUID type in AD is that it is an array of byte in AD. To query this kind of data, I have to convert it in string.\r\nIn the other way, AD returns byte[] data : I have to convert it in String.\r\n\r\nSo, I set the propery in entity class as an object type and I wrote the converters function.\r\n\r\n[DirectoryAttribute(\"objectGUID\")]\r\npublic object Id { get; set; }\r\n\r\npublic static string GuidToAD(string guid)\r\n{\r\n    byte[] bytes = new Guid(guid).ToByteArray();\r\n    System.Text.StringBuilder sb = new System.Text.StringBuilder();\r\n    foreach (byte b in bytes)\r\n        sb.AppendFormat(\"\\\\{0:X2}\", b);\r\n    return sb.ToString();\r\n}\r\n\r\npublic string StringId\r\n{\r\n    get\r\n    {\r\n        if (this.Id.GetType() == typeof(System.Byte[]))\r\n            return new Guid((System.Byte[])this.Id).ToString();\r\n        return string.Empty;\r\n    }\r\n}\r\n",
+      "PostedDate": "2007-12-04T02:19:17.79-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Mapping support for Guid types will be provided in the 1.0.1 Refresh Release.\r\n\r\nThanks for the feedback,\r\n-Bart",
+      "PostedDate": "2008-07-31T05:15:10.83-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2009-08-07T08:14:26.013-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:57:00.333-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

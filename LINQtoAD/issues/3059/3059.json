@@ -1,0 +1,50 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I was trying to retrieve an array of bytes that represent the jpegPhoto object in ActiveDirectory. However, if there is not a jpeg byte array already stored in AD. You will receive an unhandled ArgumentOutOfRangeException when you try to read it. The empty object is store in the resultValue as a null value. Since a resultValue is null it has a count of 0 which is the cause of the aforementioned Exception.",
+    "LastUpdatedDate": "2013-02-14T11:56:59.453-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2008-11-03T14:36:00.117-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Unhandled Exception when byte[] object is null.",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 3059
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "I was able to overcome this by checking if the Value property is null. So the offending condition goes from:\r\nif (i.PropertyType.GetElementType() == typeof (byte) && (value = resultValue[0] as byte[]) != null)\r\nto:\r\nif (i.PropertyType.GetElementType() == typeof (byte) && resultValue.Value != null && (value = resultValue[0] as byte[]) != null)\r\n\r\nThis is an initial quick fix that has been working in my case. I haven't done exhaustive testing of this change, so there may be some unforeseen faux pas in the working with other usages. \r\n",
+      "PostedDate": "2008-11-06T12:45:26.31-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:59.453-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

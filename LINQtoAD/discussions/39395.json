@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "130700",
+    "ThreadId": "39395",
+    "Html": "Have you looked at using System.DirectoryServices against large directories (300,000+ objects)?  I just finished up a large project where we migrated the whole AD query classes from S.DS to S.DS.P because of the memory usage and connection issues in S.DS when you're making lots of connections.<br>\r\n<br>\r\nS.DS.P is basically a layer over LDAP, whereas S.DS uses the legacy COM objects, but S.DS.P isn't widely known or used I think. Perhaps because S.DS is so much like the old ADSI.<br>\r\n<br>\r\nAnyway, here's a link with more perf data: \r\n<p style=\"margin:0in 0in 0pt\"><a href=\"http://blogs.dirteam.com/blogs/tomek/archive/2007/05/18/s-ds-and-large-data-sets.aspx\"><span style=\"font-family:calibri\">http://blogs.dirteam.com/blogs/tomek/archive/2007/05/18/s-ds-and-large-data-sets.aspx</span></a>.<br>\r\n</p>\r\n",
+    "PostedDate": "2008-11-06T17:36:50.94-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

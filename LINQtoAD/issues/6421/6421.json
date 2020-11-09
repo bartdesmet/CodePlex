@@ -1,0 +1,60 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I had to search for displayName's which started with a \"(\". LDAP query syntax uses parenthesis and therefore can't handle this without replacing that and other special characters with the escape sequence substitutes (http://msdn.microsoft.com/en-us/library/aa746475%28VS.85%29.aspx)\n \nI added the following function to my copy of DirectorySource.cs\n \n        /// <summary>\n        /// Replaces the special characters.\n        /// </summary>\n        /// <param name=\"constantValue\">The constant value.</param>\n        /// <returns></returns>\n        private object ReplaceSpecialCharacters(object constantValue)\n        {\n            if (constantValue is string)\n            {\n                StringBuilder returnValue = new StringBuilder((string)constantValue);\n                returnValue = returnValue.Replace(@\"\\\", @\"\\5c\");\n                returnValue = returnValue.Replace(@\"*\", @\"\\2a\");\n                returnValue = returnValue.Replace(@\"(\", @\"\\28\");\n                returnValue = returnValue.Replace(@\")\", @\"\\29\");\n                returnValue = returnValue.Replace(@\"/\", @\"\\00\");\n \n                return returnValue.ToString();\n            }\n            return constantValue;\n        }\n \nAnd then modified ParsePredicate to contain the following:\n \n                    switch (m.Method.Name)\n                    {\n                        case \"Contains\":\n                            {\n                                ConstantExpression c = m.Arguments[0] as ConstantExpression;\n                                sb.AppendFormat(\"{0}=*{1}*\", GetFieldName(o.Member), ReplaceSpecialCharacters(c.Value));\n                                break;\n                            }\n                        case \"StartsWith\":\n                            {\n                                ConstantExpression c = m.Arguments[0] as ConstantExpression;\n                                sb.AppendFormat(\"{0}={1}*\", GetFieldName(o.Member), ReplaceSpecialCharacters(c.Value));\n                                break;\n                            }\n                        case \"EndsWith\":\n                            {\n                                ConstantExpression c = m.Arguments[0] as ConstantExpression;\n                                sb.AppendFormat(\"{0}=*{1}\", GetFieldName(o.Member), ReplaceSpecialCharacters(c.Value));\n                                break;\n                            }\n                        default:\n                            throw new NotSupportedException(\"Unsupported string filtering query expression detected. Cannot translate to LDAP equivalent.\");\n                    }",
+    "LastUpdatedDate": "2017-12-07T18:31:56.153-08:00",
+    "PlannedForRelease": "LINQ to Active Directory Refresh Release 1.0.1",
+    "ReleaseVisibleToPublic": true,
+    "Priority": {
+      "Name": "Medium",
+      "Severity": 100,
+      "Id": 2
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2009-11-30T08:02:50.767-08:00",
+    "Status": {
+      "Name": "Active",
+      "Id": 2
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Queries fail when using special characters",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 6421
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "This will be fixed in the upcoming release.",
+      "PostedDate": "2010-07-17T21:00:33.813-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2011-08-18T14:16:03.25-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:57.173-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2017-12-07T18:31:56.153-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

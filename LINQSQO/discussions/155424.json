@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "362967",
+    "ThreadId": "155424",
+    "Html": "<p>Hello,</p>\r\n<p>One test case you didn't hit in your Join tests is the case where a customer in the customers sequence doesn't have any orders in the order sequence.&nbsp;When this occurs, a KeyNotFoundException is thrown by the Lookup class's indexer, and that exception is unhandled in your code. LINQ handles this case OK. No exception is thrown.</p>\r\n<p>To repro, in your test data, change the second order from:</p>\r\n<p><span style=\"font-family:Courier New\">\r\n<div style=\"color:Black;background-color:White\">\r\n<pre><span style=\"color:Blue\">new</span> Order ( 4, 23.45m )\r\n\r\nto:\r\n\r\n<span style=\"color:Blue\">new</span> Order ( 3, 23.45m )\r\n\r\n</pre>\r\n</div>\r\n<p>So that no orders are associated with Steve.</p>\r\n<p>I'm just&nbsp;starting to seriously dive&nbsp;into LINQ, and your code is incredibly helpful. I've been able to build &quot;custom&quot; Where, Select, and OrderBy extension methods since the Framework contains&nbsp;actual iterator types&nbsp;for these operations (instead of relying on compiler generated iterator blocks), and I was able to lift them out of Reflector. Joins get mighty complicated though, and rely heavily on the compiler. I'd love to see the fix for this exception&nbsp;if you can find some time. Do you think its something as simple as a try/catch block in the indexer?</p>\r\n<p>Thanks,</p>\r\n<p>Bob<br>&nbsp;</p>\r\n</span></p>",
+    "PostedDate": "2010-02-22T18:31:05.343-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "362975",
+    "ThreadId": "155424",
+    "Html": "<p>In the private _Join method, this seems to give us a graceful exit if the Lookup dictionary doesn't contain the specified key. The indexer simply isn't accessed:</p>\r\n<div style=\"color:Black;background-color:White\">\r\n<pre><span style=\"color:Blue\">foreach</span> (TOuter o <span style=\"color:Blue\">in</span> outer)\r\n    <span style=\"color:Blue\">foreach</span> (TInner i <span style=\"color:Blue\">in</span> innerLookup[outerKeySelector(o)])\r\n        yield <span style=\"color:Blue\">return</span> resultSelector(o, i);\r\n</pre>\r\n</div>\r\n<p>becomes:</p>\r\n<div style=\"color:Black;background-color:White\">\r\n<pre><span style=\"color:Blue\">foreach</span> (TOuter o <span style=\"color:Blue\">in</span> outer)\r\n{\r\n    <span style=\"color:Blue\">if</span> (innerLookup.Contains(outerKeySelector(o)))\r\n    {\r\n        <span style=\"color:Blue\">foreach</span> (TInner i <span style=\"color:Blue\">in</span> innerLookup[outerKeySelector(o)])\r\n            yield <span style=\"color:Blue\">return</span> resultSelector(o, i);\r\n    }\r\n}\r\n</pre>\r\n</div>\r\n<p>What do you think?</p>",
+    "PostedDate": "2010-02-22T19:26:22.647-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

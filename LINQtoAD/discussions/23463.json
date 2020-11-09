@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "78549",
+    "ThreadId": "23463",
+    "Html": "\r\nI cannot seem to get the securityIdentifier.  Here is my code for my property:<br /><br /><a href=\"http://www.codeplex.com/LINQtoAD/Wiki/View.aspx?title=DirectoryAttribute%28%22securityIdentifier%22%29\">DirectoryAttribute(\"securityIdentifier\")</a><br />        public string sID { get; set; }<br /><br />What am I doing wrong?<br />",
+    "PostedDate": "2008-03-05T14:58:43.007-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "83583",
+    "ThreadId": "23463",
+    "Html": "\r\nFixed it.  But the solution is not intuitive.<br /><br />It seems that you cannot use any other Type to define the objectSid other than \"object\".  So in order to get teh actual sID, I added another property.  Unfortunately, you cannot have ANY other properties on a type with the DirectorySchema attribute that does not exist in AD (it will throw an exception indicating that the property can't be found).  This is OK; just add the DirectoryAttribute again with the same property name, but don't define anything in the set block.<br /><br /><a href=\"http://www.codeplex.com/LINQtoAD/Wiki/View.aspx?title=DirectorySchema%28%22user%22%2c%20typeof%28IADsUser%29%29\">DirectorySchema(\"user\", typeof(IADsUser))</a><br />public class ADUser*<br />{<br /><a href=\"http://www.codeplex.com/LINQtoAD/Wiki/View.aspx?title=DirectoryAttribute%28%22objectSid%22%29\">DirectoryAttribute(\"objectSid\")</a><br />    public object rawsID { get; set; }<br /><br /><a href=\"http://www.codeplex.com/LINQtoAD/Wiki/View.aspx?title=DirectoryAttribute%28%22objectSid%22%29\">DirectoryAttribute(\"objectSid\")</a><br />    public object sID<br />    {<br />        get<br />        {<br />            SecurityIdentifier s = null;<br /><br />            try<br />            {<br />                if (rawsID != null)<br />                    s = new SecurityIdentifier((Byte[])rawsID, 0);<br />            }<br />            catch { }<br /><br />            return s.ToString();<br />        }<br />        set<br />        {<br /><br />        }<br />    }<br />}<br /><br />",
+    "PostedDate": "2008-03-28T11:16:12.38-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "84738",
+    "ThreadId": "23463",
+    "Html": "\r\nIt's works and also very fast and good!!<br />Thanks you solve me a lot of problem!<br />",
+    "PostedDate": "2008-04-03T05:50:35.727-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

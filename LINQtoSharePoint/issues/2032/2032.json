@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "Query parser",
+      "DisplayName": "Query parser"
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Predicates producing CAML like the following:\n \n   <Where>\n         <Eq>\n            <FieldRef Name=\"Modified\" />\n            <Value Type=\"DateTime\">2007-06-20T02:19:48Z</Value>\n         </Eq>\n   </Where>\ndo not take the hh:MM:ss portion into account correctly. SharePoint returns all of the rows for the specified date, regardless of the specified time. Other types for the <Value> tag seem to be ineffective too.\n \nUse of the <Now> tag doesn't produce any results when embedded in the <Value> tag.",
+    "LastUpdatedDate": "2017-11-29T08:08:46.367-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Medium",
+      "Severity": 100,
+      "Id": 2
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2007-06-19T17:29:04.387-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "DateTime query predicates don't handle hh:MM:ss portion correctly; Now support problem.",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 2032
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

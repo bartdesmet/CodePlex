@@ -1,0 +1,78 @@
+[
+  {
+    "Id": 279,
+    "Title": "Suggestion: DirectoryServicesContext"
+  },
+  {
+    "Id": 323,
+    "Title": "Problem to get System.Byte[] type properties."
+  },
+  {
+    "Id": 2191,
+    "Title": "Suggestion: Add settings for PageSize and ClientTimeout"
+  },
+  {
+    "Id": 2197,
+    "Title": "Error when using parameters inside where clause"
+  },
+  {
+    "Id": 2443,
+    "Title": "Suggestion: Making fields like pwdLastSet usable"
+  },
+  {
+    "Id": 2571,
+    "Title": "LINQ query to both Users and Groups"
+  },
+  {
+    "Id": 3059,
+    "Title": "Unhandled Exception when byte[] object is null."
+  },
+  {
+    "Id": 3440,
+    "Title": "Multi-valueds attributes, some code to deal with them"
+  },
+  {
+    "Id": 3618,
+    "Title": "Code to Handle results greater than 1000"
+  },
+  {
+    "Id": 3648,
+    "Title": "Threading AssignResultProperty"
+  },
+  {
+    "Id": 3656,
+    "Title": "Equals on ParsePredicate"
+  },
+  {
+    "Id": 3693,
+    "Title": "Really Big Problem:  Doesn't Filter Distinguished Name properly.  Doesn't Handle Escape Characters Correctly Upon WHERE Comparison"
+  },
+  {
+    "Id": 3829,
+    "Title": "COM Exception Unhandled: DirectorySource.cs"
+  },
+  {
+    "Id": 4028,
+    "Title": "Subclassing an Entity class fails"
+  },
+  {
+    "Id": 4219,
+    "Title": "directory attribute update fails when value is String.Empty"
+  },
+  {
+    "Id": 5703,
+    "Title": "Fixing slow query speed, Guid Filter and DateTime mapping (on linqtoad-12012.zip)"
+  },
+  {
+    "Id": 6172,
+    "Title": "Trying to get all users in a group is limited to 1500 records"
+  },
+  {
+    "Id": 6421,
+    "Title": "Queries fail when using special characters"
+  },
+  {
+    "Id": 7443,
+    "Title": "Memory Leak in DirectoryQuery.GetResults()"
+  }
+]

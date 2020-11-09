@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "243522",
+    "ThreadId": "71403",
+    "Html": "<p>I'm a vb guy and the source on the front page is missing a LOT of information.</p>\r\n<p>Can anyone give me a code example on how to query the GC for names in VB? &nbsp;The simpler the better.</p>\r\n<p>-Nate</p>\r\n<p>&nbsp;</p>\r\n<div id=\"_mcePaste\" style=\"left:-10000px;top:0px;width:1px;height:1px;overflow-x:hidden;overflow-y:hidden\">Set up an Active Directory domain *test* environment.</div>\r\n<div id=\"_mcePaste\" style=\"left:-10000px;top:0px;width:1px;height:1px;overflow-x:hidden;overflow-y:hidden\">&nbsp;* - Change the Program.ROOT static variable with the proper LDAP path and authentication information.</div>\r\n<div id=\"_mcePaste\" style=\"left:-10000px;top:0px;width:1px;height:1px;overflow-x:hidden;overflow-y:hidden\">&nbsp;* - When using hierarchical data contexts, make sure there's a root-level OU called Demo.</div>\r\n<div id=\"_mcePaste\" style=\"left:-10000px;top:0px;width:1px;height:1px;overflow-x:hidden;overflow-y:hidden\">\r\n<p>&nbsp;* &nbsp; #define NOTESTOU if you want to disable the hierarchical data context support</p>\r\n<p><br>lkajsdf</p>\r\n</div>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2009-10-08T09:36:01.627-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

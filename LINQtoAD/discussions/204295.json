@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "415862",
+    "ThreadId": "204295",
+    "Html": "<p>Is there a way to get only the name of the group a user is a member of?</p>\r\n<p>Currently the&nbsp;[DirectoryAttribute(&quot;memberOf&quot;)] Groups returns something like:</p>\r\n<p>&nbsp;- CN=ITDept_General, OU=Groups, DC=companyname, DC=com</p>\r\n<p>&nbsp;- CN=ITDept_Hardware, OU=Groups, DC=companyname, DC=com</p>\r\n<p>I would like just to be able to have a list with&nbsp;ITDept_General, ITDept_Hardware</p>",
+    "PostedDate": "2010-03-09T02:40:31.567-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "453803",
+    "ThreadId": "204295",
+    "Html": "<p>That would be when you print from linq, you can define the property of that object.&nbsp;</p>\r\n<p>Something like this:</p>\r\n<pre>  var res = from usr in users\r\n              where usr.FirstName.StartsWith(&quot;B&quot;) &amp;&amp; usr.Office == &quot;2525&quot;\r\n              select new { Name = usr.FirstName + &quot; &quot; + usr.LastName, usr.Office, usr.LogonCount };\r\n\r\n    foreach (var u in res)\r\n    {\r\n        Console.WriteLine(u.<span style=\"color:#ff00ff\">Name</span>);\r\n    }</pre>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2010-06-09T21:14:52.093-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "464903",
+    "ThreadId": "204295",
+    "Html": "sevententh,\r\n\r\nThe memberOf attribute in AD for users only stores the group's distinguished name from what I understand.  You would either have to parse that string or do a second look up on the group based on the distinguished name.  This also applies to group's members attribute.  See http://www.rlmueller.net/MemberOf.htm for more info.",
+    "PostedDate": "2010-07-08T08:45:30.343-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

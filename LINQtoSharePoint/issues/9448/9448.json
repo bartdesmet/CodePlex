@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "I've two lists: Catalog and Suppliers. Catalog list contains lookup field to Suppliers list.\n1) Spml Wizard allows to add only Catalog list. It should not.\n2) LINQtoSharePointGenerator reports only generic error. I've added this code to SpmlCodeGenerator.cs line 130 to report this bug correctly\nelse\n  this.GeneratorError(false, 0, ex.Message, 0, 0);\nIt reports correct error now: \"Custom tool error: Invalid Lookup field list reference encountered: list {39498c60-13f3-4668-9422-e855d7d66b7f} referred to by field Supplier is unknown in the SharePoint context.\"",
+    "LastUpdatedDate": "2013-02-14T11:46:10.867-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2008-02-29T10:35:19.297-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Missing list for lookup field",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 9448
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

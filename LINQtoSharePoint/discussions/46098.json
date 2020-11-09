@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "153852",
+    "ThreadId": "46098",
+    "Html": "Does it make sense for the SPMetal generated classes to be tied to a given instance of a list?  Not entirely sure that this is the case, but the ID attribute of the List class certainly seems to suggest that.<div><br></div><div>Doesn't the list ID change every time you instantiate the list template, and thus how would you use this in a scenario where you develop on one box and deploy a solution to another, thereby reinstantiating your lists?</div>",
+    "PostedDate": "2009-02-03T10:08:09.117-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

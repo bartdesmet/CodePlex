@@ -1,0 +1,50 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "my list version will auto changed, and i dont want build again after list version changed. \n \nany ideas?\n \nLordan\nThanks",
+    "LastUpdatedDate": "2013-02-14T11:46:10.03-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2009-05-17T23:07:54.66-07:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "List version mismatch between entity type and list definition on the server.",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 13275
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "may set attribute like: \r\nvar ctx = new SharePointDataContext(new Uri(\"http://wss.mycompany.local\"));\r\nctx.CheckListVersion = false",
+      "PostedDate": "2009-05-18T01:40:13.31-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:46:10.03-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

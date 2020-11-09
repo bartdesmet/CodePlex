@@ -1,0 +1,122 @@
+[
+  {
+    "Id": "0",
+    "Name": "0.2.3.0 Alpha",
+    "DevelopmentStatus": "None",
+    "Description": "!! LINQ to SharePoint 0.2.3 alpha release for Orcas Beta 2 and WSS 3.0\n\n*Note:* Downlevel compatibility with older versions of SharePoint does matter to us but hasn't been validated thoroughly yet. No commitments are made at this stage of the project.\n\n!!! Feature list\n* *LINQ query provider* for runtime translation of LINQ queries to CAML queries\n* Support for both *C# 3.0* and *VB 9.0*\n* *Debugger visualizer* for LINQ to SharePoint queries\n* *Entity creation wizard* for Visual Studio 2008\n* *SpMetal tool* for SharePoint list entity creation\n* *MSI setup*\n\nRead the [url:0.2.3 Alpha release bulletin|http://community.bartdesmet.net/blogs/linqtosharepoint/archive/2007/08/14/alpha-0-2-3-now-available.aspx] on the [url:LINQ to SharePoint team blog|http://blogs.bartdesmet.net/LINQtoSharePoint] for more information about this release's core features.\n\n!!! Important\nPlease keep in mind the alpha stage of the project. Do use it for evaluation and feedback purposes only. Usage in production environments is completely at the end-user's own risk.\n\n!!! Installation instructions\n* To use LINQ to SharePoint, you'll just need to download the installer *runtime binary*. It will install the required components and reconfigure Visual Studio 2008.\n* If you want to see how LINQ to SharePoint works, download the *source code*. This will require the following dependencies:\n** [url:Visual Studio 2008 SDK for Beta 2|http://www.microsoft.com/downloads/details.aspx?FamilyID=d9000e2c-bd3f-4717-a181-723960814e16&displaylang=en]\n** The SharePoint object model core assembly, *Microsoft.SharePoint.dll*, in the GAC. This assembly will be present on machines running Windows SharePoint Services 3.0; alternatively you can install the LINQ to SharePoint MSI 'runtime binary' which contains this assembly.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2007-08-15T09:19:45.993-07:00",
+    "Files": [
+      {
+        "Id": "64a41ca8-b7cc-4c96-89aa-8fb20f5812eb",
+        "FileName": "LINQ to SharePoint Alpha 0.2.3.msi",
+        "Url": "./0/64a41ca8-b7cc-4c96-89aa-8fb20f5812eb",
+        "Type": "Application",
+        "UploadDate": "2007-08-13T12:00:14.693-07:00"
+      },
+      {
+        "Id": "1b2a7dfa-2563-410a-bad4-bf151cb16eab",
+        "FileName": "LinqToSharePoint v0.2.3.0 sources.zip",
+        "Url": "./0/1b2a7dfa-2563-410a-bad4-bf151cb16eab",
+        "Type": "Source Code",
+        "UploadDate": "2007-08-13T12:00:15.863-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "1",
+    "Name": "0.2.2.0 Alpha",
+    "DevelopmentStatus": "None",
+    "Description": "!! LINQ to SharePoint 0.2.2 alpha release for Orcas Beta 1 and WSS 3.0\n\n*Note:* Downlevel compatibility with older versions of SharePoint does matter to us but hasn't been validated thoroughly yet. No commitments are made at this stage of the project.\n\n!!! Feature list\n* *LINQ query provider* for runtime translation of LINQ queries to CAML queries\n* Support for both *C# 3.0* and *VB 9.0*\n* *Debugger visualizer* for LINQ to SharePoint queries\n* *Entity creation wizard* for Visual Studio 2008 Orcas\n* *SpMetal tool* for SharePoint list entity creation\n* *MSI setup*\n\nRead the [url:0.2.2 Alpha release bulletin|http://community.bartdesmet.net/blogs/linqtosharepoint/archive/2007/07/20/the-0-2-2-alpha-interim-release-an-overview.aspx] on the [url:LINQ to SharePoint team blog|http://blogs.bartdesmet.net/LINQtoSharePoint] for more information about this release's core features.\n\n!!! Important\nPlease keep in mind the alpha stage of the project. Do use it for evaluation and feedback purposes only. Usage in production environments is completely at the end-user's own risk.\n\nYou should install the [url:Windows SharePoint Services 3.0 SDK|http://www.microsoft.com/downloads/details.aspx?familyid=05E0DD12-8394-402B-8936-A07FE8AFAFFD&displaylang=en] prior to installing LINQ to SharePoint with the MSI setup.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2007-07-20T14:04:19.723-07:00",
+    "Files": [
+      {
+        "Id": "5138c34e-e9d4-4e86-8eaa-3ddcfc3fcb7f",
+        "FileName": "LINQ to SharePoint Alpha 0.2.2.msi",
+        "Url": "./1/5138c34e-e9d4-4e86-8eaa-3ddcfc3fcb7f",
+        "Type": "Application",
+        "UploadDate": "2007-07-20T13:46:53.293-07:00"
+      },
+      {
+        "Id": "38fb546f-139a-44d0-8257-beaf2c636aa6",
+        "FileName": "LinqToSharePoint v0.2.2.0 sources.zip",
+        "Url": "./1/38fb546f-139a-44d0-8257-beaf2c636aa6",
+        "Type": "Source Code",
+        "UploadDate": "2007-07-20T13:56:39.27-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "2",
+    "Name": "0.2.0.0 Alpha",
+    "DevelopmentStatus": "None",
+    "Description": "!! LINQ to SharePoint 0.2 alpha release for Orcas Beta 1 and WSS 3.0\r\n\r\n*Note:* Downlevel compatibility with older versions of SharePoint does matter to us but hasn't been validated thoroughly yet. No commitments are made at this stage of the project.\r\n\r\n!!! Feature list\r\n* *SpMetal tool* for SharePoint list entity creation\r\n* *LINQ query provider* for runtime LINQ query-to-CAML translation\r\n* A set of *unit tests*\r\n* *Debugger visualizer* for LINQ to SharePoint queries\r\n* Support for both *C# 3.0* and *VB 9.0*\r\n\r\n!!! Important\r\nPlease keep in mind the alpha stage of the project. Do use it for evaluation and feedback purposes only. Usage in production environments is completely at the end-user's own risk.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2007-06-29T18:17:22.217-07:00",
+    "Files": [
+      {
+        "Id": "90c51bf6-feb9-4be0-a9b6-c0cde7d279ab",
+        "FileName": "LinqToSharePoint v0.2.0.0 sources.zip",
+        "Url": "./2/90c51bf6-feb9-4be0-a9b6-c0cde7d279ab",
+        "Type": "Source Code",
+        "UploadDate": "2007-06-29T17:28:20.967-07:00"
+      },
+      {
+        "Id": "d5da4526-6c86-4fbb-8d27-5e4b1c90d0b9",
+        "FileName": "LinqToSharePoint v0.2.0.0 binaries.zip",
+        "Url": "./2/d5da4526-6c86-4fbb-8d27-5e4b1c90d0b9",
+        "Type": "Application",
+        "UploadDate": "2007-06-29T17:28:21.013-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "3",
+    "Name": "0.1.2.0 Alpha",
+    "DevelopmentStatus": "None",
+    "Description": "LINQ-to-SharePoint alpha release for Orcas March 07 CTP. This release includes the SpMetal tool and the LINQ query provider for query translation to CAML at runtime. Both C# 3.0 and VB 9.0 are supported.",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2007-04-22T14:16:28.54-07:00",
+    "Files": [
+      {
+        "Id": "552e6e47-6a95-4c20-841d-19ff761cd9c1",
+        "FileName": "LinqToSharePoint v0.1.2.0 sources.zip",
+        "Url": "./3/552e6e47-6a95-4c20-841d-19ff761cd9c1",
+        "Type": "Source Code",
+        "UploadDate": "2007-04-22T14:01:47.757-07:00"
+      },
+      {
+        "Id": "0734e0a6-468c-4eda-b035-4d9b379e0158",
+        "FileName": "LinqToSharePoint v0.1.2.0 binaries.zip",
+        "Url": "./3/0734e0a6-468c-4eda-b035-4d9b379e0158",
+        "Type": "Application",
+        "UploadDate": "2007-04-22T14:01:47.787-07:00"
+      }
+    ]
+  },
+  {
+    "Id": "4",
+    "Name": "0.2.4.0 Alpha",
+    "DevelopmentStatus": "None",
+    "Description": "!! LINQ to SharePoint 0.2.4 alpha release for .NET Framework 3.5 and WSS 3.0\n\n!!! Feature list\n* *LINQ query provider* for runtime translation of LINQ queries to CAML queries\n* Support for both *C# 3.0* and *VB 9.0*\n* *Debugger visualizer* for LINQ to SharePoint queries\n* *Entity creation wizard* for Visual Studio 2008\n* *SpMetal tool* for SharePoint list entity creation\n* *MSI setup*\n\nRead the [url:0.2.4 Alpha release bulletin|http://community.bartdesmet.net/blogs/linqtosharepoint/archive/2007/11/30/now-available-0-2-4-0-alpha-for-orcas-rtm.aspx] on the [url:LINQ to SharePoint team blog|http://blogs.bartdesmet.net/LINQtoSharePoint] for more information about this release's core features.\n\n!!! Important\nPlease keep in mind the alpha stage of the project. Do use it for evaluation and feedback purposes only. Usage in production environments is completely at the end-user's own risk.\n\n!!! Installation instructions\n* To use LINQ to SharePoint, you'll just need to download the installer *runtime binary*. It will install the required components and reconfigure Visual Studio 2008.\n* If you want to see how LINQ to SharePoint works, download the *source code*. This will require the [url:Visual Studio 2008 SDK|http://www.microsoft.com/downloads/details.aspx?FamilyID=30402623-93ca-479a-867c-04dc45164f5b&DisplayLang=en].\n\n!!! Release note\nSeveral users have reported issues with components missing in the GAC after the installation. This issue only affects integration with Visual Studio 2008. We'll fix this issue in a subsequent release, the current workaround is to GAC these assemblies manually. The instructions are outlined below; we sincerely apologize for the inconvenience even though this is an alpha release:\n* Start a Visual Studio 2008 Command Prompt (on Vista, make sure you Run as Administrator)\n* Enter \"cd %programfiles%\\BdsSoft Linq to SharePoint\"\n* Execute the following commands:\n** gacutil -i BdsSoft.SharePoint.Linq.dll\n** gacutil -i BdsSoft.SharePoint.Linq.ObjectModelProvider.dll\n** gacutil -i BdsSoft.SharePoint.Linq.Tools.Spml.dll\n** gacutil -i BdsSoft.SharePoint.Linq.Tools.EntityGenerator.dll",
+    "ReleasedDatge": "0001-01-01T00:00:00",
+    "ModifiedDate": "2008-02-07T00:48:51.073-08:00",
+    "Files": [
+      {
+        "Id": "cdc2723f-3999-4620-9e9a-1c4d3ad25cd3",
+        "FileName": "LINQ to SharePoint v0.2.4.msi",
+        "Url": "./4/cdc2723f-3999-4620-9e9a-1c4d3ad25cd3",
+        "Type": "Application",
+        "UploadDate": "2007-11-29T00:31:58.57-08:00"
+      },
+      {
+        "Id": "61eeb5a8-1b94-4700-82af-ab6ebb4be6ff",
+        "FileName": "LINQ to SharePoint v0.2.4 sources.zip",
+        "Url": "./4/61eeb5a8-1b94-4700-82af-ab6ebb4be6ff",
+        "Type": "Source Code",
+        "UploadDate": "2007-11-29T00:31:58.46-08:00"
+      }
+    ]
+  }
+]

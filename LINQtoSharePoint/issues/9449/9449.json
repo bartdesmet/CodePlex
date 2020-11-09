@@ -1,0 +1,55 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Some sites have other locale than en-us! When you parse Czech double \"12,32\", you get 1232 but you should get 12.32.\nQuick fix:\n- use CultureInfo.CurrentCulture in AssignResultProperty method in CamlQuery.cs.\nSuggestions:\n1) SharePointDataContext could have CultureInfo property.\n2) It could read CultureInfo from SPWeb.Locale.",
+    "LastUpdatedDate": "2013-02-14T11:46:10.71-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2008-02-29T11:16:06.03-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Hardcoded CultureInfo en-us",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 2,
+    "Id": 9449
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Calculated fields must be parsed with en-us CultureInfo, so correct solution could be:\r\nCultureInfo cultureInfo;\r\nif (field.Calculated)\r\n{\r\n  valueAsString = valueAsString.Substring(valueAsString.IndexOf(\";#\", StringComparison.Ordinal) + 2);\r\n  cultureInfo = new CultureInfo(\"en-us\");\r\n}\r\nelse\r\n{\r\n  cultureInfo = CultureInfo.CurrentCulture;\r\n}\r\n",
+      "PostedDate": "2008-02-29T13:22:01.86-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2009-12-24T03:43:42.077-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:46:10.71-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

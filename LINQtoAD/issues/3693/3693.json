@@ -1,0 +1,55 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Tell me I am not the only one to run into this...\n \nThe Distinguished Name of an object in the Active Directoy requires that certain characters are escaped.  Please refer to http://www.rlmueller.net/CharactersEscaped.htm.\n \nI have an Active Directory group named \"MyActiveDirectoryGroupName\" which contains objects that have the following Distinguished Name's:\n \n\"CN=John Doe,OU=Location A,OU=Company Objects,DC=mycompany,DC=com\"\n\"CN=Jane Doe,OU=Location A,OU=Company Objects,DC=mycompany,DC=com\"\n\"CN=Krugar, Freddy,OU=Location A,OU=Company Objects,DC=mycompany,DC=com\"\n \nNotice the , in the \"CN=\".  As far as Active Directory is concerned this translates to:\n\"CN=Krugar\\, Freddy,OU=Location A,OU=Company Objects,DC=mycompany,DC=com\" because the  , has to be escaped using a \\ in front of it.\n \n \nBut guess what...when I run the following query:\n \n------------------------------------\n        DirectoryEntry ROOT = new DirectoryEntry(ConfigurationSettings.AppSettings[\"ActiveDirectory\"]);\n        MyCompanyName.LINQ.ActiveDirectory.ADsContext ctx = new MyCompanyName.LINQ.ActiveDirectory.ADsContext(ROOT);\n \n        var results = from item in ctx.Groups\n                      where item.Name == \"MyActiveDirectoryGroupName\"         // Note: Name is the [DirectoryAttribute(\"name\")] for the Group object.\n                      select item;\n \n        foreach (var item in results)\n        {\n            rptrGroupMember.DataSource = item.Members;\n            rptrGroupMember.DataBind();\n        }\n---------------------------------\nAbove Members is a string[] array of the Distinguished Name's of the members in the group I just query'd. LOL!  Yay this is what I want....oh but wait...\n \nNow I need to take the value in the Members[x] (which is the string Distinguished Name) and go lookup the User information since the Distinguished Name is the unique value I should be using to lookup a user fromt he Active Directory right, or any other object for that matter? ....ok lets do that...\n \nSo I created the following additional query:\n \n------------------------------------\npublic string GetGroupMemberSAMAccountName(object data)\n{\n        DirectoryEntry ROOT = new DirectoryEntry(ConfigurationSettings.AppSettings[\"ActiveDirectory\"]);\n        MyCompanyName.LINQ.ActiveDirectory.ADsContext ctx = new MyCompanyName.LINQ.ActiveDirectory.ADsContext(ROOT);\n        \n        var results = from item in ctx.Users\n                      where item.Dn == Convert.ToString(data)           // Note: Dn is the [DirectoryAttribute(\"distinguishedName\")] for the User object.\n                      select item;\n \n        string itemValue= string.Empty;\n \n        foreach (var item in results)\n        {\n            itemValue= item.SAMAccountName;\n        }\n \n        return itemValue;\n}\n--------------------------------\nYa this should work!  And guess what it does except for one thing which is a deal breaker.  The only result(s) I get back is the John Doe and the Jane Doe.  What?  Why?  Well after spending a lot of time trying to pin point it, a pattern started to emerge...crap...the Distinguished Name's that have Last Name first and First Name last doesn't match correctly when the LINQ builds the query to use against the LDAP search for the Active Directory.  I thought, well maybe I am passing the value wrong to it.  If you look at the Convert.ToString(data) value during debugging you see the following:\n \n\"CN=Krugar\\\\, Freddy,OU=Location A,OU=Company Objects,DC=mycompany,DC=com\"\n \nHmmm...wonder what I have to do in order to get this LINQtoAD component to realize that this should match.  When I looked further into the debuggin I noticed that the \\ gets translated later on int he LINQtoAD project as the 0x5c value which of course is the ANSII value for \\.  Don't know if that has anything to do with it.  Anyone have any ideas or resolutions?  I can't seriously be the only one who has run into this.  And this is the only LINQtoAD component out there that I am aware of.  Couldn't we make it work a little better by having the component realize that matching on Distinguished Name is crutial since Active Directory uses this as the object fully qualified name?  It kinda like I want to search on a unique ID of a object but LINQtoAD won't let me.  Bummer...  Any ideas?",
+    "LastUpdatedDate": "2013-02-14T11:56:58.447-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoAD",
+    "ReportedDate": "2009-01-28T13:58:04.66-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Really Big Problem:  Doesn't Filter Distinguished Name properly.  Doesn't Handle Escape Characters Correctly Upon WHERE Comparison",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 3693
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "you can just use this format to search DN\r\n where usr.Dn == \"<GUID=70992CC0-7E3B-4C74-AC64-C3DD8807919A>\"\r\nwhere 70992CC0-7E3B-4C74-AC64-C3DD8807919A is what you get from your entity class \r\n\r\n[DirectoryAttribute(\"objectGUID\")]\r\npublic Guid Id { get; set; }\r\n\r\njust use Id.ToString();\r\n\r\nHope that helps\r\n",
+      "PostedDate": "2009-03-09T18:43:01.81-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "I believe the search operations work bi-directionally and this may be why you are seeing inconsistent results. See the following for additional information. http://www.ldapexplorer.com/en/manual/109010000-ldap-filter-syntax.htm",
+      "PostedDate": "2010-12-23T10:21:42.66-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:56:58.447-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

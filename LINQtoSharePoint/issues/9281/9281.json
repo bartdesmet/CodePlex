@@ -1,0 +1,80 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Could not load file of assembly 'BdsSoft.SharePoint.Linq.Tools.EntityGenerator, Version=0.2.4.0, Culture=neutral, PublicKey Token=c9246ff4557ee8a2' \nor one of its dependencies. The system cannot find the file specified.\n \nwhen trying to add LINQ to SharePoint file to project.\n \nCurrently only the BdsSoft.SharePoint.Linq.ObjectModelProvider and BdsSoft.SharePoint.Linq.Tools.Spml dll's are present in the GAC, should the other dll's also be added? \n \nAny ideas?",
+    "LastUpdatedDate": "2013-02-14T11:46:11.577-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2008-02-04T20:46:51.737-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "installing on vista with VS2008",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 3,
+    "Id": 9281
+  },
+  "FileAttachments": [],
+  "Comments": [
+    {
+      "Message": "Same here",
+      "PostedDate": "2008-02-05T08:14:43.767-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "the 0.2.3.0.0 release works with vs2008 and vista, for the 0.2.4.0 release I see that the 'BdsSoft.SharePoint.Linq.Tools.EntityGenerator' dll is not getting installed into the GAC, is there a dependency missing from the 0.2.4.0 release? ",
+      "PostedDate": "2008-02-05T12:12:06.373-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Indeed, there seems to be an issue with the assemblies being GAC'ed; we've seen this problem before. You should be able to work around it by GAC'ing the assemblies manually from the %programfiles%\\BdsSoft LINQ to SharePoint folder where copies should be installed. You should have the BdsSoft.SharePoint.Linq, BdsSoft.SharePoint.Linq.ObjectModelProvider, BdsSoft.SharePoint.Linq.Tools.EntityGenerator and BdsSoft.SharePoint.Linq.Tools.Spml assemblies in the GAC for tool support to work fine.\r\n\r\nHope this helps and sorry for the inconvenience,\r\n-Bart",
+      "PostedDate": "2008-02-07T00:28:50.613-08:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Yeah Bert is right.\r\nAss the dlls to the GAC and they should work.\r\nPlease make sure you reset ur IIS.\r\nPatrick",
+      "PostedDate": "2008-10-14T20:53:17.343-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Same here. Just installed the package on Windows 7, VS2008SP1.\r\n\r\nWhen I create a new 'LINQ to Sharepoint file' an error is displayed. \"Could not load file or assembly BdsSoft.....EntityGenerator...\".",
+      "PostedDate": "2009-10-13T07:43:56.96-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2009-10-13T07:44:04.687-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "Using the following command in VS Command Prompt (as Administrator) solved the problem.\r\n\r\ngacutil /i \"c:\\Program Files (x86)\\BdsSoft LINQ to SharePoint\\BdsSoft.SharePoint.Linq.Tools.EntityGenerator.dll\"",
+      "PostedDate": "2009-10-13T07:50:54.46-07:00",
+      "Id": -2147483648
+    },
+    {
+      "Message": "",
+      "PostedDate": "2013-02-14T11:46:11.577-08:00",
+      "Id": -2147483648
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "Id": "88943",
+    "ThreadId": "26586",
+    "Html": "\r\nIs the project still alive? There are no checkins this year. Is there a roadmap for the beta version?<br />",
+    "PostedDate": "2008-04-25T02:10:36.73-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "92411",
+    "ThreadId": "26586",
+    "Html": "Hi Marzel,<br>\r\n<br>\r\nI do not know the status of this project, but if you are interested in using LINQ for SharePoint development, there is a new solution on the horizon. It's a solution called LINQ4SP, you can find more info here: http://www.sharepointblogs.com/aghy/archive/2008/05/08/announcing-linq4sp.aspx<br>\r\n<br>\r\n",
+    "PostedDate": "2008-05-14T04:20:35.077-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "92412",
+    "ThreadId": "26586",
+    "Html": "<br>\r\n<div style=\"border-style:dotted none;border-color:rgb(170, 170, 170) -moz-use-text-color;border-width:0.1em medium;margin:1em 0em 2.5em 3em;padding:0.2em;font-style:italic\"><br>\r\nMarzel wrote:<br>\r\nIs the project still alive? There are no checkins this year. Is there a roadmap for the beta version?<br>\r\n<br>\r\n<br>\r\n</div>\r\nI do not know the status of this project, but if you are interested in\r\nusing LINQ for SharePoint development, there is a new solution on the\r\nhorizon. It's a solution called LINQ4SP, you can find more info here:\r\nhttp://www.sharepointblogs.com/aghy/archive/2008/05/08/announcing-linq4sp.aspx<br>\r\n",
+    "PostedDate": "2008-05-14T04:21:43.327-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "176417",
+    "ThreadId": "26586",
+    "Html": "Still nothing?  Is anyone actively maintaining LINQtoSharePoint?\r\n",
+    "PostedDate": "2009-04-06T18:54:30.603-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

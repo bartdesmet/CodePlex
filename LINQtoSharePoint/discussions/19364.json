@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "63904",
+    "ThreadId": "19364",
+    "Html": "\r\nHi it's me again. Sorry to be littering your discussion board with bugs, but I didn't think it appropriate for me to try to add things to what looks to be your internal issue tracker. Anyways...<br /><br />This bug is pretty simple. Basically in your CamlFactory class line 163 or so, you <b>XmlConvert.EncodeName</b> on the field name to get the internal representation for Sharepoint. This works fine except when you start using special characters like the colon. Colons are default in column names for BDC field types. For instance take the field <b>User: Name</b>. This will encode to <b>User:<i>x0020</i>LanID</b> but SharePoint internally sees the FieldRef as <b>User<i>x003a_</i>x0020_LanID</b>.<br /><br />If you point Reflector at <b>Microsoft.SharePoint.Utilities</b> and look at the <b>SPStringUtility</b> class and inspect <b>EncodeNonAlphaNumericalAsciiChars</b> and <b>IsBadSymbol</b> you'll see the WSS algorithm for encoding FieldRefs.<br /><br />I hacked this code into CamlFactory and was able to get things working again for BDC fields.<br /><br /><b>fieldName.Value = EncodeNonAlphaNumericalAsciiChars(XmlConvert.EncodeName(field));</b><br />",
+    "PostedDate": "2007-12-18T13:04:44.873-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "63965",
+    "ThreadId": "19364",
+    "Html": "\r\nI ran into the same exact issue today with mapped BDC fields. Good catch.<br /><br />I hope this fix makes it into the next build.<br />",
+    "PostedDate": "2007-12-18T16:27:44.467-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "72282",
+    "ThreadId": "19364",
+    "Html": "\r\nThanks for the feedback and sorry for the delay it took to answer. I'll take a look at this issue in the next go-round; since the goal is to avoid any static dependency on Microsoft.SharePoint.dll, algorithms like this will have to get their own private implementation in our core DLL. This is something I'm looking at actively.<br /><br />-Bart<br />",
+    "PostedDate": "2008-02-06T23:49:34.993-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

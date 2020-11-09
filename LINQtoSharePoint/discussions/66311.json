@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "225253",
+    "ThreadId": "66311",
+    "Html": "<p>Hi,</p>\r\n<p>Thanks for this helpful project. I am building an ASP.NET website using your project. In my solution, I have a Class library where all the logic is done which includes the *.spml file and a website which uses the class library as a reference. When I run the solution in VS 2008, everything works well BUT when I move the solution to server, I get an error. When I checked the Event Viewer on the server, below is the exception which isn't handled:</p>\r\n<p>Exception information: <br>&nbsp;&nbsp;&nbsp; Exception type: FileNotFoundException <br>&nbsp;&nbsp;&nbsp; Exception message: Could not load file or assembly 'BdsSoft.SharePoint.Linq, Version=0.2.4.0, Culture=neutral, PublicKeyToken=c9246ff4557ee8a2' or one of its dependencies. The system cannot find the file specified.</p>\r\n<p>I will be very grateful for your help.</p>\r\n<p><br>Thanks,</p>\r\n<p>Matrich</p>",
+    "PostedDate": "2009-08-18T21:57:10.157-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "226977",
+    "ThreadId": "66311",
+    "Html": "<p>Hi all,</p>\r\n<p>It seems I have gotten a work around for the error I was getting above. In my published website, I added the BdsSoft.SharePoint.Linq.dll file to the Bin folder and everything worked again. Hope this helps someone else who might get the same problem.</p>\r\n<p>On another note, is this project still live or dead? I emailed Bart and also posted here the above problem. And in a week or so, i got no response even to acknowledge. Anywayz, thanks for the great project THO I was going to go back to CAML.</p>\r\n<p>Thanks,<br>Matrich</p>",
+    "PostedDate": "2009-08-24T03:01:31.69-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

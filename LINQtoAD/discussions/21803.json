@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "72632",
+    "ThreadId": "21803",
+    "Html": "\r\nHi. First, off, this is such a good idea. I am evaluating using this as a basis for an upcoming project where I need to synchronize a database of users into an Active Directory. Things were going great, until I wrote the following chunk of code:<br /><br /><br />var dbUsers = new DirectorySource&lt;MyUser&gt;(rootEntry, SearchScope.Subtree);<br />\t\t\tvar dbResults = (from u in dbUsers where u.EmployeeID == employeeId select u).SingleOrDefault();<br />\t\t\tif (dbResults != null) {<br />\t\t\t\tresult = dbResults;<br />\t\t\t}<br /><br />The problem is an Method or operation is not implemented exception is thrown when executing this line of code:<br /><br />var dbResults = (from u in dbUsers where u.EmployeeID == employeeId select u).SingleOrDefault();<br /><br />Looks like the method hasn't been implemented for:<br /><br />        public TResult Execute&lt;TResult&gt;(Expression expression)<br />        {<br />            throw new NotImplementedException();<br />        }<br /><br />Line 248 in the DirectorySource.cs file. Any plans for an update that might have this...I guess I could take a stab at it myself, if I can find the time. <br />Or is there something wrong I am doing in the code? Basically, I just want to get  a DirectoryEntry for a user with a specific value in the employeeID attribute. <br />",
+    "PostedDate": "2008-02-08T09:19:38.81-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "77161",
+    "ThreadId": "21803",
+    "Html": "\r\nHi msr79,<br /><br />I'll take a look into this - for singleton results the Execute method is used by the Queryable methods indeed. Question is how to map this efficiently on querying code so that we only retrieve that one item instead of a bunch of items applying client-side filtering.<br /><br />In the meantime you can inject AsEnumerable():<br /><br />(from u in dbUsers where u.EmployeeID == employeeId select u).AsEnumerable().SingleOrDefault();<br /><br />Thanks,<br />-Bart<br />",
+    "PostedDate": "2008-02-28T13:36:28.62-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "78467",
+    "ThreadId": "21803",
+    "Html": "\r\nThanks Bart! I'll try that as a work around and see how it goes. Good job on this project thus far. I am liking it a lot.<br />",
+    "PostedDate": "2008-03-05T10:56:02.777-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

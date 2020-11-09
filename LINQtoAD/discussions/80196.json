@@ -1,0 +1,50 @@
+[
+  {
+    "Id": "274852",
+    "ThreadId": "80196",
+    "Html": "<p>I am trying to use a Lambada expression to dynamically build my query. When I run the application nothing is returned if I use the lambada expression. It looks to me as if it is not carrying the values through. Here is my code maybe someone can tell me what i am doing wrong or if this is a linq to ad issue?</p>\r\n<p>&nbsp;</p>\r\n<p>\r\n<div style=\"color:Black;background-color:White\">\r\n<pre><span style=\"color:Blue\">private</span> <span style=\"color:Blue\">static</span> IEnumerable&lt;Demo.User&gt; GetADUsers(<span style=\"color:Blue\">string</span> FName, <span style=\"color:Blue\">string</span> LName, <span style=\"color:Blue\">string</span> Logon)\r\n        {\r\n            \r\n                                    \r\n            IEnumerable&lt;Demo.User&gt; users;\r\n\r\n            <span style=\"color:Blue\">var</span> usersDS = <span style=\"color:Blue\">new</span> DirectorySource&lt;Demo.User&gt;(ROOT, SearchScope.Subtree);\r\n\r\n\r\n            users = <span style=\"color:Blue\">from</span> usr <span style=\"color:Blue\">in</span> usersDS\r\n                    <span style=\"color:Blue\">where</span> usr.FirstName.StartsWith(FName)\r\n                    <span style=\"color:Blue\">select</span> usr;\r\n            \r\n            users = users.Where(user =&gt; user.LastName.StartsWith(LName));\r\n            users = users.OrderBy(user =&gt; user.MI).ToList(); <span style=\"color:Green\">// Sort them alphabetically by name.</span>\r\n\r\n            <span style=\"color:Blue\">return</span> users;\r\n        }\r\n</pre>\r\n</div>\r\n</p>",
+    "PostedDate": "2010-01-08T09:54:34.747-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "276194",
+    "ThreadId": "80196",
+    "Html": "<p>\r\n<div style=\"color:Black;background-color:White\">\r\n<pre>IEnumerable&lt;Demo.User&gt; users;\r\n\r\n            <span style=\"color:Blue\">var</span> usersDS = <span style=\"color:Blue\">new</span> DirectorySource&lt;Demo.User&gt;(ROOT, SearchScope.Subtree);\r\n\r\n\r\n            users = <span style=\"color:Blue\">from</span> usr <span style=\"color:Blue\">in</span> usersDS\r\n                    <span style=\"color:Blue\">where</span> usr.FirstName.StartsWith(FName) &amp;&amp; usr.LastName.StartsWith(LName)\r\n                    <span style=\"color:Blue\">select</span> usr;\r\n\r\n            <span style=\"color:Blue\">return</span> users;\r\n\r\n\r\nfigured it <span style=\"color:Blue\">out</span>.\r\n</pre>\r\n</div>\r\n</p>",
+    "PostedDate": "2010-01-12T07:31:28.46-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "467079",
+    "ThreadId": "80196",
+    "Html": "<p>The upcoming refresh of LINQ to AD will support multiple where clauses. In the meantime, use &amp;&amp; as you discovered.</p>\r\n<p>Hope this helps,<br>-Bart</p>",
+    "PostedDate": "2010-07-13T22:23:58.603-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "470370",
+    "ThreadId": "80196",
+    "Html": "<p>Hi,</p>\r\n<p>Is it possible to make some clauses conditional?<br>I try to use 1 query for querying against a few attribtues. Until now,&nbsp;I set&nbsp;a wildchar to fields which should not filter the result (when not provided by the user). But unfortunately some of the attributes I am&nbsp;querying do not always exist. <br>Is there a workaround?</p>\r\n<p>Martin</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>&nbsp;</p>",
+    "PostedDate": "2010-07-21T08:18:03.94-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "471012",
+    "ThreadId": "80196",
+    "Html": "<p>I solved the problem for me until there is a refresh with the new features.</p>\r\n<p>Maybe it helps someone.</p>\r\n<p>I modified the BuildPredicate method a little bit:</p>\r\n<div style=\"color:black;background-color:white\">\r\n<pre>        <span style=\"color:blue\">private</span> <span style=\"color:blue\">void</span> BuildPredicate(LambdaExpression q)\r\n        {\r\n            StringBuilder sb = <span style=\"color:blue\">new</span> StringBuilder();\r\n\r\n            <span style=\"color:green\">//</span>\r\n            <span style=\"color:green\">// Recursive tree traversal to build the LDAP query (prefix notation).</span>\r\n            <span style=\"color:green\">//</span>\r\n            ParsePredicate(q.Body, sb);\r\n\r\n            <span style=\"color:green\">//Original Code:</span>\r\n            <span style=\"color:green\">//query = sb.ToString();</span>\r\n\r\n            <span style=\"color:green\">//Modified Code: </span>\r\n            <span style=\"color:blue\">if</span> (query != <span style=\"color:blue\">null</span> &amp;&amp; query.Length != 0)\r\n            {\r\n                query = <span style=\"color:blue\">string</span>.Format(<span style=\"color:#a31515\">&quot;(&amp;{0}{1})&quot;</span>, query, sb.ToString());\r\n            }\r\n            <span style=\"color:blue\">else</span>\r\n            {\r\n                query = sb.ToString();\r\n            }\r\n        }\r\n</pre>\r\n<pre>Now I can query like this:</pre>\r\n<pre><div style=\"color:black;background-color:white\"><pre>...\t\r\n<span style=\"color:blue\">var</span> person = <span style=\"color:blue\">new</span> DirectorySource&lt;PersonEntity&gt;(_rootDirectoryEntry, System.DirectoryServices.SearchScope.Subtree);\r\nIQueryable&lt;EmployeeEntity&gt; query = employees;\r\n\r\nquery = query.Where(x =&gt; x.Lastname == <span style=\"color:#a31515\">&quot;Willis&quot;</span>);\r\nquery = query.Where(x =&gt; x.Firstname == <span style=\"color:#a31515\">&quot;Bruce&quot;</span>);\r\n\r\nquery.Select....\r\n\r\n</pre>\r\n<pre>Warning, the code ist not tested a lot!</pre>\r\n<pre>Martin</pre>\r\n</div>\r\n</pre>\r\n</div>",
+    "PostedDate": "2010-07-22T06:26:17.587-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "471839",
+    "ThreadId": "80196",
+    "Html": "<p>This is more or less how things will change - though an LDAP-specific tree model will be used to avoid magic format string throughout the code base (and such a tree model has lots of other advantages, too).</p>",
+    "PostedDate": "2010-07-23T13:21:35.63-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

@@ -1,0 +1,39 @@
+{
+  "WorkItem": {
+    "AffectedComponent": {
+      "Name": "",
+      "DisplayName": ""
+    },
+    "ClosedComment": "",
+    "ClosedDate": null,
+    "CommentCount": 0,
+    "Custom": null,
+    "Description": "Hi Bart,\n \nYour project adds tremendous value to Sharepoint development!\nIn trying my teeth on it I was able to create the spmetal file for accessing lists on a remote WSS3 server (albeit with empty Ids) but I was unable to generate the Linq Entities.\nMy dev environment is Win2003 SR1 with sp2 - running VS2008 Pro (RTM). I have copied your dlls to GAC per your instructions and downloaded the latest WSS SDK.\n \nRegards,\n \nDimitris Foukas",
+    "LastUpdatedDate": "2013-02-14T11:46:11.36-08:00",
+    "PlannedForRelease": "",
+    "ReleaseVisibleToPublic": false,
+    "Priority": {
+      "Name": "Low",
+      "Severity": 50,
+      "Id": 1
+    },
+    "ProjectName": "LINQtoSharePoint",
+    "ReportedDate": "2008-02-14T01:17:21.12-08:00",
+    "Status": {
+      "Name": "Proposed",
+      "Id": 1
+    },
+    "ReasonClosed": {
+      "Name": "Unassigned"
+    },
+    "Summary": "Unable to run the LINQtoSharePointGenerator tool",
+    "Type": {
+      "Name": "Issue",
+      "Id": 3
+    },
+    "VoteCount": 1,
+    "Id": 9323
+  },
+  "FileAttachments": [],
+  "Comments": []
+}

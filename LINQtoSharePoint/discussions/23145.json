@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "77467",
+    "ThreadId": "23145",
+    "Html": "\r\nIf you want to select all tasks assigned to current user, you must use this query:<br />http://msdn2.microsoft.com/en-us/library/aa544234.aspx<br />&lt;Or&gt;<br />  &lt;Membership Type=\\\"CurrentUserGroups\\\"&gt;<br />    &lt;FieldRef Name=\\\"AssignedTo\\\"/&gt;<br />  &lt;/Membership&gt;<br />  &lt;Eq&gt;<br />    &lt;FieldRef Name=\\\"AssignedTo\\\"&gt;&lt;/FieldRef&gt;<br />    &lt;Value Type=\\\"Integer\\\"&gt;<br />      &lt;UserID/&gt;<br />    &lt;/Value&gt;<br />  &lt;/Eq&gt;<br />&lt;/Or&gt;<br /><br />Is it possible to support Memebership and UserID? (In CamlMethods class?)<br />",
+    "PostedDate": "2008-02-29T12:15:54.87-08:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

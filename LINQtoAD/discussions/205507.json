@@ -1,0 +1,58 @@
+[
+  {
+    "Id": "420306",
+    "ThreadId": "205507",
+    "Html": "<p>Has anyone used this in VS2010, I have been using it in VS2008 and its great, I am doing some testing in VS2010 and it errors out in the GetResults&nbsp;method at the&nbsp;&nbsp;<span style=\"font-family:Consolas;color:#0000ff;font-size:x-small\"><span style=\"font-family:Consolas;color:#0000ff;font-size:x-small\"><span style=\"font-family:Consolas;color:#0000ff;font-size:x-small\">foreach</span></span></span><span style=\"font-family:Consolas;font-size:x-small\"><span style=\"font-family:Consolas;font-size:x-small\">(</span></span><span style=\"font-family:Consolas;color:#2b91af;font-size:x-small\"><span style=\"font-family:Consolas;color:#2b91af;font-size:x-small\"><span style=\"font-family:Consolas;color:#2b91af;font-size:x-small\">SearchResult</span></span></span><span style=\"font-family:Consolas;font-size:x-small\"><span style=\"font-family:Consolas;font-size:x-small\"> sr </span></span><span style=\"font-family:Consolas;color:#0000ff;font-size:x-small\"><span style=\"font-family:Consolas;color:#0000ff;font-size:x-small\"><span style=\"font-family:Consolas;color:#0000ff;font-size:x-small\">in</span></span></span><span style=\"font-family:Consolas;font-size:x-small\"><span style=\"font-family:Consolas;font-size:x-small\"> s.FindAll()) section. I am using the exact same settings in VS2008, I opend up the&nbsp;source code and recopiled against NET 4.0 Framework but I am still having no luck, just wondering if anyone else has tried.<br>Thanks</span></span></p>",
+    "PostedDate": "2010-03-19T09:05:29.24-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "423211",
+    "ThreadId": "205507",
+    "Html": "<p>I am using it in a VS2010 solution. I am using the RC of Visual Studio 2010. What is the exception thrown in your project?</p>",
+    "PostedDate": "2010-03-24T12:57:44.057-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "449142",
+    "ThreadId": "205507",
+    "Html": "<p>Yes and work perfect!</p>\r\n<p>Bye</p>",
+    "PostedDate": "2010-05-29T16:10:55.123-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "453802",
+    "ThreadId": "205507",
+    "Html": "<p>Works just fine in VS2010.</p>",
+    "PostedDate": "2010-06-09T21:12:02.653-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "467078",
+    "ThreadId": "205507",
+    "Html": "<p>An upcoming release of LINQ to AD will target Visual Studio 2010 and .NET 4.</p>\r\n<p>Cheers,<br>-Bart</p>",
+    "PostedDate": "2010-07-13T22:22:51.247-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "485417",
+    "ThreadId": "205507",
+    "Html": "<p>Using it with VS2010 right now...works perfectly.</p>",
+    "PostedDate": "2010-08-26T15:21:14.733-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "514807",
+    "ThreadId": "205507",
+    "Html": "\r\n<p>Hi Bart,</p>\r\n<p>Do you know when the VS2010/.Net 4 targeted version of Linq to AD will be released?</p>\r\n<p>Kind Regards</p>\r\n",
+    "PostedDate": "2010-10-29T18:55:05.39-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

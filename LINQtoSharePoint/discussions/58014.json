@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "196159",
+    "ThreadId": "58014",
+    "Html": "<p>Hello!</p>\r\n<p>I have &quot;LINQ To SharePoint v0.2.4.0&quot; with VS 2008 and WSS 3.0.</p>\r\n<p>I can't use function JOIN in my queries, why?</p>\r\n<p>Example:</p>\r\n<p>private System.Net.NetworkCredential CredenciaisU = new System.Net.NetworkCredential(&quot;hcdadmin&quot;, &quot;#cd@dm!n09&quot;);</p>\r\n<p>public DataSet GetSituacaoCadastral(String VRegional, String VDistri, String VFunc) {</p>\r\n<p>OSharePointDataContext dsSC = new OSharePointDataContext();</p>\r\n<p>dsSC.Credentials = CredenciaisU;</p>\r\n<p>DataSet ds = new DataSet();</p>\r\n<p>var OUsuarios = dsSC.Usuarios;</p>\r\n<p>var ODistribuidores = dsSC.Distribuidores;</p>\r\n<p>var querySC = from u in OUsers //from d in ODistribuidores</p>\r\n<p>//where u.Cargo == Funcao &amp;&amp; u.Distribuidor == Distribuidor// &amp;&amp; u.Distribuidor == d.Distribuidor</p>\r\n<p>join d in ODistri on u.Distri equals d.Distri</p>\r\n<p>where u.Cargo == VFunc &amp;&amp; d.Distri == VDistri &amp;&amp; d.Regional == VRegional</p>\r\n<p>select new {Name = u.FullName, Distri = u.Distri};</p>\r\n<p>DataTable dtSC = new DataTable(&quot;SituationC&quot;);</p>\r\n<p>//</p>\r\n<p>dtSC.Columns.Add(&quot;FullName&quot;);</p>\r\n<p>dtSC.Columns.Add(&quot;Distri&quot;);</p>\r\n<p>//</p>\r\n<p>DataRow row;</p>\r\n<p>foreach (var nSC in querySC) {</p>\r\n<p>//</p>\r\n<p>row = dtSC.NewRow();</p>\r\n<p>row[&quot;FullName&quot;] = nSC.Name;</p>\r\n<p>row[&quot;Distri&quot;] = nSC.Distri;</p>\r\n<p>dtSC.Rows.Add();</p>\r\n<p>}</p>\r\n<p>ds.Tables.Add(dtSC);</p>\r\n<p>return ds;</p>\r\n<p>}</p>\r\n<p>Thanks!!!<br><br>Wagner Amorim<br>wa.amorim@hotmail.com</p>",
+    "PostedDate": "2009-05-31T10:50:22.59-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "196323",
+    "ThreadId": "58014",
+    "Html": "<p>Hi Wagner,</p>\r\n<p>LINQ to SharePoint doesn't support joins, as the underyling query language (CAML) hasn't built-in support for it. Implementing joins would require the provider to have to download big chunks of data to the client in order to execute the join code there. In general that's not a good thing as the remote execution properties of the LINQ query become superfluous. Rather, to make developers aware of this, the provider doesn't try to be smart and requires local joins to be executed explicitly using LINQ to Object. Recall that you can turn execution from remote into local by calling the AsEnumerable() method. For example, you could have two queries to select the sources to be joined, each of which you call AsEnumerable on, and then use with LINQ join syntax to have the join execute locally:</p>\r\n<p>from x in (from y in src.Z where ... select y).AsEnumerable()<br>join a in (from b in src.C where ... select b).AsEnumerable() on x.K equals a.L<br>...<br>select ...</p>\r\n<p>Hope this helps,<br>-Bart</p>",
+    "PostedDate": "2009-06-01T02:36:48.663-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

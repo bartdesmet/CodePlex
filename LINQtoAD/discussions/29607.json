@@ -1,0 +1,18 @@
+[
+  {
+    "Id": "98720",
+    "ThreadId": "29607",
+    "Html": "<p>Hi,</p>\r\n<p>First, this library a great idea and really appreciated.</p>\r\n<p>We were attempting to create an autocomplete textbox and were trying to use the StartsWith LINQ operator:<br>\r\n&nbsp;<br>\r\n<span style=\"font-family:courier\">public static List&lt;Group&gt; GetGroups(string startsWith) <br>\r\n{\r\n<blockquote dir=ltr style=\"margin-right:0px\">if (String.IsNullOrEmpty(startsWith)) throw new ArgumentException(&quot;startsWith cannot be null or empty.&quot;);&nbsp; <br>\r\n<br>\r\nvar ADGroups = new DirectorySource&lt;Group&gt;(Config.LDAPDirectoryEntry, SearchScope.Subtree);&nbsp; <br>\r\n<br>\r\nvar groups = ADGroups.Where(g =&gt; g.Name.StartsWith(startsWith)).Select(c =&gt; new Client { Name = g.Name, DateCreated = g.DateCreated, DateUpdated = g.DateUpdated });\r\n<p>return groups.ToList(); </p>\r\n</blockquote>}</span></p>\r\n<p>However, when passing the StartsWith parameter as a parameter the string somehow gets passed as a property of an object within DirectoryQuery...<br>\r\n&nbsp;<br>\r\nConstantExpression c = m.Arguments[0] as ConstantExpression; </p>\r\n<p>Where c.Value would normally contain the string passed as the parameter it now is c.Value.startsWith (being that I named the parameter as startsWith).</p>\r\n<p>I tried debugging and correcting this, and also tried using reflection to dynamically access the property on c.Value, but I am unable figure this one out.&nbsp; Any ideas?</p>\r\n<p>Thanks,<br>\r\nRyan</p>\r\n",
+    "PostedDate": "2008-06-13T06:15:40.323-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  },
+  {
+    "Id": "101991",
+    "ThreadId": "29607",
+    "Html": "This is a known issue.&nbsp; Use the remedy disussed <a href=\"http://www.codeplex.com/LINQtoAD/WorkItem/View.aspx?WorkItemId=2197\">here</a>\r\n",
+    "PostedDate": "2008-07-01T13:57:21.3-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]

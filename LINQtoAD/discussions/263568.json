@@ -1,0 +1,10 @@
+[
+  {
+    "Id": "636031",
+    "ThreadId": "263568",
+    "Html": "\r\n<p>The description says that it supports both but how do you map to one instead of the other? The reason I ask is because my project that is going to use this is compiled for &quot;Any cpu&quot; and when running on x64, I get the usual COM exception.. Compiling under\r\n x86 makes it work correctly but I dont want to do that..</p>\r\n",
+    "PostedDate": "2011-07-01T07:43:07.023-07:00",
+    "UserRole": null,
+    "MarkedAsAnswerDate": null
+  }
+]
